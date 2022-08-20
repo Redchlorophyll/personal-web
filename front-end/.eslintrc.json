@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "parserOptions": {
+        "parser": "babel-eslint"
+    },
+    "extends": "next/core-web-vitals",
+    "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "."],
+          ["~", "."]
+        ],
+        "extensions": [".js", ".ts", ".jsx", ".tsx"]
+      }
+    }
+  }
+}
