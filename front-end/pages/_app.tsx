@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "@/assets/styles/globals.css";
+import { store } from '@/store'
+import { Provider } from 'react-redux'
 
 export default function App({ Component, pageProps }) {
+  useEffect((): void => {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark')
+    }
+    else if (localStorage.getItem('theme') === 'light' 
+    || !localStorage.getItem('theme')) {
+      document.documentElement.classList.remove('dark')
+    }
+  }, []);
+
   return (
-    <Component {...pageProps} />
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
   );
 }
