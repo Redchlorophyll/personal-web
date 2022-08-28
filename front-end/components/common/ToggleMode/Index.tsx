@@ -25,7 +25,8 @@ export default function ToggleMode() {
       className={`${theme === 'light'? 'bg-black-300' : 'bg-yellow-700'} w-24 h-12 rounded-full relative left transition-all duration-700`}
       >
         <input 
-        type='checkbox' 
+        type='checkbox'
+        aria-label='toggle-mode'
         id='toggle-mode' 
         className='opacity-0 peer w-24 h-24 z-10'
         checked={theme === 'dark'}
@@ -46,7 +47,7 @@ export default function ToggleMode() {
             src={theme === 'dark'? icMoon : icSunny}
             width="25px"
             height="25px"
-            alt={theme === 'dark'? 'Dark mode icon' : 'light mode icon'} />
+            alt={theme === 'dark'? 'Dark mode icon' : 'Light mode icon'} />
           </label>
       </div>
   )
