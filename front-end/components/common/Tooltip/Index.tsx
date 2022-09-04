@@ -37,7 +37,7 @@ const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) =>  {
 
   return (
     <div 
-    className='group bg-red-700 relative hover:bg-yellow-700 cursor-pointer w-fit'
+    className='group relative w-fit'
     ref={tooltipWrapper}>
         <div>
         { props.children }

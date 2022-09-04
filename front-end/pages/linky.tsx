@@ -3,7 +3,7 @@ import Button from '@/components/common/Button/Index';
 import ToggleMode from '@/components/common/ToggleMode/Index';
 import { localStorageTheme } from '@/stores/theme';
 import { useDispatch } from 'react-redux';
-import Tooltip from '@/components/common/Tooltip/TooltipWrapper';
+import Tooltip from '@/components/common/Tooltip/Index';
 
 
 export default function Linky() {
