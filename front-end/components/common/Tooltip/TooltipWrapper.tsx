@@ -1,10 +1,10 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState, useRef, useLayoutEffect } from 'react';
 import TooltipContent from './TooltipContent';
 
 type tooltipWrapperProps = {
-    content?: ReactNode
-    tooltipContent?: ReactNode
-    direction?: 'top' | 'bottom' | 'left' | 'right'
+  children?: ReactNode
+  tooltipContent?: ReactNode
+  direction?: 'top' | 'bottom' | 'left' | 'right'
 }
 
 type tooltipDirection = 'top' | 'bottom' | 'left' | 'right';
@@ -15,11 +15,18 @@ const defaultProps: tooltipWrapperProps = {
 
 const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) =>  {
   const [ tooltipDirection, setTooltipDirection ] = useState<tooltipDirection>('top');
+  const [ halfWidth, setHalfWidth ] = useState<Number>(0);
+  const tooltipWrapper = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    console.log(document.getElementById('tooltip-wrapper')?.firstChild);
     tipDirection(props.direction || 'bottom')
-  }, []);
+  }, [props.direction]);
+
+  useLayoutEffect(() => {
+    if (typeof tooltipWrapper.current?.clientWidth === 'number') {
+      setHalfWidth(Math.trunc(tooltipWrapper.current?.clientWidth / 2))
+    }
+  });
 
   const tipDirection = (tip: tooltipDirection) => {
     if (tip === 'top') setTooltipDirection('bottom');
@@ -31,11 +38,20 @@ const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) =>  {
   return (
     <div 
     className='group bg-red-700 relative hover:bg-yellow-700 cursor-pointer w-fit'
-    id="tooltip-wrapper">
+    ref={tooltipWrapper}>
         <div>
-        { props.content }
+        { props.children }
         </div>
-        <div className='absolute invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300'>
+        <div 
+        className={
+          'absolute ' +
+          (props.direction === 'top'? `-top-10 translate-x-[${halfWidth}px] ` : '') +
+          (props.direction === 'bottom'? `translate-x-[${halfWidth}px] ` : '') +
+          (props.direction === 'left'? '-top-3 -translate-x-full -left-2 ' : '') +
+          (props.direction === 'right'? '-top-3 translate-x-2 left-full ' : '') +
+          'invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300'
+        }
+        >
             <TooltipContent tipLocation={tooltipDirection}>{props.tooltipContent}</TooltipContent>
         </div>
     </div>

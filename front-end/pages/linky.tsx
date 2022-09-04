@@ -18,11 +18,14 @@ export default function Linky() {
             <h1 className="card">Hello</h1>
             <Button />
             <ToggleMode />
-            <Tooltip 
-            content={<span>Hover me here please!</span>}
-            tooltipContent={'test'}
-            direction={'top'}
-            />
+            <div className='flex justify-center'>
+                <Tooltip 
+                tooltipContent={'ini adalah tooltip'}
+                direction={'top'}
+                >
+                    <span>Hover me here please! dad  ad a da da da a da a  a a a da a dada  dawd awdad ad aw awd awd wa</span>
+                </Tooltip>
+            </div>
         </div>
     );
 }
