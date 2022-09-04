@@ -23,7 +23,7 @@ const TooltipContent: React.FunctionComponent<toolTipProps> = (props) => {
         'after:border-b-4 after:border-b-black-500 after:w-0 after:h-0 after:border-l-4 after:border-r-4 after:border-l-black-100/0 after:border-r-black-100/0'
       }
       >
-        {props.children? props.children : 'Insert Text Here'} - tip in the { props.tipLocation }
+        {props.children? props.children : 'Insert Tooltip Content Here'}
       </div>
   );
 }

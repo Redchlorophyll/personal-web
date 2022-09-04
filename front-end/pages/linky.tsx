@@ -21,9 +21,9 @@ export default function Linky() {
             <div className='flex justify-center'>
                 <Tooltip 
                 tooltipContent={'ini adalah tooltip'}
-                direction={'top'}
+                direction={'bottom'}
                 >
-                    <span>Hover me here please! dad  ad a da da da a da a  a a a da a dada  dawd awdad ad aw awd awd wa</span>
+                    <span>Hover me here please!</span>
                 </Tooltip>
             </div>
         </div>
