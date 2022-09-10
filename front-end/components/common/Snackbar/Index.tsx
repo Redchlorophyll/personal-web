@@ -3,6 +3,7 @@ import Image from "next/image";
 import icWarning from "@/assets/img/icons/ic_warning.svg";
 import icInfo from "@/assets/img/icons/ic_info.svg";
 import icError from "@/assets/img/icons/ic_error.svg";
+import icClose from "@/assets/img/icons/ic_snackbar-close.svg";
 import icChecked from "@/assets/img/icons/ic_checked.svg";
 import { Fade } from "react-awesome-reveal";
 
@@ -40,11 +41,14 @@ const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
     }
   }, [props.variant]);
 
+  function onClose() {
+    if (props.onClose) props.onClose(false);
+  }
+
   useEffect(() => {
     if (props.timer && props.isShown) {
       setTimeout(() => {
-        if (props.onClose) props.onClose(false);
-        console.log("test " + props.timer);
+        if (props.onClose) onClose();
       }, props.timer);
     }
   }, [props.timer, props.isShown]);
@@ -60,8 +64,21 @@ const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
               <Image layout="fixed" src={image} alt="warning icons" />
             </div>
             <div>
-              {props.children ? props.children : "Snackbar Children Goes Here!"}
+              <p className="text-base translate-y-[2px] min-w-[10rem]">
+                {props.children
+                  ? props.children
+                  : "Snackbar Children Goes Here!"}
+              </p>
             </div>
+            {!props.timer ? (
+              <div className="-translate-y-1 translate-x-4">
+                <button onClick={() => onClose()}>
+                  <Image src={icClose} alt="close icon" layout="fixed" />
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </Fade>
       ) : (

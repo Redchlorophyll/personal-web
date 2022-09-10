@@ -28,7 +28,7 @@ export default function Linky() {
       <Button />
       <ToggleMode />
       <div className="flex justify-center">
-        <Tooltip tooltipContent={"ini adalah tooltip"} direction={"right"}>
+        <Tooltip tooltipContent={"ini adalah tooltip"} direction={"bottom"}>
           <span>Hover me here please!</span>
         </Tooltip>
       </div>
@@ -76,7 +76,7 @@ export default function Linky() {
         isShown={isShown}
         onClose={onSnackbarClose}
       >
-        Error Internal Server: 404 Not Found
+        test
       </Snackbar>
     </div>
   );
