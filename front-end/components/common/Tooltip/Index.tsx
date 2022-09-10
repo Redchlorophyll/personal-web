@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  useEffect,
-  useState,
-  useRef,
-  useLayoutEffect,
-} from "react";
+import React, { ReactNode, useEffect, useState, useRef } from "react";
 import TooltipContent from "./TooltipContent";
 
 type tooltipWrapperProps = {
@@ -29,11 +23,11 @@ const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) => {
     tipDirection(props.direction || "bottom");
   }, [props.direction]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof tooltipWrapper.current?.clientWidth === "number") {
       setHalfWidth(Math.trunc(tooltipWrapper.current?.clientWidth / 2));
     }
-  });
+  }, []);
 
   const tipDirection = (tip: tooltipDirection) => {
     if (tip === "top") setTooltipDirection("bottom");
@@ -46,14 +40,14 @@ const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) => {
     <div className="group relative w-fit" ref={tooltipWrapper}>
       <div>{props.children}</div>
       <div
+        style={
+          props.direction === "top" || props.direction === "bottom"
+            ? { transform: `translateX(${halfWidth}px)` }
+            : {}
+        }
         className={
           "absolute " +
-          (props.direction === "top"
-            ? `-top-10 translate-x-[${halfWidth}px] `
-            : "") +
-          (props.direction === "bottom"
-            ? `translate-x-[${halfWidth}px] `
-            : "") +
+          (props.direction === "top" ? `-top-10 ` : "") +
           (props.direction === "left"
             ? "-top-3 -translate-x-full -left-2 "
             : "") +
