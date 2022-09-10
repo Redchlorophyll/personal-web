@@ -15,8 +15,6 @@ type SnackbarProps = {
   onClose?: Function;
 };
 
-type Svg = HTMLElement & SVGElement;
-
 const defaultProps: SnackbarProps = {
   variant: "error",
   isShown: false,
@@ -25,6 +23,7 @@ const defaultProps: SnackbarProps = {
 const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
   const [baseColor, setBaseColor] = useState<String>("bg-red-700");
   const [image, setImage] = useState<string>(icError);
+
   useEffect(() => {
     if (props.variant === "error") {
       setBaseColor("bg-red-700");
@@ -61,7 +60,7 @@ const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
             className={`${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`}
           >
             <div>
-              <Image layout="fixed" src={image} alt="warning icons" />
+              <Image layout="fixed" src={image} alt={`${props.variant} icon`} />
             </div>
             <div>
               <p className="text-base translate-y-[2px] min-w-[10rem]">
@@ -72,7 +71,7 @@ const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
             </div>
             {!props.timer ? (
               <div className="-translate-y-1 translate-x-4">
-                <button onClick={() => onClose()}>
+                <button onClick={() => onClose()} data-testid="close-snackbar">
                   <Image src={icClose} alt="close icon" layout="fixed" />
                 </button>
               </div>
