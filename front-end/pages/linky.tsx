@@ -9,12 +9,27 @@ import Dropdown from "@/components/common/Dropdown/Index";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
+type optVal = {
+  label: string;
+  value: string;
+};
 
 export default function Linky() {
   const [snackbarVariant, setSnackbarVariant] =
     useState<snackbarVariant>("error");
   const [isShown, setIsShown] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const [SnackbarOptions, setSnackbarOptions] = useState([
+    { label: "BCA", value: "bca" },
+    { label: "BRI", value: "bri" },
+    { label: "Mandiri", value: "mandiri" },
+    { label: "SeaBank", value: "seabank" },
+    { label: "myBank", value: "myBank" },
+  ]);
+  const [activeBank, setActiveBank] = useState<optVal | undefined>({
+    label: "",
+    value: "",
+  });
 
   function onSnackbarClose(state: boolean) {
     setIsShown(state);
@@ -81,8 +96,17 @@ export default function Linky() {
         >
           test
         </Snackbar>
-        <div className="w-[180px]">
-          <Dropdown />
+        <div className="w-[370px]">
+          <Dropdown
+            options={SnackbarOptions}
+            placeholder="pilih bank"
+            value={activeBank}
+            setValue={(val: optVal | undefined) => {
+              if (val) {
+                setActiveBank(val);
+              }
+            }}
+          />
         </div>
       </div>
     </DefaultLayout>
