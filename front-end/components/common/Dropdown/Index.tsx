@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Dropdown() {
   return (
-    <div className="w-full relative">
+    <div className="w-full relative dark:text-black-900">
       <input
-        className="cursor-pointer bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:shadow-lg"
+        className="cursor-pointer bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:drop-shadow-[0px_1px_17px_#406fcb]"
         type="text"
         placeholder="Select data here..."
         readOnly

@@ -12,6 +12,8 @@ module.exports = {
       },
     },
     colors: {
+      "dark-layout": "#333333",
+      "light-layout": "FCFCFC",
       primary: {
         100: "#f0f5ff",
         200: "#dde8ff",
