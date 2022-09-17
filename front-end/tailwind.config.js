@@ -6,7 +6,11 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "dropdown-arrow": "url('~/assets/img/icons/ic_arrow.svg')",
+      },
+    },
     colors: {
       primary: {
         100: "#f0f5ff",

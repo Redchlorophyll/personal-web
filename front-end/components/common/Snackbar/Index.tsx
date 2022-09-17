@@ -53,7 +53,7 @@ const Snackbar: React.FunctionComponent<SnackbarProps> = (props) => {
   }, [props.timer, props.isShown]);
 
   return (
-    <div className="flex justify-center fixed top-4 w-screen left-1/2 -translate-x-1/2">
+    <div className="fixed top-4 left-1/2 -translate-x-1/2">
       {props.isShown ? (
         <Fade>
           <div

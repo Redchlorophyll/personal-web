@@ -5,6 +5,7 @@ import { localStorageTheme } from "@/stores/theme";
 import { useDispatch } from "react-redux";
 import Tooltip from "@/components/common/Tooltip/Index";
 import Snackbar from "@/components/common/Snackbar/Index";
+import Dropdown from "@/components/common/Dropdown/Index";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
 
@@ -78,6 +79,9 @@ export default function Linky() {
       >
         test
       </Snackbar>
+      <div className="w-[180px]">
+        <Dropdown />
+      </div>
     </div>
   );
 }

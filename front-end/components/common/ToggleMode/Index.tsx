@@ -14,12 +14,14 @@ export default function ToggleMode() {
     if (localStorage.getItem("theme") === "dark") {
       localStorage.setItem("theme", "light");
       dispatch(toggleLight());
+      document.documentElement.classList.remove("dark");
     } else if (
       localStorage.getItem("theme") === "light" ||
       !localStorage.getItem("theme")
     ) {
       localStorage.setItem("theme", "dark");
       dispatch(toggleDark());
+      document.documentElement.classList.add("dark");
     }
   }
 
