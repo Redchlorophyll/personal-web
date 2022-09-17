@@ -60,7 +60,7 @@ export default function Dropdown(props: dropdownProps) {
   return (
     <div ref={inputRef} className="w-full relative dark:text-black-900">
       <input
-        className="peer cursor-pointer bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:drop-shadow-[0px_1px_17px_#406fcb]"
+        className="peer cursor-pointer bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]"
         type="text"
         placeholder="Select data here..."
         readOnly
