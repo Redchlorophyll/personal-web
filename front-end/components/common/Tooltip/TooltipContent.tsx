@@ -13,7 +13,7 @@ const TooltipContent: React.FunctionComponent<toolTipProps> = (props) => {
   return (
     <div
       className={
-        "bg-black-100 mt-2 py-1 pl-2 pr-4 shadow-[0_0_4px_rgba(29,171,221,0.2)] w-fit whitespace-nowrap rounded-sm " +
+        "bg-black-100 mt-2 py-1 pl-2 pr-4 shadow-[0_0_4px_rgba(29,171,221,0.2)] w-fit whitespace-nowrap rounded-sm dark:text-black-900 " +
         // tip styling
         "after:absolute after:left-[1px] " +
         (props.tipLocation == "top" ? "after:top-1 " : "") +

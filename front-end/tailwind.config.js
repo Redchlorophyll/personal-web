@@ -6,8 +6,14 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "dropdown-arrow": "url('~/assets/img/icons/ic_arrow.svg')",
+      },
+    },
     colors: {
+      "dark-layout": "#333333",
+      "light-layout": "FCFCFC",
       primary: {
         100: "#f0f5ff",
         200: "#dde8ff",
@@ -87,5 +93,11 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
+  variants: {
+    scrollbar: ["rounded"],
+  },
 };
