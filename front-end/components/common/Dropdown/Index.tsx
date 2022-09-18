@@ -9,13 +9,27 @@ type optVal = {
 type dropdownProps = {
   options: Array<optVal>;
   placeholder?: string;
-  value: optVal | undefined;
+  value?: optVal | undefined;
   setValue: Function;
+  type?: "dropdown" | "combobox";
 };
 
-export default function Dropdown(props: dropdownProps) {
+const defaultProps: dropdownProps = {
+  type: "dropdown",
+  options: [{ label: "sampel", value: "sampelVal" }],
+  setValue: (): void => {},
+};
+
+const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLHeadingElement>(null);
+  const [inputValue, setInputValue] = useState<optVal | undefined>({
+    label: "",
+    value: "",
+  });
+  const [inputOptions, setInputOptions] = useState<Array<optVal>>([
+    ...props.options,
+  ]);
 
   const handleFocus = () => {
     setIsOpen(!isOpen);
@@ -26,11 +40,25 @@ export default function Dropdown(props: dropdownProps) {
 
   const setActiveVal = (activeVal: optVal | undefined) => {
     handleFocus();
-    console.log(activeVal);
-    props.setValue(activeVal);
+    if (props.setValue) {
+      props.setValue(activeVal);
+      setInputValue(activeVal);
+    }
   };
 
-  const optionHtml = props.options.map((value, idx) => {
+  const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    if (props.type === "dropdown") return;
+    const filterOptions = props.options.filter((data) =>
+      data.label.toLowerCase().includes(event.currentTarget.value.toLowerCase())
+    );
+    setInputOptions(filterOptions);
+    setInputValue({
+      label: event.currentTarget.value,
+      value: event.currentTarget.value.toLocaleLowerCase().split(" ").join("-"),
+    });
+  };
+
+  const optionHtml = inputOptions.map((value, idx) => {
     return (
       <div
         onClick={() => setActiveVal(value)}
@@ -41,6 +69,10 @@ export default function Dropdown(props: dropdownProps) {
       </div>
     );
   });
+
+  useEffect(() => {
+    setInputValue(props.value);
+  }, [props.value]);
 
   useEffect(() => {
     const outsideClickHandler = ({ target }: MouseEvent) => {
@@ -60,21 +92,29 @@ export default function Dropdown(props: dropdownProps) {
   return (
     <div ref={inputRef} className="w-full relative dark:text-black-900">
       <input
-        className="peer cursor-pointer bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]"
+        className={`peer ${
+          props.type === "dropdown" ? "cursor-pointer" : ""
+        } bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`}
         type="text"
-        placeholder="Select data here..."
-        readOnly
+        placeholder={props.placeholder || "Select data here..."}
+        readOnly={!!(props.type === "dropdown")}
         onClick={() => handleFocus()}
-        value={props.value?.label}
+        value={inputValue?.label}
+        onChange={(e) => onInputChange(e)}
       />
 
-      <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
-      {isOpen ? (
+      {props.type === "dropdown" ? (
+        <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
+      ) : (
+        ""
+      )}
+      {isOpen && inputOptions.length > 0 ? (
         <Fade>
           <div className="w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]">
-            {props.options.length > 1 &&
+            {inputOptions.length > 0 &&
             props.value?.label !== "" &&
-            props.value?.value !== "" ? (
+            props.value?.value !== "" &&
+            props.type === "dropdown" ? (
               <div
                 onClick={() =>
                   setActiveVal({
@@ -82,7 +122,7 @@ export default function Dropdown(props: dropdownProps) {
                     value: "",
                   })
                 }
-                className="cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
+                className="text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
               >
                 Clear Selection
               </div>
@@ -97,4 +137,8 @@ export default function Dropdown(props: dropdownProps) {
       )}
     </div>
   );
-}
+};
+
+Dropdown.defaultProps = defaultProps;
+
+export default Dropdown;
