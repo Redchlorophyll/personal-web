@@ -19,7 +19,7 @@ export default function Linky() {
     useState<snackbarVariant>("error");
   const [isShown, setIsShown] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const [SnackbarOptions, setSnackbarOptions] = useState([
+  const [options, setOptions] = useState([
     { label: "BCA", value: "bca" },
     { label: "BRI", value: "bri" },
     { label: "Mandiri", value: "mandiri" },
@@ -99,7 +99,7 @@ export default function Linky() {
         <div className="w-[370px]">
           <Dropdown
             type="dropdown"
-            options={SnackbarOptions}
+            options={options}
             placeholder="pilih bank"
             value={activeBank}
             setValue={(val: optVal | undefined) => {

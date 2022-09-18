@@ -60,13 +60,13 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
 
   const optionHtml = inputOptions.map((value, idx) => {
     return (
-      <div
+      <button
         onClick={() => setActiveVal(value)}
         key={idx}
-        className="cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
+        className="w-full text-left cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
       >
         {value.label}
-      </div>
+      </button>
     );
   });
 
@@ -90,7 +90,11 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
     };
   });
   return (
-    <div ref={inputRef} className="w-full relative dark:text-black-900">
+    <div
+      ref={inputRef}
+      data-testid="focus-element"
+      className="w-full relative dark:text-black-900"
+    >
       <input
         className={`peer ${
           props.type === "dropdown" ? "cursor-pointer" : ""
@@ -115,17 +119,17 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
             props.value?.label !== "" &&
             props.value?.value !== "" &&
             props.type === "dropdown" ? (
-              <div
+              <button
                 onClick={() =>
                   setActiveVal({
                     label: "",
                     value: "",
                   })
                 }
-                className="text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
+                className="w-full text-left text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
               >
                 Clear Selection
-              </div>
+              </button>
             ) : (
               ""
             )}
