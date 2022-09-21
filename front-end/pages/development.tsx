@@ -1,4 +1,4 @@
-import Button from "~/components/common/Button/Index";
+import Button from "@/components/common/Button/Index";
 import { useState } from "react";
 
 type variant = "warning" | "success" | "primary" | "error" | "muted";
