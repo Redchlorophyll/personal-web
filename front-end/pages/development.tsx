@@ -2,21 +2,20 @@ import Button from "@/components/common/Button/Index";
 import { useState } from "react";
 
 type variant = "warning" | "success" | "primary" | "error" | "muted";
+type type = "solid" | "outline" | "translucent";
 
 function Development() {
   const [variant, setVariant] = useState<variant>("warning");
-  const [type, setType] = useState("solid");
+  const [type, setType] = useState<type>("solid");
 
   const handleSelectedVariant = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    // console.log(event.target.value);
     setVariant(event.target.value as variant);
   };
 
   const handleSelectedType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // console.log(event.target.value);
-    setType(event.target.value);
+    setType(event.target.value as type);
   };
 
   const handleOnClick = () => {
