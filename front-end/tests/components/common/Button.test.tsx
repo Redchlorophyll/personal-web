@@ -29,19 +29,13 @@ describe("Component - common - Button", () => {
     expect(target).toBeInTheDocument();
   });
 
-  test("It should be clicked successfully", () => {
+  test("It should show status when clicked", async () => {
     render(<ButtonWrapper />);
-    const target = screen.getByRole("button");
-
-    userEvent.click(target);
-  });
-
-  test("It should show status when clicked", () => {
-    render(<ButtonWrapper />);
+    const user = userEvent.setup();
     const target = screen.getByRole("button");
 
     expect(screen.queryByText("empty")).toBeInTheDocument();
-    fireEvent.click(target);
+    await user.click(target);
     expect(screen.queryByText("clicked")).toBeInTheDocument();
   });
 });
