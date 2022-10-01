@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Checkbox from "@/components/common/Checkbox/Index";
-import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
+import userEvent from "@testing-library/user-event";
 
 function CheckboxWrapper() {
   const [valueCheckbox, setValueCheckbox] = useState<Array<string>>([]);
@@ -30,13 +30,17 @@ describe("components - common - checkbox", () => {
     expect(target).toBeInTheDocument();
   });
 
-  test("it should show value when clicked", () => {
+  test("it should show value when clicked", async () => {
     render(<CheckboxWrapper />);
     const target = screen.getByRole("checkbox");
     expect(screen.queryByText("test")).not.toBeInTheDocument();
-    fireEvent.click(target);
-    expect(screen.queryByText("test")).toBeInTheDocument();
-    fireEvent.click(target);
-    expect(screen.queryByText("test")).not.toBeInTheDocument();
+
+    userEvent.click(target);
+    await waitFor(() => expect(screen.queryByText("test")).toBeInTheDocument());
+
+    userEvent.click(target);
+    await waitFor(() =>
+      expect(screen.queryByText("test")).not.toBeInTheDocument()
+    );
   });
 });

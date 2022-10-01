@@ -3,7 +3,7 @@ import React from "react";
 type checkboxProps = {
   value?: string;
   valueList?: Array<string>;
-  onChange?: Function;
+  onChange?: (value: Array<string>) => void;
 };
 
 const defaultProps: checkboxProps = {
@@ -17,7 +17,7 @@ const Checkbox: React.FunctionComponent<checkboxProps> = (props) => {
     if (!props.onChange) return;
     const { value, checked } = event.target as HTMLInputElement;
     const results: Array<string> =
-      props.valueList?.filter((data) => data !== value) || [];
+      props.valueList?.filter((data: string) => data !== value) || [];
     if (checked) {
       results.push(value);
     }
