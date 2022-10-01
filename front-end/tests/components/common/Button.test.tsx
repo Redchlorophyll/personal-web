@@ -30,8 +30,8 @@ describe("Component - common - Button", () => {
   });
 
   test("It should show status when clicked", async () => {
-    render(<ButtonWrapper />);
     const user = userEvent.setup();
+    render(<ButtonWrapper />);
     const target = screen.getByRole("button");
 
     expect(screen.queryByText("empty")).toBeInTheDocument();
