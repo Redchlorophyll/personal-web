@@ -133,6 +133,7 @@ describe("components - common - Snakbar", () => {
   });
   it("should disappear when close is clicked", async () => {
     await act(async () => {
+      const user = userEvent.setup();
       render(<SnackbarWrapper isTimer={false} />);
       mockAllIsIntersecting(true);
 
@@ -140,7 +141,7 @@ describe("components - common - Snakbar", () => {
       const btn = screen.getByTestId("close-snackbar");
       expect(target).toBeInTheDocument();
 
-      await userEvent.click(btn);
+      await user.click(btn);
       await waitFor(() => {
         target = screen.queryByText("This is Snackbar Error Message!");
         expect(target).not.toBeInTheDocument();

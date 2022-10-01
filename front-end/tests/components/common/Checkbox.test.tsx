@@ -35,12 +35,10 @@ describe("components - common - checkbox", () => {
     const target = screen.getByRole("checkbox");
     expect(screen.queryByText("test")).not.toBeInTheDocument();
 
-    userEvent.click(target);
-    await waitFor(() => expect(screen.queryByText("test")).toBeInTheDocument());
+    await userEvent.click(target);
+    expect(screen.queryByText("test")).toBeInTheDocument();
 
-    userEvent.click(target);
-    await waitFor(() =>
-      expect(screen.queryByText("test")).not.toBeInTheDocument()
-    );
+    await userEvent.click(target);
+    expect(screen.queryByText("test")).not.toBeInTheDocument();
   });
 });
