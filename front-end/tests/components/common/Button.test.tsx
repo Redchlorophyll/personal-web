@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import Button from "@/components/common/Button/Index";
@@ -29,19 +29,13 @@ describe("Component - common - Button", () => {
     expect(target).toBeInTheDocument();
   });
 
-  test("It should be clicked successfully", () => {
-    render(<ButtonWrapper />);
-    const target = screen.getByRole("button");
-
-    userEvent.click(target);
-  });
-
-  test("It should show status when clicked", () => {
+  test("It should show status when clicked", async () => {
+    const user = userEvent.setup();
     render(<ButtonWrapper />);
     const target = screen.getByRole("button");
 
     expect(screen.queryByText("empty")).toBeInTheDocument();
-    fireEvent.click(target);
+    await user.click(target);
     expect(screen.queryByText("clicked")).toBeInTheDocument();
   });
 });
