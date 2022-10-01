@@ -1,21 +1,19 @@
 import React, { ReactNode, useEffect, useState, useRef } from "react";
 import TooltipContent from "./TooltipContent";
+import { direction } from "@/globals/types";
 
 type tooltipWrapperProps = {
   children?: ReactNode;
   tooltipContent?: ReactNode;
-  direction?: "top" | "bottom" | "left" | "right";
+  direction?: direction;
 };
-
-type tooltipDirection = "top" | "bottom" | "left" | "right";
 
 const defaultProps: tooltipWrapperProps = {
   direction: "bottom",
 };
 
 const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) => {
-  const [tooltipDirection, setTooltipDirection] =
-    useState<tooltipDirection>("top");
+  const [tooltipDirection, setTooltipDirection] = useState<direction>("top");
   const [halfWidth, setHalfWidth] = useState<Number>(0);
   const tooltipWrapper = useRef<HTMLHeadingElement>(null);
 
@@ -29,7 +27,7 @@ const Tooltip: React.FunctionComponent<tooltipWrapperProps> = (props) => {
     }
   }, []);
 
-  const tipDirection = (tip: tooltipDirection) => {
+  const tipDirection = (tip: direction) => {
     if (tip === "top") setTooltipDirection("bottom");
     if (tip === "bottom") setTooltipDirection("top");
     if (tip === "left") setTooltipDirection("right");

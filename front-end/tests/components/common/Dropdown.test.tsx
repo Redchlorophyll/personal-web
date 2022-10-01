@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Dropdown from "@/components/common/Dropdown/Index";
+import userEvent from "@testing-library/user-event";
 import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 
 type optVal = {
@@ -54,50 +55,55 @@ describe("components - common - dropdown", () => {
     expect(target).toBeInTheDocument();
   });
 
-  test("it should show right value", () => {
+  test("it should show right value", async () => {
+    const user = userEvent.setup();
     render(<DropdownWrapper isCombobox={false} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText("pilih bank");
-    fireEvent.click(target);
+    await user.click(target);
     const selectedOpt = screen.getByText("BCA");
-    fireEvent.click(selectedOpt);
+    await user.click(selectedOpt);
     expect(screen.getByDisplayValue("BCA")).toBeInTheDocument();
   });
 
-  it("should change combobox value if changed by input", () => {
+  it("should change combobox value if changed by input", async () => {
+    const user = userEvent.setup();
     render(<DropdownWrapper isCombobox={true} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText("pilih bank");
-    fireEvent.change(target, { target: { value: "testing input" } });
+    await user.type(target, "testing input");
     expect(screen.queryByDisplayValue("testing input")).toBeInTheDocument();
   });
 
-  it("should show suggestion when input exists in options", () => {
+  it("should show suggestion when input exists in options", async () => {
+    const user = userEvent.setup();
     render(<DropdownWrapper isCombobox={true} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText("pilih bank");
-    fireEvent.change(target, { target: { value: "bc" } });
-    fireEvent.click(target);
+    await user.type(target, "bc");
     expect(screen.queryByText("BCA")).toBeInTheDocument();
     expect(screen.queryByText("mandiri")).not.toBeInTheDocument();
   });
 
-  it("should clear value selection", () => {
+  it("should clear value selection", async () => {
+    const user = userEvent.setup();
     render(<DropdownWrapper isCombobox={false} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText("pilih bank");
-    fireEvent.click(target);
+    await user.click(target);
     expect(screen.queryByText("Clear Selection")).not.toBeInTheDocument();
     const selectedOpt = screen.getByText("BCA");
-    fireEvent.click(selectedOpt);
+    await user.click(selectedOpt);
     expect(screen.getByDisplayValue("BCA")).toBeInTheDocument();
 
-    fireEvent.click(target);
-    fireEvent.click(screen.getByText("Clear Selection"));
+    await user.click(target);
+
+    const clearSelection = screen.getByText("Clear Selection");
+    await user.click(clearSelection);
     expect(screen.getByDisplayValue("")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("pilih bank")).toBeInTheDocument();
   });

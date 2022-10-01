@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  render,
-  act,
-  screen,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
+import { render, act, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import Snackbar from "@/components/common/Snackbar/Index";
 import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
@@ -138,6 +133,7 @@ describe("components - common - Snakbar", () => {
   });
   it("should disappear when close is clicked", async () => {
     await act(async () => {
+      const user = userEvent.setup();
       render(<SnackbarWrapper isTimer={false} />);
       mockAllIsIntersecting(true);
 
@@ -145,7 +141,7 @@ describe("components - common - Snakbar", () => {
       const btn = screen.getByTestId("close-snackbar");
       expect(target).toBeInTheDocument();
 
-      fireEvent.click(btn);
+      await user.click(btn);
       await waitFor(() => {
         target = screen.queryByText("This is Snackbar Error Message!");
         expect(target).not.toBeInTheDocument();

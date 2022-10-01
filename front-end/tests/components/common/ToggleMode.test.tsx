@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 import ToggleMode from "@/components/common/ToggleMode/Index";
 import { Provider } from "react-redux";
 import { store } from "@/store";
@@ -20,7 +21,7 @@ describe("components - common - ToggleMode", () => {
     expect(toggleMode).toBeInTheDocument();
   });
 
-  test("it should show dark mode icons when clicked", () => {
+  test("it should show dark mode icons when clicked", async () => {
     render(
       <Provider store={store}>
         <ToggleMode />
@@ -31,7 +32,7 @@ describe("components - common - ToggleMode", () => {
       name: "toggle-mode",
     });
 
-    fireEvent.click(toggleMode);
+    await userEvent.click(toggleMode);
 
     expect(screen.getByAltText("Dark mode icon")).toBeInTheDocument();
   });

@@ -1,14 +1,15 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import { variantStyle, typeStyle } from "@/globals/types";
 
 type buttonProps = {
-  variant?: "warning" | "success" | "primary" | "error" | "muted";
+  variant?: variantStyle;
   children?: ReactNode;
-  type?: "solid" | "outline" | "translucent";
+  type?: typeStyle;
   onClick?: () => void;
 };
 
 type buttonStyle = {
-  variant?: "warning" | "success" | "primary" | "error" | "muted";
+  variant?: variantStyle;
   style?: string;
 };
 

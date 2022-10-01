@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
+import { direction } from "@/globals/types";
 
 type toolTipProps = {
-  tipLocation?: "top" | "bottom" | "left" | "right";
+  tipLocation?: direction;
   children?: ReactNode;
 };
 

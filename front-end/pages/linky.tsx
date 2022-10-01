@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import Tooltip from "@/components/common/Tooltip/Index";
 import Snackbar from "@/components/common/Snackbar/Index";
 import Dropdown from "@/components/common/Dropdown/Index";
+import Checkbox from "@/components/common/Checkbox/Index";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
@@ -18,6 +19,7 @@ export default function Linky() {
   const [snackbarVariant, setSnackbarVariant] =
     useState<snackbarVariant>("error");
   const [isShown, setIsShown] = useState<boolean>(false);
+  const [checkboxVals, setCheckboxVal] = useState<Array<string>>([]);
   const dispatch = useDispatch();
   const [options, setOptions] = useState([
     { label: "BCA", value: "bca" },
@@ -33,6 +35,10 @@ export default function Linky() {
 
   function onSnackbarClose(state: boolean) {
     setIsShown(state);
+  }
+
+  function onChangeCheckbox(val: Array<string>) {
+    setCheckboxVal(val);
   }
 
   useEffect((): void => {
@@ -110,6 +116,22 @@ export default function Linky() {
           />
         </div>
       </div>
+      {checkboxVals}
+      <Checkbox
+        valueList={checkboxVals}
+        onChange={(val: Array<string>) => onChangeCheckbox(val)}
+        value={"test"}
+      />
+      <Checkbox
+        valueList={checkboxVals}
+        onChange={(val: Array<string>) => onChangeCheckbox(val)}
+        value={"test1"}
+      />
+      <Checkbox
+        valueList={checkboxVals}
+        onChange={(val: Array<string>) => onChangeCheckbox(val)}
+        value={"test2"}
+      />
     </DefaultLayout>
   );
 }

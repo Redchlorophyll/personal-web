@@ -1,16 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
-
-type optVal = {
-  label: string;
-  value: string;
-};
+import { optVal } from "@/globals/types";
 
 type dropdownProps = {
   options: Array<optVal>;
   placeholder?: string;
   value?: optVal | undefined;
-  setValue: Function;
+  setValue?: (value: optVal | undefined) => void;
   type?: "dropdown" | "combobox";
 };
 

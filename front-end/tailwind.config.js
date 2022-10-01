@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "dropdown-arrow": "url('~/assets/img/icons/ic_arrow.svg')",
+        "checkbox-check": "url('~/assets/img/icons/ic_checkbox-check.svg')",
       },
     },
     colors: {

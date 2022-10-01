@@ -6,13 +6,14 @@ import icError from "@/assets/img/icons/ic_error.svg";
 import icClose from "@/assets/img/icons/ic_snackbar-close.svg";
 import icChecked from "@/assets/img/icons/ic_checked.svg";
 import { Fade } from "react-awesome-reveal";
+import { variantType } from "@/globals/types";
 
 type SnackbarProps = {
   children?: ReactNode;
-  variant?: "error" | "info" | "success" | "warning";
+  variant?: variantType;
   timer?: number;
-  isShown?: Boolean;
-  onClose?: Function;
+  isShown?: boolean;
+  onClose?: (value: boolean) => void;
 };
 
 const defaultProps: SnackbarProps = {
