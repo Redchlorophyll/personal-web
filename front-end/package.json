@@ -6,7 +6,7 @@
     "build": "next build",
     "lint": "next lint",
     "start": "next start",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watchAll --coverage",
     "test": "jest --coverage",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "prepare": "cd ../ && husky install ./front-end/.husky"
