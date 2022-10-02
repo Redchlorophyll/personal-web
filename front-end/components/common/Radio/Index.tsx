@@ -23,11 +23,10 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
   }, [props.valueGroup]);
 
   const onClickRadio = () => {
+    if (!props.onChange) return;
     if (!isChecked) {
-      if (!props.onChange) return;
       props.onChange(props.value || "");
     } else {
-      if (!props.onChange) return;
       props.onChange("");
     }
     setChecked(!isChecked);
