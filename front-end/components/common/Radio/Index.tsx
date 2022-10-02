@@ -17,7 +17,6 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
 
   useEffect(() => {
     if (props.value) {
-      console.log("test");
       if (props.value === props.valueGroup) setChecked(true);
       else setChecked(false);
     }
@@ -48,7 +47,7 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
         onChange={onChange}
         checked={isChecked}
       />
-      <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6  rounded-full p-[1px] border-solid border-[1px] border-black-800">
+      <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
         <div className="w-5 h-5 rounded-full"></div>
       </div>
     </div>
