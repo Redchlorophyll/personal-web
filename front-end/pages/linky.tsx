@@ -33,8 +33,8 @@ export default function Linky() {
     { label: "myBank", value: "myBank" },
   ]);
   const [activeBank, setActiveBank] = useState<optVal | undefined>({
-    label: "",
-    value: "",
+    label: "BCA",
+    value: "bca",
   });
   const [radio, setRadio] = useState("test");
 
@@ -114,7 +114,7 @@ export default function Linky() {
         </Snackbar>
         <div className="w-[370px]">
           <Dropdown
-            type="dropdown"
+            type="combobox"
             options={options}
             placeholder="pilih bank"
             value={activeBank}

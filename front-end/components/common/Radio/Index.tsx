@@ -38,10 +38,10 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
   };
 
   return (
-    <div>
+    <label>
       <input
         type="radio"
-        className="w-6 h-6 peer absolute opacity-0"
+        className="w-6 h-6 peer sr-only"
         value="test"
         onClick={onClickRadio}
         onChange={onChange}
@@ -50,7 +50,7 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
       <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
         <div className="w-5 h-5 rounded-full"></div>
       </div>
-    </div>
+    </label>
   );
 };
 
