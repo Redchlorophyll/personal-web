@@ -89,7 +89,7 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
     <div
       ref={inputRef}
       data-testid="focus-element"
-      className="w-full relative dark:text-black-900"
+      className="w-full relative z-[5] dark:text-black-900"
     >
       <input
         className={`peer ${

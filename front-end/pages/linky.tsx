@@ -8,6 +8,7 @@ import Snackbar from "@/components/common/Snackbar/Index";
 import Dropdown from "@/components/common/Dropdown/Index";
 import Checkbox from "@/components/common/Checkbox/Index";
 import DefaultLayout from "@/components/layout/DefaultLayout";
+import Radio from "@/components/common/Radio/Index";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
 type optVal = {
@@ -19,7 +20,10 @@ export default function Linky() {
   const [snackbarVariant, setSnackbarVariant] =
     useState<snackbarVariant>("error");
   const [isShown, setIsShown] = useState<boolean>(false);
-  const [checkboxVals, setCheckboxVal] = useState<Array<string>>([]);
+  const [checkboxVals, setCheckboxVal] = useState<Array<string>>([
+    "test2",
+    "test",
+  ]);
   const dispatch = useDispatch();
   const [options, setOptions] = useState([
     { label: "BCA", value: "bca" },
@@ -29,9 +33,15 @@ export default function Linky() {
     { label: "myBank", value: "myBank" },
   ]);
   const [activeBank, setActiveBank] = useState<optVal | undefined>({
-    label: "",
-    value: "",
+    label: "BCA",
+    value: "bca",
   });
+  const [radio, setRadio] = useState("test");
+
+  function onChangeRadio(value: string) {
+    console.log(value);
+    setRadio(value);
+  }
 
   function onSnackbarClose(state: boolean) {
     setIsShown(state);
@@ -104,7 +114,7 @@ export default function Linky() {
         </Snackbar>
         <div className="w-[370px]">
           <Dropdown
-            type="dropdown"
+            type="combobox"
             options={options}
             placeholder="pilih bank"
             value={activeBank}
@@ -131,6 +141,22 @@ export default function Linky() {
         valueList={checkboxVals}
         onChange={(val: Array<string>) => onChangeCheckbox(val)}
         value={"test2"}
+      />
+      {radio}
+      <Radio
+        value="test"
+        valueGroup={radio}
+        onChange={(val: string) => onChangeRadio(val)}
+      />
+      <Radio
+        value="test1"
+        valueGroup={radio}
+        onChange={(val: string) => onChangeRadio(val)}
+      />
+      <Radio
+        value="test2"
+        valueGroup={radio}
+        onChange={(val: string) => onChangeRadio(val)}
       />
     </DefaultLayout>
   );
