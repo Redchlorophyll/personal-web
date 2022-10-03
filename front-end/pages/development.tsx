@@ -1,5 +1,8 @@
 import Button from "@/components/common/Button/Index";
 import { useState } from "react";
+import Input from "~/components/common/Input";
+import ToggleMode from "~/components/common/ToggleMode/Index";
+import DefaultLayout from "~/components/layout/DefaultLayout";
 
 type variant = "warning" | "success" | "primary" | "error" | "muted";
 type type = "solid" | "outline" | "translucent";
@@ -23,32 +26,39 @@ function Development() {
   };
 
   return (
-    <div className="text-center">
-      <h1>hallo this is Development Page for chandra</h1>
-      <div className="mb-3 mt-3">
-        <label htmlFor="" className="inline-block mr-7">
-          Chose Button Variant
-        </label>
-        <select name="" id="" onChange={handleSelectedVariant}>
-          <option value="warning">warning</option>
-          <option value="success">success</option>
-          <option value="primary">primary</option>
-          <option value="error">error</option>
-          <option value="muted">muted</option>
-        </select>
+    <DefaultLayout>
+      <ToggleMode />
+      <div className="text-center">
+        <h1>hallo this is Development Page for chandra</h1>
+        <div className="mb-3 mt-3">
+          <label htmlFor="" className="inline-block mr-7">
+            Chose Button Variant
+          </label>
+          <select name="" id="" onChange={handleSelectedVariant}>
+            <option value="warning">warning</option>
+            <option value="success">success</option>
+            <option value="primary">primary</option>
+            <option value="error">error</option>
+            <option value="muted">muted</option>
+          </select>
+        </div>
+        <div className="mb-8">
+          <label htmlFor="" className="inline-block mr-7">
+            Chose Button Type
+          </label>
+          <select name="" id="" onChange={handleSelectedType}>
+            <option value="solid">solid</option>
+            <option value="outline">outline</option>
+            <option value="translucent">translucent</option>
+          </select>
+        </div>
+        <Button type={type} onClick={handleOnClick} variant={variant}></Button>
+        <div className="mt-4 mb-2">input</div>
+        <div className="w-[236px] mx-auto my-0">
+          <Input />
+        </div>
       </div>
-      <div className="mb-8">
-        <label htmlFor="" className="inline-block mr-7">
-          Chose Button Type
-        </label>
-        <select name="" id="" onChange={handleSelectedType}>
-          <option value="solid">solid</option>
-          <option value="outline">outline</option>
-          <option value="translucent">translucent</option>
-        </select>
-      </div>
-      <Button type={type} onClick={handleOnClick} variant={variant}></Button>
-    </div>
+    </DefaultLayout>
   );
 }
 
