@@ -1,5 +1,5 @@
 import Button from "@/components/common/Button/Index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "~/components/common/Input";
 import ToggleMode from "~/components/common/ToggleMode/Index";
 import DefaultLayout from "~/components/layout/DefaultLayout";
@@ -10,6 +10,11 @@ type type = "solid" | "outline" | "translucent";
 function Development() {
   const [variant, setVariant] = useState<variant>("warning");
   const [type, setType] = useState<type>("solid");
+  const [value, setValue] = useState<string>("hallo");
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
 
   const handleSelectedVariant = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -23,6 +28,10 @@ function Development() {
 
   const handleOnClick = () => {
     window.alert("hallo");
+  };
+
+  const onChange = (event: string): void => {
+    setValue(event);
   };
 
   return (
@@ -55,7 +64,8 @@ function Development() {
         <Button type={type} onClick={handleOnClick} variant={variant}></Button>
         <div className="mt-4 mb-2">input</div>
         <div className="w-[236px] mx-auto my-0">
-          <Input />
+          <Input value={value} onChange={onChange} />
+          <p>ini adalah value: {value}</p>
         </div>
       </div>
     </DefaultLayout>
