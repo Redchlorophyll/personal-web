@@ -6,32 +6,30 @@ type checkboxProps = {
   onChange?: (value: Array<string>) => void;
 };
 
-const defaultProps: checkboxProps = {
-  value: "",
-  valueList: [],
-  onChange: (value: Array<string>): void => {},
-};
-
-const Checkbox: React.FunctionComponent<checkboxProps> = (props) => {
+export default function Checkbox({
+  value = "",
+  valueList = [],
+  onChange,
+}: checkboxProps) {
   const [isChecked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (props.value) {
-      const isValueIncluded = props.valueList?.includes(props.value);
+    if (value) {
+      const isValueIncluded = valueList.includes(value);
       if (isValueIncluded) setChecked(true);
       else setChecked(false);
     }
-  }, [props.valueList]);
+  }, [valueList]);
 
   const onChangeAction = (event: React.FormEvent<HTMLInputElement>) => {
-    if (!props.onChange) return;
+    if (!onChange) return;
     const { value, checked } = event.target as HTMLInputElement;
     const results: Array<string> =
-      props.valueList?.filter((data: string) => data !== value) || [];
+      valueList?.filter((data: string) => data !== value) || [];
     if (checked) {
       results.push(value);
     }
-    props.onChange(results);
+    onChange(results);
   };
 
   return (
@@ -39,7 +37,7 @@ const Checkbox: React.FunctionComponent<checkboxProps> = (props) => {
       <input
         className="peer w-[24px] h-[24px] sr-only"
         type="checkbox"
-        value={props.value}
+        value={value}
         onChange={(e) => onChangeAction(e)}
         checked={isChecked}
       />
@@ -48,8 +46,4 @@ const Checkbox: React.FunctionComponent<checkboxProps> = (props) => {
       </div>
     </label>
   );
-};
-
-Checkbox.defaultProps = defaultProps;
-
-export default Checkbox;
+}
