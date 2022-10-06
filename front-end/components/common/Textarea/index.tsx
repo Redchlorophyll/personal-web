@@ -22,7 +22,7 @@ const Textarea = ({ placeholder, value, onChange }: textareaProps) => {
         "border-[#464646] rounded-[7px] px-[13px] py-[8px]",
         "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] dark:text-black-900",
       ].join(" ")}
-    ></textarea>
+    />
   );
 };
 
