@@ -13,7 +13,7 @@ type buttonStyle = {
   style?: string;
 };
 
-const Button: React.FunctionComponent<buttonProps> = (props) => {
+const Button = ({ variant, children, type, onClick }: buttonProps) => {
   const [style, setStyle] = useState<string>("");
 
   const solid: buttonStyle[] = [
@@ -86,32 +86,32 @@ const Button: React.FunctionComponent<buttonProps> = (props) => {
   ];
 
   useEffect(() => {
-    if (props.type === "solid") {
+    if (type === "solid") {
       const designValue: buttonStyle[] = solid.filter(
-        (val) => val.variant === props.variant
+        (val) => val.variant === variant
       );
       setStyle(designValue[0]["style"] || "");
     }
-    if (props.type === "outline") {
+    if (type === "outline") {
       const designValue: buttonStyle[] = outline.filter(
-        (val) => val.variant === props.variant
+        (val) => val.variant === variant
       );
       setStyle(designValue[0]["style"] || "");
     }
-    if (props.type === "translucent") {
+    if (type === "translucent") {
       const designValue: buttonStyle[] = translucent.filter(
-        (val) => val.variant === props.variant
+        (val) => val.variant === variant
       );
       setStyle(designValue[0]["style"] || "");
     }
-  }, [props.variant, props.type]);
+  }, [variant, type]);
 
   return (
     <button
-      onClick={props.onClick}
+      onClick={onClick}
       className={`w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] text-lg leading-[22px] ${style}`}
     >
-      {props.children}
+      {children}
     </button>
   );
 };
