@@ -8,6 +8,7 @@ type dropdownProps = {
   value?: optVal | undefined;
   onChange?: (value: optVal | undefined) => void;
   type?: "dropdown" | "combobox";
+  label?: string;
 };
 
 export default function Dropdown({
@@ -16,7 +17,9 @@ export default function Dropdown({
   placeholder = "choose an option...",
   onChange,
   value,
+  label,
 }: dropdownProps) {
+  const inputId = label.toLowerCase().split(" ").join("-");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLHeadingElement>(null);
   const [inputValue, setInputValue] = useState<optVal | undefined>({
@@ -66,7 +69,7 @@ export default function Dropdown({
 
   useEffect(() => {
     setInputValue(value);
-    if (type === "dropdown") {
+    if (type === "combobox") {
       const filterOptions = options.filter((data) =>
         data.label.toLowerCase().includes(value?.label.toLowerCase() || "")
       );
@@ -90,55 +93,65 @@ export default function Dropdown({
     };
   });
   return (
-    <div
-      ref={inputRef}
-      data-testid="focus-element"
-      className="w-full relative z-[5] dark:text-black-900"
-    >
-      <input
-        className={`peer ${
-          type === "dropdown" ? "cursor-pointer" : ""
-        } bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`}
-        type="text"
-        placeholder={placeholder}
-        readOnly={!!(type === "dropdown")}
-        onClick={() => handleFocus()}
-        value={inputValue?.label}
-        onChange={(e) => onInputChange(e)}
-      />
+    <div className="flex flex-col items-start">
+      {label ? (
+        <label className="pb-[5px]" htmlFor={inputId}>
+          {label}
+        </label>
+      ) : (
+        ""
+      )}
+      <div
+        ref={inputRef}
+        data-testid="focus-element"
+        className="w-full relative z-[5] dark:text-black-900"
+      >
+        <input
+          id={inputId}
+          className={`peer ${
+            type === "dropdown" ? "cursor-pointer" : ""
+          } bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`}
+          type="text"
+          placeholder={placeholder}
+          readOnly={!!(type === "dropdown")}
+          onClick={() => handleFocus()}
+          value={inputValue?.label}
+          onChange={(e) => onInputChange(e)}
+        />
 
-      {type === "dropdown" ? (
-        <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
-      ) : (
-        ""
-      )}
-      {isOpen && inputOptions.length > 0 ? (
-        <Fade>
-          <div className="w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]">
-            {inputOptions.length > 0 &&
-            value?.label !== "" &&
-            value?.value !== "" &&
-            type === "dropdown" ? (
-              <button
-                onClick={() =>
-                  setActiveVal({
-                    label: "",
-                    value: "",
-                  })
-                }
-                className="w-full text-left text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
-              >
-                Clear Selection
-              </button>
-            ) : (
-              ""
-            )}
-            {optionHtml}
-          </div>
-        </Fade>
-      ) : (
-        ""
-      )}
+        {type === "dropdown" ? (
+          <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
+        ) : (
+          ""
+        )}
+        {isOpen && inputOptions.length > 0 ? (
+          <Fade>
+            <div className="w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]">
+              {inputOptions.length > 0 &&
+              value?.label !== "" &&
+              value?.value !== "" &&
+              type === "dropdown" ? (
+                <button
+                  onClick={() =>
+                    setActiveVal({
+                      label: "",
+                      value: "",
+                    })
+                  }
+                  className="w-full text-left text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
+                >
+                  Clear Selection
+                </button>
+              ) : (
+                ""
+              )}
+              {optionHtml}
+            </div>
+          </Fade>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }
