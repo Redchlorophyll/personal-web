@@ -4,7 +4,7 @@ type radioProps = {
   value?: string;
   valueGroup?: string;
   onChange?: (value: string) => void;
-  label: string;
+  label?: string;
 };
 
 export default function Radio({
