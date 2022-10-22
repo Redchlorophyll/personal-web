@@ -113,6 +113,7 @@ export default function Linky() {
         </Snackbar>
         <div className="w-[370px]">
           <Dropdown
+            label="test"
             type="combobox"
             options={options}
             placeholder="pilih bank"
