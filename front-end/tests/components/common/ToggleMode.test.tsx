@@ -22,6 +22,7 @@ describe("components - common - ToggleMode", () => {
   });
 
   test("it should show dark mode icons when clicked", async () => {
+    const user = userEvent.setup();
     render(
       <Provider store={store}>
         <ToggleMode />
@@ -32,7 +33,7 @@ describe("components - common - ToggleMode", () => {
       name: "toggle-mode",
     });
 
-    await userEvent.click(toggleMode);
+    await user.click(toggleMode);
 
     expect(screen.getByAltText("Dark mode icon")).toBeInTheDocument();
   });

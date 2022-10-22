@@ -13,7 +13,12 @@ type buttonStyle = {
   style?: string;
 };
 
-const Button = ({ variant, children, type, onClick }: buttonProps) => {
+export default function Button({
+  variant = "primary",
+  children = "Button",
+  type = "solid",
+  onClick,
+}: buttonProps) {
   const [style, setStyle] = useState<string>("");
 
   const solid: buttonStyle[] = [
@@ -109,11 +114,9 @@ const Button = ({ variant, children, type, onClick }: buttonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] text-lg leading-[22px] ${style}`}
+      className={`w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] ${style}`}
     >
       {children}
     </button>
   );
-};
-
-export default Button;
+}

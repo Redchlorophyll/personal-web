@@ -4,35 +4,35 @@ type radioProps = {
   value?: string;
   valueGroup?: string;
   onChange?: (value: string) => void;
+  label?: string;
 };
 
-const defaultProps: radioProps = {
-  value: "",
-  valueGroup: "",
-  onChange: (value: string): void => {},
-};
-
-const Radio: React.FunctionComponent<radioProps> = (props) => {
+export default function Radio({
+  value = "",
+  valueGroup = "",
+  onChange,
+  label,
+}: radioProps) {
   const [isChecked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (props.value) {
-      if (props.value === props.valueGroup) setChecked(true);
+    if (value) {
+      if (value === valueGroup) setChecked(true);
       else setChecked(false);
     }
-  }, [props.valueGroup]);
+  }, [valueGroup]);
 
   const onClickRadio = () => {
-    if (!props.onChange) return;
+    if (!onChange) return;
     if (!isChecked) {
-      props.onChange(props.value || "");
+      onChange(value || "");
     } else {
-      props.onChange("");
+      onChange("");
     }
     setChecked(!isChecked);
   };
 
-  const onChange = () => {
+  const onChangeRadio = () => {
     return;
   };
 
@@ -43,16 +43,19 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
         className="w-6 h-6 peer sr-only"
         value="test"
         onClick={onClickRadio}
-        onChange={onChange}
+        onChange={onChangeRadio}
         checked={isChecked}
       />
-      <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
+      <div className="inline-block peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
         <div className="w-5 h-5 rounded-full"></div>
       </div>
+      {label ? (
+        <div className="inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2">
+          test
+        </div>
+      ) : (
+        ""
+      )}
     </label>
   );
-};
-
-Radio.defaultProps = defaultProps;
-
-export default Radio;
+}

@@ -21,7 +21,7 @@ function ButtonWrapper() {
   );
 }
 
-describe("Component - common - Button", () => {
+describe("component - common - Button", () => {
   test("It should render properly", () => {
     render(<ButtonWrapper />);
     const target = screen.getByText("Test");
