@@ -66,6 +66,12 @@ export default function Dropdown({
 
   useEffect(() => {
     setInputValue(value);
+    if (type === "dropdown") {
+      const filterOptions = options.filter((data) =>
+        data.label.toLowerCase().includes(value?.label.toLowerCase() || "")
+      );
+      setInputOptions(filterOptions);
+    }
   }, [value]);
 
   useEffect(() => {
