@@ -61,10 +61,20 @@ function Development() {
             <option value="translucent">translucent</option>
           </select>
         </div>
-        <Button type={type} onClick={handleOnClick} variant={variant}></Button>
+        <Button type={type} onClick={handleOnClick} variant={variant}>
+          Test
+        </Button>
         <div className="mt-4 mb-2">input</div>
         <div className="w-[236px] mx-auto my-0">
-          <Input value={value} onChange={onChange} />
+          <Input
+            value={value}
+            onChange={onChange}
+            label="Name*"
+            isDisabled={false}
+            isError={false}
+            placeholder="Input Name here..."
+            errorMessage="input right name"
+          />
           <p>ini adalah value: {value}</p>
         </div>
       </div>

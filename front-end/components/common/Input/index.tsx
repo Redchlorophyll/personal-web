@@ -1,24 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 
 type inputProps = {
-  onChange: (event: string) => void;
-  value: string;
+  onChange?: (event: string) => void;
+  value?: string;
+  placeholder?: string;
+  isError?: boolean;
+  errorMessage?: string;
+  isDisabled?: boolean;
+  label?: string;
 };
 
-const Input: React.FunctionComponent<inputProps> = (props) => {
+export default function Input({
+  onChange,
+  value = "",
+  placeholder = "Input Text Here...",
+  isError = false,
+  errorMessage = "Error Message Here...",
+  isDisabled = false,
+  label = "",
+}: inputProps) {
+  const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    if (!onChange || isDisabled) return;
+    const { value } = event.target as HTMLInputElement;
+
+    onChange(value);
+  };
+
   return (
-    <input
-      aria-label="input"
-      value={props.value}
-      onChange={(event) => props.onChange(event.target.value)}
-      className={[
-        "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
-        "border-[#3B67BB] px-[17px] py-[6px] dark:text-black-900",
-        "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
-      ].join(" ")}
-      type="text"
-    />
+    <div className="flex flex-col items-start">
+      <label className="pb-[5px]">{label}</label>
+      <input
+        aria-label="input"
+        value={value}
+        placeholder={placeholder}
+        onChange={(event) => onInputChange(event)}
+        disabled={isDisabled}
+        className={[
+          "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
+          "px-[17px] py-[6px] dark:text-black-900",
+          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
+          "disabled:bg-black-200 disabled:text-black-700",
+          "disabled:border-black-600 dark:disabled:bg-black-500",
+          isError
+            ? "border-red-800"
+            : "border-black-800 focus:border-primary-800",
+        ].join(" ")}
+        type="text"
+      />
+      {isError ? (
+        <span className="text-sm text-red-800">{errorMessage}</span>
+      ) : (
+        ""
+      )}
+    </div>
   );
-};
-
-export default Input;
+}
