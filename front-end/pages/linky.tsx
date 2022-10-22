@@ -106,7 +106,6 @@ export default function Linky() {
         </div>
         <Snackbar
           variant={snackbarVariant}
-          timer={5000}
           isShown={isShown}
           onClose={onSnackbarClose}
         >
@@ -118,7 +117,7 @@ export default function Linky() {
             options={options}
             placeholder="pilih bank"
             value={activeBank}
-            setValue={(val: optVal | undefined) => {
+            onChange={(val: optVal | undefined) => {
               if (val) {
                 setActiveBank(val);
               }

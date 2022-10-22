@@ -6,33 +6,31 @@ type radioProps = {
   onChange?: (value: string) => void;
 };
 
-const defaultProps: radioProps = {
-  value: "",
-  valueGroup: "",
-  onChange: (value: string): void => {},
-};
-
-const Radio: React.FunctionComponent<radioProps> = (props) => {
+export default function Radio({
+  value = "",
+  valueGroup = "",
+  onChange,
+}: radioProps) {
   const [isChecked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (props.value) {
-      if (props.value === props.valueGroup) setChecked(true);
+    if (value) {
+      if (value === valueGroup) setChecked(true);
       else setChecked(false);
     }
-  }, [props.valueGroup]);
+  }, [valueGroup]);
 
   const onClickRadio = () => {
-    if (!props.onChange) return;
+    if (!onChange) return;
     if (!isChecked) {
-      props.onChange(props.value || "");
+      onChange(value || "");
     } else {
-      props.onChange("");
+      onChange("");
     }
     setChecked(!isChecked);
   };
 
-  const onChange = () => {
+  const onChangeRadio = () => {
     return;
   };
 
@@ -43,7 +41,7 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
         className="w-6 h-6 peer sr-only"
         value="test"
         onClick={onClickRadio}
-        onChange={onChange}
+        onChange={onChangeRadio}
         checked={isChecked}
       />
       <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
@@ -51,8 +49,4 @@ const Radio: React.FunctionComponent<radioProps> = (props) => {
       </div>
     </label>
   );
-};
-
-Radio.defaultProps = defaultProps;
-
-export default Radio;
+}

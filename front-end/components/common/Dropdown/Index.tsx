@@ -3,29 +3,27 @@ import { Fade } from "react-awesome-reveal";
 import { optVal } from "@/globals/types";
 
 type dropdownProps = {
-  options: Array<optVal>;
+  options?: Array<optVal>;
   placeholder?: string;
   value?: optVal | undefined;
-  setValue?: (value: optVal | undefined) => void;
+  onChange?: (value: optVal | undefined) => void;
   type?: "dropdown" | "combobox";
 };
 
-const defaultProps: dropdownProps = {
-  type: "dropdown",
-  options: [{ label: "sampel", value: "sampelVal" }],
-  setValue: (): void => {},
-};
-
-const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
+export default function Dropdown({
+  type = "dropdown",
+  options = [{ label: "sampel", value: "sampelVal" }],
+  placeholder = "choose an option...",
+  onChange,
+  value,
+}: dropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLHeadingElement>(null);
   const [inputValue, setInputValue] = useState<optVal | undefined>({
     label: "",
     value: "",
   });
-  const [inputOptions, setInputOptions] = useState<Array<optVal>>([
-    ...props.options,
-  ]);
+  const [inputOptions, setInputOptions] = useState<Array<optVal>>([...options]);
 
   const handleFocus = () => {
     setIsOpen(!isOpen);
@@ -36,15 +34,15 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
 
   const setActiveVal = (activeVal: optVal | undefined) => {
     handleFocus();
-    if (props.setValue) {
-      props.setValue(activeVal);
+    if (onChange) {
+      onChange(activeVal);
       setInputValue(activeVal);
     }
   };
 
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    if (props.type === "dropdown") return;
-    const filterOptions = props.options.filter((data) =>
+    if (type === "dropdown") return;
+    const filterOptions = options.filter((data) =>
       data.label.toLowerCase().includes(event.currentTarget.value.toLowerCase())
     );
     setInputOptions(filterOptions);
@@ -67,8 +65,8 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
   });
 
   useEffect(() => {
-    setInputValue(props.value);
-  }, [props.value]);
+    setInputValue(value);
+  }, [value]);
 
   useEffect(() => {
     const outsideClickHandler = ({ target }: MouseEvent) => {
@@ -93,17 +91,17 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
     >
       <input
         className={`peer ${
-          props.type === "dropdown" ? "cursor-pointer" : ""
+          type === "dropdown" ? "cursor-pointer" : ""
         } bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`}
         type="text"
-        placeholder={props.placeholder || "Select data here..."}
-        readOnly={!!(props.type === "dropdown")}
+        placeholder={placeholder}
+        readOnly={!!(type === "dropdown")}
         onClick={() => handleFocus()}
         value={inputValue?.label}
         onChange={(e) => onInputChange(e)}
       />
 
-      {props.type === "dropdown" ? (
+      {type === "dropdown" ? (
         <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
       ) : (
         ""
@@ -112,9 +110,9 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
         <Fade>
           <div className="w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]">
             {inputOptions.length > 0 &&
-            props.value?.label !== "" &&
-            props.value?.value !== "" &&
-            props.type === "dropdown" ? (
+            value?.label !== "" &&
+            value?.value !== "" &&
+            type === "dropdown" ? (
               <button
                 onClick={() =>
                   setActiveVal({
@@ -137,8 +135,4 @@ const Dropdown: React.FunctionComponent<dropdownProps> = (props) => {
       )}
     </div>
   );
-};
-
-Dropdown.defaultProps = defaultProps;
-
-export default Dropdown;
+}

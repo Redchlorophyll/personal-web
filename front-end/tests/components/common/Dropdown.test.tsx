@@ -36,7 +36,7 @@ function DropdownWrapper(props: props) {
         options={options}
         placeholder="pilih bank"
         value={activeBank}
-        setValue={(val: optVal | undefined) => {
+        onChange={(val: optVal | undefined) => {
           if (val) {
             setActiveBank(val);
           }
