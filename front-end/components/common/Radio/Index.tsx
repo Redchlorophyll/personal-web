@@ -44,7 +44,7 @@ export default function Radio({
         onChange={onChangeRadio}
         checked={isChecked}
       />
-      <div className="peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
+      <div className="inline-block peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800">
         <div className="w-5 h-5 rounded-full"></div>
       </div>
     </label>
