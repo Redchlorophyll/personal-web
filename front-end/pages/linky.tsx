@@ -9,6 +9,7 @@ import Dropdown from "@/components/common/Dropdown/Index";
 import Checkbox from "@/components/common/Checkbox/Index";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 import Radio from "@/components/common/Radio/Index";
+import Modal from "@/components/common/Modal/Index";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
 type optVal = {
@@ -32,6 +33,7 @@ export default function Linky() {
     { label: "SeaBank", value: "seabank" },
     { label: "myBank", value: "myBank" },
   ]);
+  const [modalVisible, setModalVisible] = useState(false);
   const [activeBank, setActiveBank] = useState<optVal | undefined>({
     label: "BCA",
     value: "bca",
@@ -51,15 +53,32 @@ export default function Linky() {
     setCheckboxVal(val);
   }
 
+  function onModalClose() {
+    setModalVisible(false);
+  }
+
+  function onModalOpen() {
+    setModalVisible(true);
+  }
+
   useEffect((): void => {
     dispatch(localStorageTheme());
   }, []);
 
   return (
     <DefaultLayout>
+      {modalVisible ? (
+        <Modal title="edit page">
+          <Button onClick={onModalClose} variant="muted" type="outline">
+            close
+          </Button>
+        </Modal>
+      ) : (
+        ""
+      )}
       <div>
         <h1 className="card">Hello</h1>
-        <Button />
+        <Button onClick={onModalOpen}>Open Modal</Button>
         <ToggleMode />
         <div className="flex justify-center">
           <Tooltip tooltipContent={"ini adalah tooltip"} direction={"bottom"}>
