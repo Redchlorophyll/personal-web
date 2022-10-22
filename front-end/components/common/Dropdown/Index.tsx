@@ -17,7 +17,7 @@ export default function Dropdown({
   placeholder = "choose an option...",
   onChange,
   value,
-  label,
+  label = "",
 }: dropdownProps) {
   const inputId = label.toLowerCase().split(" ").join("-");
   const [isOpen, setIsOpen] = useState<boolean>(false);
