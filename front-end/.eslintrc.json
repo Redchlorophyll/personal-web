@@ -1,14 +1,14 @@
 {
-    "root": true,
-    "env": {
-        "browser": true,
-        "node": true
-    },
-    "parserOptions": {
-        "parser": "babel-eslint"
-    },
-    "extends": ["next","next/core-web-vitals"],
-    "settings": {
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "extends": ["next", "next/core-web-vitals"],
+  "settings": {
     "import/resolver": {
       "alias": {
         "map": [
