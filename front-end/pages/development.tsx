@@ -1,6 +1,6 @@
 import Button from "@/components/common/Button/Index";
 import { useEffect, useState } from "react";
-import Input from "~/components/common/Input";
+import Input from "~/components/common/Input/Index";
 import ToggleMode from "~/components/common/ToggleMode/Index";
 import DefaultLayout from "~/components/layout/DefaultLayout";
 

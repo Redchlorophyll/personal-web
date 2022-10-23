@@ -10,6 +10,7 @@ import Checkbox from "@/components/common/Checkbox/Index";
 import DefaultLayout from "@/components/layout/DefaultLayout";
 import Radio from "@/components/common/Radio/Index";
 import Modal from "@/components/common/Modal/Index";
+import Textarea from "~/components/common/Textarea/Index";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
 type optVal = {
@@ -33,6 +34,7 @@ export default function Linky() {
     { label: "SeaBank", value: "seabank" },
     { label: "myBank", value: "myBank" },
   ]);
+  const [textareaValue, setTextAreaValue] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [activeBank, setActiveBank] = useState<optVal | undefined>({
     label: "BCA",
@@ -177,6 +179,16 @@ export default function Linky() {
         valueGroup={radio}
         onChange={(val: string) => onChangeRadio(val)}
       />
+      <div className="w-[370px]">
+        <Textarea
+          label="Content"
+          value={textareaValue}
+          onChange={(e) => setTextAreaValue(e)}
+          isDisabled={false}
+          limit={100}
+        />
+        {textareaValue}
+      </div>
     </DefaultLayout>
   );
 }
