@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/Input/Index";
 
 function InputWrapper(props: { isDisabled?: boolean }) {
   const [value, setValue] = useState<string>("");

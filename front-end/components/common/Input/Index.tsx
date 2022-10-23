@@ -29,9 +29,13 @@ export default function Input({
 
   return (
     <div className="flex flex-col items-start">
-      <label className="pb-[5px]" htmlFor={inputId}>
-        {label}
-      </label>
+      {label ? (
+        <label className="pb-[5px]" htmlFor={inputId}>
+          {label}
+        </label>
+      ) : (
+        ""
+      )}
       <input
         id={inputId}
         aria-label="input"
