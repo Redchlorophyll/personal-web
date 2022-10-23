@@ -1,0 +1,17 @@
+{
+  "editor.rulers": [100],
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.eol": "\n",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "eslint.workingDirectories": ["./front-end"]
+}

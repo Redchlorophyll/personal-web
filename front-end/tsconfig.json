@@ -6,15 +6,23 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "~~/*": ["./*"],
+      "@@/*": ["./*"]
+    },
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
     "resolveJsonModule": true,
+    "moduleResolution":"node",
     "isolatedModules": true,
     "jsx": "preserve"
   },

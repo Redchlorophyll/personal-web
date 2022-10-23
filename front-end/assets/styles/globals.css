@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  body {
+	@apply text-black-900;
+  }
+}
 
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,6 +27,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-size: 16px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -28,6 +36,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	
+	font-family: 'Montserrat', -apple-system, system-ui, blinkmacsystemfont, 'Segoe UI', roboto, sans-serif;;
 }
 ol, ul {
 	list-style: none;
@@ -46,9 +56,6 @@ table {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
