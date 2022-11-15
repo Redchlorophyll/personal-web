@@ -21,6 +21,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var src_exports = {};
 __export(src_exports, {
   Button: () => Button,
+  Input: () => Input,
   Radio: () => Radio
 });
 module.exports = __toCommonJS(src_exports);
@@ -182,8 +183,72 @@ function Radio({
     ]
   });
 }
+
+// src/components/Input/index.tsx
+var import_jsx_runtime3 = require("react/jsx-runtime");
+function Input({
+  onChange,
+  value = "",
+  placeholder = "Input Text Here...",
+  isError = false,
+  errorMessage = "Error Message Here...",
+  isDisabled = false,
+  label = ""
+}) {
+  const inputId = label.toLowerCase().split(" ").join("-");
+  const onInputChange = (event) => {
+    if (!onChange || isDisabled)
+      return;
+    const { value: value2 } = event.target;
+    onChange(value2);
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", {
+    className: "flex flex-col items-start",
+    children: [
+      label ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("label", {
+        className: "pb-[5px]",
+        htmlFor: inputId,
+        children: label
+      }) : "",
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", {
+        id: inputId,
+        "aria-label": "input",
+        value,
+        placeholder,
+        onChange: (event) => onInputChange(event),
+        disabled: isDisabled,
+        className: [
+          "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
+          "px-[17px] py-[6px] dark:text-black-900",
+          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
+          "disabled:bg-black-200 disabled:text-black-700",
+          "disabled:border-black-600 dark:disabled:bg-black-500",
+          isError ? "border-red-800" : "border-black-800 focus:border-primary-800"
+        ].join(" "),
+        type: "text"
+      }),
+      isError ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", {
+        className: "text-sm text-red-800",
+        children: errorMessage
+      }) : ""
+    ]
+  });
+}
+
+// src/components/Modal/index.tsx
+var import_jsx_runtime4 = require("react/jsx-runtime");
+
+// src/components/Tooltip/index.tsx
+var import_react3 = require("react");
+
+// src/components/Tooltip/TooltipContent.tsx
+var import_jsx_runtime5 = require("react/jsx-runtime");
+
+// src/components/Tooltip/index.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Button,
+  Input,
   Radio
 });
