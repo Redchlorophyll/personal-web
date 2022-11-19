@@ -1,9 +1,10 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import icWarning from "@/src/assets/img/icons/ic_warning.svg";
-import icInfo from "@/src/assets/img/icons/ic_info.svg";
-import icError from "@/src/assets/img/icons/ic_error.svg";
-import icClose from "@/src/assets/img/icons/ic_snackbar-close.svg";
-import icChecked from "@/src/assets/img/icons/ic_checked.svg";
+// import icWarning from "../../assets/img/icons/ic_warning.svg";
+// import icInfo from "../../assets/img/icons/ic_info.svg";
+// import icError from "../../assets/img/icons/ic_error.svg";
+// import icClose from "../../assets/img/icons/ic_snackbar-close.svg";
+// import icChecked from "../../assets/img/icons/ic_checked.svg";
+// import { ReactComponent as icWarning } from "../../assets/img/icons/ic_warning.svg";
 import { Fade } from "react-awesome-reveal";
 
 export type variantType = "error" | "info" | "success" | "warning";
@@ -16,29 +17,29 @@ type SnackbarProps = {
   onClose?: (value: boolean) => void;
 };
 
-export default function Snackbar({
+export function Snackbar({
   variant = "error",
   isShown = false,
   timer,
   onClose,
   children,
 }: SnackbarProps) {
-  const [baseColor, setBaseColor] = useState<String>("bg-red-700");
-  const [image, setImage] = useState<string>(icError);
+  const [baseColor, setBaseColor] = useState<string>("bg-red-700");
+  const [image, setImage] = useState<string>('error');
 
   useEffect(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
-      setImage(icError);
+      setImage('error');
     } else if (variant === "info") {
       setBaseColor("bg-primary-700");
-      setImage(icInfo);
+      setImage('info');
     } else if (variant === "success") {
       setBaseColor("bg-green-700");
-      setImage(icChecked);
+      setImage('checked');
     } else if (variant === "warning") {
       setBaseColor("bg-orange-700");
-      setImage(icWarning);
+      setImage('warning');
     }
   }, [variant]);
 
@@ -54,6 +55,13 @@ export default function Snackbar({
     }
   }, [timer, isShown]);
 
+  const snackbarIcon = () => {
+    if (image === 'error') return (<div className={`bg-icon-error w-[30px] h-[30px] bg-cover`} />);
+    else if (image === 'info') return (<div className={`bg-icon-info w-[30px] h-[30px] bg-cover`} />);
+    else if (image === 'warning') return (<div className={`bg-icon-warning w-[30px] h-[30px] bg-cover`} />);
+    else if (image === 'checked') return (<div className={`bg-icon-checked w-[30px] h-[30px] bg-cover`} />);
+  };
+
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2">
       {isShown ? (
@@ -62,7 +70,9 @@ export default function Snackbar({
             className={`${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`}
           >
             <div>
-              <img layout="fixed" src={image} alt={`${variant} icon`} />
+              {/* <img src={image} alt={`${variant} icon`} /> */}
+              {snackbarIcon()}
+              {/* <icWarning /> */}
             </div>
             <div>
               <p className="text-base translate-y-[2px] min-w-[10rem]">
@@ -75,7 +85,8 @@ export default function Snackbar({
                   onClick={() => onCloseAction()}
                   data-testid="close-snackbar"
                 >
-                  <img src={icClose} alt="close icon" layout="fixed" />
+                  {/* <img src={icClose} alt="close icon" /> */}
+                  <div className="bg-icon-close w-[30px] h-[30px]" />
                 </button>
               </div>
             ) : (

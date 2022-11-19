@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Modal from "./index";
+import { Modal } from "./index";
 
 describe("components - common - Modal", () => {
   test("it should render properly", () => {

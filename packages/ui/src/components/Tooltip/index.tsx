@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState, useRef } from "react";
 import TooltipContent from "./TooltipContent";
 
-export type direction = "top" | "bottom" | "left" | "right";
+type direction = "top" | "bottom" | "left" | "right";
 
 type tooltipProps = {
   children?: ReactNode;
@@ -9,7 +9,7 @@ type tooltipProps = {
   direction?: direction;
 };
 
-export default function Tooltip({
+export function Tooltip({
   direction = "bottom",
   tooltipContent,
   children,

@@ -7,7 +7,7 @@ type checkboxProps = {
   label?: string;
 };
 
-export default function Checkbox({
+export function Checkbox({
   value = "",
   valueList = [],
   onChange,

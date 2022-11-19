@@ -10,7 +10,7 @@ type textareaProps = {
   style?: CSSProperties;
 };
 
-const Textarea = ({
+export function Textarea({
   placeholder = "Input Text Here...",
   value,
   onChange,
@@ -18,7 +18,7 @@ const Textarea = ({
   isDisabled = false,
   style,
   label = "",
-}: textareaProps) => {
+}: textareaProps) {
   const inputId = label.toLowerCase().split(" ").join("-");
   const [sumCharacters, setSumCharacters] = useState<number>(0);
   const [textboxVal, setTextBoxVal] = useState<string>("");
@@ -85,5 +85,3 @@ const Textarea = ({
     </div>
   );
 };
-
-export default Textarea;

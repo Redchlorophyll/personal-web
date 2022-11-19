@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import Textarea from "./index";
+import { Textarea } from "./index";
 
 function InputWrapper({
   disabled = false,

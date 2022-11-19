@@ -6,7 +6,7 @@ type modalProps = {
   style?: CSSProperties;
 };
 
-export default function Modal({ children, title, style }: modalProps) {
+export function Modal({ children, title, style }: modalProps) {
   return (
     <>
       <div className="w-full h-[100vh] absolute z-30 bg-black-900 opacity-25" />

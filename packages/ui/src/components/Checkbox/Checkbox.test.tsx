@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Checkbox from "./index";
+import { Checkbox } from "./index";
 import userEvent from "@testing-library/user-event";
 
 function CheckboxWrapper() {

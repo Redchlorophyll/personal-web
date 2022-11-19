@@ -1,24 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-     // app content
-     `src/**/*.{js,ts,jsx,tsx}`,
-     // include packages if not transpiling
-     // "../../packages/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
-    extend: {
-      backgroundImage: {
-        "dropdown-arrow": "url('../src/assets/img/icons/ic_arrow.svg')",
-        "checkbox-check": "url('../src/assets/img/icons/ic_checkbox-check.svg')",
-        "icon-warning": "url('../src/assets/img/icons/ic_warning.svg')",
-        "icon-info": "url('../src/assets/img/icons/ic_info.svg')",
-        "icon-error": "url('../src/assets/img/icons/ic_error.svg')",
-        "icon-close": "url('../src/assets/img/icons/ic_snackbar-close.svg')",
-        "icon-checked": "url('../src/assets/img/icons/ic_checked.svg')",
-      },
-    },
+    extend: {},
     colors: {
       "dark-layout": "#333333",
       "light-layout": "FCFCFC",

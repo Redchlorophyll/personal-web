@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 
-export type optVal = {
+type optVal = {
   label: string;
   value: string;
 };
@@ -15,7 +15,7 @@ type dropdownProps = {
   label?: string;
 };
 
-export default function Dropdown({
+export function Dropdown({
   type = "dropdown",
   options = [{ label: "sampel", value: "sampelVal" }],
   placeholder = "choose an option...",
@@ -96,6 +96,7 @@ export default function Dropdown({
       document.removeEventListener("mousedown", outsideClickHandler);
     };
   });
+
   return (
     <div className="flex flex-col items-start">
       {label ? (

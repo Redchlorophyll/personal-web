@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Dropdown from "./index";
+import { Dropdown } from "./index";
 import userEvent from "@testing-library/user-event";
 import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 

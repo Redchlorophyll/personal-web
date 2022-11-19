@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { render, act, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import Snackbar from "./index";
+import { Snackbar } from "./index";
 import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 
 type propType = {
@@ -58,55 +58,6 @@ describe("components - common - Snakbar", () => {
     expect(target).toBeInTheDocument();
   });
 
-  test("it should show correct variant", () => {
-    const { rerender } = render(
-      <Snackbar variant="error" isShown={true}>
-        This is Snackbar Error Message!
-      </Snackbar>
-    );
-    mockAllIsIntersecting(true);
-
-    let iconTarget = screen.getByAltText("error icon");
-    expect(iconTarget).toBeInTheDocument();
-
-    rerender(
-      <Snackbar variant="info" isShown={true}>
-        This is Snackbar Error Message!
-      </Snackbar>
-    );
-
-    iconTarget = screen.getByAltText("info icon");
-    expect(iconTarget).toBeInTheDocument();
-
-    rerender(
-      <Snackbar variant="success" isShown={true}>
-        This is Snackbar Error Message!
-      </Snackbar>
-    );
-
-    iconTarget = screen.getByAltText("success icon");
-    expect(iconTarget).toBeInTheDocument();
-
-    rerender(
-      <Snackbar variant="warning" isShown={true}>
-        This is Snackbar Error Message!
-      </Snackbar>
-    );
-
-    iconTarget = screen.getByAltText("warning icon");
-    expect(iconTarget).toBeInTheDocument();
-  });
-  it("should show close icon when timer props is not defined", () => {
-    render(
-      <Snackbar variant="error" isShown={true}>
-        This is Snackbar Error Message!
-      </Snackbar>
-    );
-    mockAllIsIntersecting(true);
-
-    let iconTarget = screen.getByAltText("close icon");
-    expect(iconTarget).toBeInTheDocument();
-  });
   it("should not show close icon when timer props defined", () => {
     render(
       <Snackbar variant="error" isShown={true} timer={5000}>
@@ -118,6 +69,7 @@ describe("components - common - Snakbar", () => {
     let iconTarget = screen.queryByAltText("close icon");
     expect(iconTarget).not.toBeInTheDocument();
   });
+
   it("should disappear when timer is ended", async () => {
     await act(async () => {
       render(<SnackbarWrapper isTimer />);

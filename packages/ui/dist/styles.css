@@ -635,6 +635,10 @@ video {
   height: 1.25rem;
 }
 
+.h-\[30px\] {
+  height: 30px;
+}
+
 .h-\[170px\] {
   height: 170px;
 }
@@ -678,6 +682,10 @@ video {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-\[30px\] {
+  width: 30px;
 }
 
 .min-w-\[140px\] {
@@ -926,11 +934,31 @@ video {
 }
 
 .bg-checkbox-check {
-  background-image: url('~/src/assets/img/icons/ic_checkbox-check.svg');
+  background-image: url('../src/assets/img/icons/ic_checkbox-check.svg');
 }
 
 .bg-dropdown-arrow {
-  background-image: url('~/src/assets/img/icons/ic_arrow.svg');
+  background-image: url('../src/assets/img/icons/ic_arrow.svg');
+}
+
+.bg-icon-error {
+  background-image: url('../src/assets/img/icons/ic_error.svg');
+}
+
+.bg-icon-info {
+  background-image: url('../src/assets/img/icons/ic_info.svg');
+}
+
+.bg-icon-warning {
+  background-image: url('../src/assets/img/icons/ic_warning.svg');
+}
+
+.bg-icon-checked {
+  background-image: url('../src/assets/img/icons/ic_checked.svg');
+}
+
+.bg-icon-close {
+  background-image: url('../src/assets/img/icons/ic_snackbar-close.svg');
 }
 
 .bg-cover {

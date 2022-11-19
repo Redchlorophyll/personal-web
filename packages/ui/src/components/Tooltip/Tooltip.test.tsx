@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Tooltip from "./index";
+import { Tooltip } from "./index";
 import userEvent from "@testing-library/user-event";
 
 describe("components - common - tooltip", () => {
