@@ -45,14 +45,14 @@ export default function ToggleMode() {
           'bg-black-100 p-1 left-2 top-1',
           'peer-checked:bg-black-800',
           'peer-checked:left-12',
-          'transition-all duration-700',
+          'transition-all duration-1000',
           'w-10 h-10',
           'flex justify-center'].join(' ')}
       >
         <Image
           src={theme === "dark" ? icMoon : icSunny}
-          width="25px"
-          height="25px"
+          width="25"
+          height="25"
           alt={theme === "dark" ? "Dark mode icon" : "Light mode icon"}
         />
       </label>
