@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // import Snackbar from "@/components/common/Snackbar/Index";
 // import Dropdown from "@/components/common/Dropdown/Index";
 // import Checkbox from "@/components/common/Checkbox/Index";
-// import DefaultLayout from "@/components/layout/DefaultLayout";
+import Layout from "@/components/Layouts/index";
 // import Radio from "@/components/common/Radio/Index";
 // import Modal from "@/components/common/Modal/Index";
 // import Textarea from "~/components/common/Textarea/Index";
@@ -64,12 +64,8 @@ export default function Linky() {
     setModalVisible(true);
   }
 
-  useEffect((): void => {
-    dispatch(localStorageTheme());
-  }, []);
-
   return (
-    // <DefaultLayout>
+    <Layout>
       <div>
         {modalVisible ? (
         <Modal title="edit page">
@@ -189,7 +185,7 @@ export default function Linky() {
         />
         {textareaValue}
       </div>
-      </div>
-    // </DefaultLayout>
+    </div>
+    </Layout>
   );
 }

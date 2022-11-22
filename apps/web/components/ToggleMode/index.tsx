@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDark, toggleLight } from "@/stores/theme";
+import { toggleDark, toggleLight, localStorageTheme } from "@/stores/theme";
 import type { RootState } from "@/store";
 import Image from "next/image";
 import icSunny from "@/assets/img/icons/ic_sunny.svg";
@@ -24,6 +24,15 @@ export default function ToggleMode() {
       document.documentElement.classList.add("dark");
     }
   }
+
+  useEffect((): void => {
+    dispatch(localStorageTheme());
+  }, []);
+
+  const image = () => {
+    if (theme === "dark") return icMoon;
+    else if (theme === 'light') return icSunny;
+  };
 
   return (
     <div
@@ -50,7 +59,7 @@ export default function ToggleMode() {
           'flex justify-center'].join(' ')}
       >
         <Image
-          src={theme === "dark" ? icMoon : icSunny}
+          src={image() || '/none.jpg'}
           width="25"
           height="25"
           alt={theme === "dark" ? "Dark mode icon" : "Light mode icon"}

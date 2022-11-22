@@ -1,8 +1,10 @@
-import Button from "@/components/common/Button/Index";
+// import Button from "@/components/common/Button/Index";
 import { useEffect, useState } from "react";
-import Input from "~/components/common/Input/Index";
-import ToggleMode from "~/components/common/ToggleMode/Index";
-import DefaultLayout from "~/components/layout/DefaultLayout";
+import ToggleMode from "@/components/ToggleMode/index";
+import Layout from "@/components/Layouts/index";
+import { Button,
+Input,
+} from "ui";
 
 type variant = "warning" | "success" | "primary" | "error" | "muted";
 type type = "solid" | "outline" | "translucent";
@@ -35,7 +37,7 @@ function Development() {
   };
 
   return (
-    <DefaultLayout>
+    <Layout>
       <ToggleMode />
       <div className="text-center">
         <h1>hallo this is Development Page for chandra</h1>
@@ -78,7 +80,7 @@ function Development() {
           <p>ini adalah value: {value}</p>
         </div>
       </div>
-    </DefaultLayout>
+    </Layout>
   );
 }
 
