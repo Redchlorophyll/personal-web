@@ -7,7 +7,7 @@ export type optVal = {
   value: string;
 };
 
-// export type direction = "top" | "bottom" | "left" | "right";
+export type direction = "top" | "bottom" | "left" | "right";
 
 export type variantStyle = "warning" | "success" | "primary" | "error" | "muted";
 
