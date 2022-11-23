@@ -1,10 +1,4 @@
 import React, { ReactNode, useEffect, useState } from "react";
-// import icWarning from "../../assets/img/icons/ic_warning.svg";
-// import icInfo from "../../assets/img/icons/ic_info.svg";
-// import icError from "../../assets/img/icons/ic_error.svg";
-// import icClose from "../../assets/img/icons/ic_snackbar-close.svg";
-// import icChecked from "../../assets/img/icons/ic_checked.svg";
-// import { ReactComponent as icWarning } from "../../assets/img/icons/ic_warning.svg";
 import { Fade } from "react-awesome-reveal";
 
 export type variantType = "error" | "info" | "success" | "warning";
@@ -70,9 +64,7 @@ export function Snackbar({
             className={`${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`}
           >
             <div>
-              {/* <img src={image} alt={`${variant} icon`} /> */}
               {snackbarIcon()}
-              {/* <icWarning /> */}
             </div>
             <div>
               <p className="text-base translate-y-[2px] min-w-[10rem]">
@@ -85,7 +77,6 @@ export function Snackbar({
                   onClick={() => onCloseAction()}
                   data-testid="close-snackbar"
                 >
-                  {/* <img src={icClose} alt="close icon" /> */}
                   <div className="bg-icon-close w-[30px] h-[30px]" />
                 </button>
               </div>

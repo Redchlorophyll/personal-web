@@ -1,8 +1,8 @@
 import { ReactNode, CSSProperties } from 'react';
 
-declare type variantStyle = "warning" | "success" | "primary" | "error" | "muted";
-declare type typeStyle = "solid" | "outline" | "translucent";
-declare type buttonProps = {
+type variantStyle = "warning" | "success" | "primary" | "error" | "muted";
+type typeStyle = "solid" | "outline" | "translucent";
+type buttonProps = {
     variant?: variantStyle;
     children?: ReactNode;
     type?: typeStyle;
@@ -10,7 +10,7 @@ declare type buttonProps = {
 };
 declare function Button({ variant, children, type, onClick, }: buttonProps): JSX.Element;
 
-declare type radioProps = {
+type radioProps = {
     value?: string;
     valueGroup?: string;
     onChange?: (value: string) => void;
@@ -18,7 +18,7 @@ declare type radioProps = {
 };
 declare function Radio({ value, valueGroup, onChange, label, }: radioProps): JSX.Element;
 
-declare type inputProps = {
+type inputProps = {
     onChange?: (event: string) => void;
     value?: string;
     placeholder?: string;
@@ -29,23 +29,23 @@ declare type inputProps = {
 };
 declare function Input({ onChange, value, placeholder, isError, errorMessage, isDisabled, label, }: inputProps): JSX.Element;
 
-declare type modalProps = {
+type modalProps = {
     children?: ReactNode;
     title?: string;
     style?: CSSProperties;
 };
 declare function Modal({ children, title, style }: modalProps): JSX.Element;
 
-declare type direction = "top" | "bottom" | "left" | "right";
-declare type tooltipProps = {
+type direction = "top" | "bottom" | "left" | "right";
+type tooltipProps = {
     children?: ReactNode;
     tooltipContent?: ReactNode;
     direction?: direction;
 };
 declare function Tooltip({ direction, tooltipContent, children, }: tooltipProps): JSX.Element;
 
-declare type variantType = "error" | "info" | "success" | "warning";
-declare type SnackbarProps = {
+type variantType = "error" | "info" | "success" | "warning";
+type SnackbarProps = {
     children?: ReactNode;
     variant?: variantType;
     timer?: number;
@@ -54,11 +54,11 @@ declare type SnackbarProps = {
 };
 declare function Snackbar({ variant, isShown, timer, onClose, children, }: SnackbarProps): JSX.Element;
 
-declare type optVal = {
+type optVal = {
     label: string;
     value: string;
 };
-declare type dropdownProps = {
+type dropdownProps = {
     options?: Array<optVal>;
     placeholder?: string;
     value?: optVal | undefined;
@@ -68,7 +68,7 @@ declare type dropdownProps = {
 };
 declare function Dropdown({ type, options, placeholder, onChange, value, label, }: dropdownProps): JSX.Element;
 
-declare type checkboxProps = {
+type checkboxProps = {
     value?: string;
     valueList?: Array<string>;
     onChange?: (value: Array<string>) => void;
@@ -76,7 +76,7 @@ declare type checkboxProps = {
 };
 declare function Checkbox({ value, valueList, onChange, label, }: checkboxProps): JSX.Element;
 
-declare type textareaProps = {
+type textareaProps = {
     onChange?: (event: string) => void;
     value?: string;
     placeholder?: string;

@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
-// import Button from "@/components/common/Button/Index";
-import ToggleMode from "@/components/ToggleMode/index";
-import { localStorageTheme } from "@/stores/theme";
-import { useDispatch } from "react-redux";
-// import Tooltip from "@/components/common/Tooltip/Index";
-// import Snackbar from "@/components/common/Snackbar/Index";
-// import Dropdown from "@/components/common/Dropdown/Index";
-// import Checkbox from "@/components/common/Checkbox/Index";
-import Layout from "@/components/Layouts/index";
-// import Radio from "@/components/common/Radio/Index";
-// import Modal from "@/components/common/Modal/Index";
-// import Textarea from "~/components/common/Textarea/Index";
+import React, { useState } from "react";
+import ToggleMode from "@/components/ToggleMode";
+import Layout from "@/components/Layouts";
 import { Button, Radio, Tooltip, Modal, Dropdown, Snackbar, Checkbox, Textarea } from "ui";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
@@ -27,7 +17,6 @@ export default function Linky() {
     "test2",
     "test",
   ]);
-  const dispatch = useDispatch();
   const [options, setOptions] = useState([
     { label: "BCA", value: "bca" },
     { label: "BRI", value: "bri" },

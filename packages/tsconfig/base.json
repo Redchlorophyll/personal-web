@@ -16,12 +16,13 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"],
       "~~/*": ["./*"],
       "@@/*": ["./*"]
-    },
+    }
   },
   "exclude": ["node_modules"]
 }

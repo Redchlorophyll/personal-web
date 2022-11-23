@@ -5,7 +5,7 @@ import { Radio } from "./index";
 import userEvent from "@testing-library/user-event";
 
 function RadioWrapper() {
-  const [radio, setRadio] = useState<string>([]);
+  const [radio, setRadio] = useState<string>('');
 
   function onChangeCheckbox(val: string) {
     setRadio(val);
