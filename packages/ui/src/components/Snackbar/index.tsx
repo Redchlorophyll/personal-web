@@ -52,7 +52,7 @@ export function Snackbar({
   const snackbarIcon = () => {
     if (image === 'error') return (<div className={`bg-icon-error w-[30px] h-[30px] bg-cover`} />);
     else if (image === 'info') return (<div className={`bg-icon-info w-[30px] h-[30px] bg-cover`} />);
-    else if (image === 'warning') return (<div className={`bg-icon-warning w-[30px] h-[30px] bg-cover`} />);
+    else if (image === 'warning') return (<div className={`bg-icon-warning w-[30px] h-[25px] bg-cover`} />);
     else if (image === 'checked') return (<div className={`bg-icon-checked w-[30px] h-[30px] bg-cover`} />);
   };
 

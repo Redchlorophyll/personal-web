@@ -393,7 +393,7 @@ function Snackbar({
       });
     else if (image === "warning")
       return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", {
-        className: `bg-icon-warning w-[30px] h-[30px] bg-cover`
+        className: `bg-icon-warning w-[30px] h-[25px] bg-cover`
       });
     else if (image === "checked")
       return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", {
