@@ -13,5 +13,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "eslint.workingDirectories": ["./front-end"]
+  "eslint.workingDirectories": ["./packages/ui", "./apps/web", ".apps/docs"]
 }
