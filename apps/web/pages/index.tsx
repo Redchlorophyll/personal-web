@@ -1,11 +1,10 @@
-import { Button, Radio } from "ui";
+import EmptyPage from "@/components/EmptyPage";
 
 export default function Web() {
   return (
     <div>
-      <h1>Web</h1>
-      <Button variant="muted"/>
-      <Radio />
+      <div className="w-full h-[67px] bg-red-200 mb-10"></div>
+      <EmptyPage />
     </div>
   );
 }

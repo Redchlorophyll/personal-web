@@ -3,6 +3,7 @@ import "@/assets/styles/globals.css";
 import "ui/styles.css";
 import { store } from "@/store";
 import { Provider } from "react-redux";
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -17,8 +18,13 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </>
   );
 }
