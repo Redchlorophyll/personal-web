@@ -20,9 +20,13 @@ export default function EmptyPage() {
             />
           </div>
         </div>
-        <div className='mt-auto ml-0 mb-auto w-full md:max-w-lg text-center md:text-left pl-[15px] pr-[15px]'>
-          <h1 className='text-[36px] md:text-[40px] font-bold'>OOPS! Page Not Found</h1>
-          <h2 className='font-bold text-3xl md:text-4xl text-black-500 md:pt-3.5 pb-3.5'>404 error not found</h2>
+        <div className='mt-auto ml-0 mb-auto w-full max-w-md md:max-w-lg text-center md:text-left pl-[15px] pr-[15px]'>
+          <h1
+            className='text-[36px] md:text-[40px] font-bold'
+          >
+            OOPS! <br className='visible sm:hidden'/>Page Not Found
+          </h1>
+          <h2 className='font-bold text-3xl md:text-4xl text-black-500 md:pt-3.5 pb-3.5'>404 Error Not Found</h2>
           <p className='text-[15px] md:text-[16px] pb-4'>
             Our astronout can’t find planet you looking for.
             we need to come back to previous planet
