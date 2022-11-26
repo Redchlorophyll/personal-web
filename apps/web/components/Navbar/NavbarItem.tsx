@@ -1,6 +1,5 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 type navbarProps = {
   children: ReactNode
@@ -35,7 +34,7 @@ export default function NavbarItem({
 
   return (
     <div className='relative h-[calc(100%+20px)]'>
-      <input type="checkbox" className='w-full h-full peer absolute -translate-y-3 z-[2] opacity-0' checked={isChecked} onChange={onLinkClicked} />
+      <input type="checkbox" className='cursor-pointer w-full h-full peer absolute -translate-y-3 z-[2] opacity-0' checked={isChecked} onChange={onLinkClicked} />
       <div className={[
         'absolute transition-all peer-hover:h-[65%] bg-red-200 h-0 w-full rounded-b-[3px]',
         'peer-checked:text-black-100 peer-checked:peer-hover:h-full',
