@@ -2,12 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import ilu404 from '@/assets/img/ilustrations/ilu_404.png';
 import { Button } from "ui";
+import Link from 'next/link';
 
 export default function EmptyPage() {
-  const onBackBtnClicked = () => {
-    alert('mock back btn');
-  };
-
   return (
     <div className='flex justify-center'>
       <div className='md:flex md:gap-12'>
@@ -32,7 +29,9 @@ export default function EmptyPage() {
             we need to come back to previous planet
             before to late!
           </p>
-          <Button onClick={onBackBtnClicked}>Back</Button>
+          <Link href="/linky">
+            <Button>Back</Button>
+          </Link>
         </div>
       </div>
     </div>
