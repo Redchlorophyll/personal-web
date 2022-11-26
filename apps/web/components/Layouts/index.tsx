@@ -1,10 +1,14 @@
 import React, { ReactNode, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import NavbarItem from "@/components/Navbar/NavbarItem";
 import ToggleMode from "@/components/ToggleMode";
 import Image from 'next/image';
 import icBack from '@/assets/img/icons/ic_back.svg';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+
+const NavbarItem = dynamic(() => import('@/components/Navbar/NavbarItem'), {
+  suspense: true,
+});
 
 type DefaultLayoutProps = {
   children: ReactNode;

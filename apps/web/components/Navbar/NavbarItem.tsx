@@ -3,15 +3,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 type navbarProps = {
-  children?: ReactNode
+  children: ReactNode
   isActive?: boolean
   href?: string
   wip?: boolean
 };
 
 export default function NavbarItem({
-  children='list',
-  isActive=false,
+  children,
   href='#',
   wip=false
 }) {
