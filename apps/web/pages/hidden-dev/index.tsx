@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ToggleMode from "@/components/ToggleMode";
-import Layout from "@/components/Layouts";
+import Layout from "~/Layouts";
 import { Button, Radio, Tooltip, Modal, Dropdown, Snackbar, Checkbox, Textarea } from "ui";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
@@ -26,10 +26,7 @@ export default function Linky() {
   ]);
   const [textareaValue, setTextAreaValue] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const [activeBank, setActiveBank] = useState<optVal | undefined>({
-    label: "BCA",
-    value: "bca",
-  });
+  const [activeBank, setActiveBank] = useState('');
   const [radio, setRadio] = useState("test");
 
   function onChangeRadio(value: string) {
@@ -127,7 +124,7 @@ export default function Linky() {
             value={activeBank}
             onChange={(val: optVal | undefined) => {
               if (val) {
-                setActiveBank(val);
+                setActiveBank(val.value);
               }
             }}
           />

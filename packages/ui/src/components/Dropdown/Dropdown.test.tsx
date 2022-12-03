@@ -22,10 +22,7 @@ function DropdownWrapper(props: props) {
     { label: "SeaBank", value: "seabank" },
     { label: "myBank", value: "myBank" },
   ]);
-  const [activeBank, setActiveBank] = useState<optVal | undefined>({
-    label: "",
-    value: "",
-  });
+  const [activeBank, setActiveBank] = useState<string>('');
 
   return (
     <div>
@@ -38,7 +35,7 @@ function DropdownWrapper(props: props) {
         value={activeBank}
         onChange={(val: optVal | undefined) => {
           if (val) {
-            setActiveBank(val);
+            setActiveBank(val.value);
           }
         }}
       />

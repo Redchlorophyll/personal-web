@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Layout from "@/components/Layouts";
-import userEvent from "@testing-library/user-event";
+import EmptyPage from "@/pages/404";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 
@@ -37,29 +36,15 @@ describe('component - navbar', () => {
     back,
   }));
 
-  test('it should render properly', async () => {
-    const user = userEvent.setup();
+  test('it should render properly', () => {
     render(
     <Provider store={store}>
-      <Layout backButton>content</Layout>
-    </Provider>
-    );
+      <EmptyPage />
+    </Provider>);
 
-    const home = screen.getByText('Home');
-    const blog = screen.getByText('Blog');
-    const project = screen.getByText('Project');
-    const aboutMe = screen.getByText('About Me');
-    const pageContent = screen.getByText('content');
-    const target = screen.getByAltText('back icon');
+    const target = screen.getByText('OOPS! Page Not Found');
 
-    expect(home).toBeInTheDocument();
-    expect(blog).toBeInTheDocument();
-    expect(project).toBeInTheDocument();
-    expect(aboutMe).toBeInTheDocument();
-    expect(pageContent).toBeInTheDocument();
-
-    await user.click(target);
-    expect(back).toHaveBeenCalledTimes(1);
+    expect(target).toBeInTheDocument();
   });
 
 });

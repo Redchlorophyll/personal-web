@@ -61,7 +61,7 @@ type optVal = {
 type dropdownProps = {
     options?: Array<optVal>;
     placeholder?: string;
-    value?: optVal | undefined;
+    value?: string;
     onChange?: (value: optVal | undefined) => void;
     type?: "dropdown" | "combobox";
     label?: string;

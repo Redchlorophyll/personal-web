@@ -1,7 +1,7 @@
 // import Button from "@/components/common/Button/Index";
 import { useEffect, useState } from "react";
 import ToggleMode from "@/components/ToggleMode";
-import Layout from "@/components/Layouts";
+import Layout from "~/Layouts";
 import { Button, Input } from "ui";
 
 type variant = "warning" | "success" | "primary" | "error" | "muted";
