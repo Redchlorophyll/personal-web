@@ -69,6 +69,11 @@ export default function DefaultLayout({
           ) : ''
         }
       </Navbar>
-    {children}</div>
+      <div className="flex w-full justify-center">
+        <div className="max-w-[1080px]">
+          {children}
+        </div>
+      </div>
+    </div>
   );
 }

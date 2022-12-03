@@ -450,10 +450,13 @@ function Dropdown({
     }, idx);
   });
   useEffect5(() => {
-    setInputValue(value);
+    if (!inputValue)
+      return;
+    const matchedData = options.find((data) => data.value === value);
+    setInputValue(matchedData);
     if (type === "combobox") {
       const filterOptions = options.filter(
-        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.label.toLowerCase()) || "")
+        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.toLowerCase()) || "")
       );
       setInputOptions(filterOptions);
     }
@@ -485,12 +488,12 @@ function Dropdown({
         children: [
           /* @__PURE__ */ jsx8("input", {
             id: inputId,
-            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
+            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[5px_17px_5px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
             type: "text",
             placeholder,
             readOnly: !!(type === "dropdown"),
             onClick: () => handleFocus(),
-            value: inputValue == null ? void 0 : inputValue.label,
+            value: (inputValue == null ? void 0 : inputValue.label) || "",
             onChange: (e) => onInputChange(e)
           }),
           type === "dropdown" ? /* @__PURE__ */ jsx8("div", {
@@ -500,7 +503,7 @@ function Dropdown({
             children: /* @__PURE__ */ jsxs6("div", {
               className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]",
               children: [
-                inputOptions.length > 0 && (value == null ? void 0 : value.label) !== "" && (value == null ? void 0 : value.value) !== "" && type === "dropdown" ? /* @__PURE__ */ jsx8("button", {
+                inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ jsx8("button", {
                   onClick: () => setActiveVal({
                     label: "",
                     value: ""

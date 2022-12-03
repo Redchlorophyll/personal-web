@@ -1000,6 +1000,10 @@ video {
   padding: 0.25rem;
 }
 
+.p-\[5px_17px_5px_13px\] {
+  padding: 5px 17px 5px 13px;
+}
+
 .px-\[27px\] {
   padding-left: 27px;
   padding-right: 27px;

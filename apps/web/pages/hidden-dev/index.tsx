@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ToggleMode from "@/components/ToggleMode";
-import Layout from "@/components/Layouts";
+import Layout from "~/Layouts";
 import { Button, Radio, Tooltip, Modal, Dropdown, Snackbar, Checkbox, Textarea } from "ui";
 
 type snackbarVariant = "error" | "info" | "success" | "warning";
