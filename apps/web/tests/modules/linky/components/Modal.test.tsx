@@ -7,15 +7,19 @@ import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 
 function ModalWrapper() {
   const [formData, setFormData] = useState({ name: '', tag: '', color: '', description: '' });
-  const [showModal, setShowModal] = useState<string>('');
-  const onToggleModal = (type: 'create' | 'edit' | 'update' | 'delete' | 'close', event: 'open' | 'close') => {
+  const [showModal, setShowModal] = useState<'create' | 'edit' | 'update-profile' | 'delete' | 'close'>('close');
+  const onToggleModal = (type: 'create' | 'edit' | 'update-profile' | 'delete' | 'close', event: 'open' | 'close') => {
     if (event === 'open') setShowModal(type);
-    else if (event === 'close') setShowModal('');
+    else if (event === 'close') setShowModal('close');
   }
   const onSubmit = (val) => {
     setFormData(val);
     onToggleModal('close', 'close');
   };
+
+  const onSubumitModalInfo = () => {
+    onToggleModal('close', 'close');
+  }
 
   return (
     <div>
@@ -28,13 +32,15 @@ function ModalWrapper() {
       }
       </ul>
       {
-        showModal === 'create' || showModal === 'edit' ? (<ModalForm type={showModal} onSubmit={(val) => {onSubmit(val)}} />)
-        : (<ModalInfo onSubmit={(val) => {setFormData(val)}} />)
+        (showModal === 'create' || showModal === 'edit')? (<ModalForm type={showModal} onSubmit={(val) => {onSubmit(val)}} />) : ''
+      }
+      {
+        showModal === 'delete' || showModal === 'update-profile'? (<ModalInfo type={showModal} onSubmit={() => {onSubumitModalInfo()}} />) : ''
       }
       <button onClick={() => onToggleModal('create', 'open')}>Show Modal Create</button>
       <button onClick={() => onToggleModal('edit', 'open')}>Show Modal Edit</button>
       <button onClick={() => onToggleModal('delete', 'open')}>Show Modal Delete</button>
-      <button onClick={() => onToggleModal('update', 'open')}>Show Modal Update</button>
+      <button onClick={() => onToggleModal('update-profile', 'open')}>Show Modal Update</button>
     </div>
   );
 }
@@ -122,34 +128,39 @@ describe('modules - linky - components - modal - ModalForm', () => {
   });
 });
 
-// describe('modules - linky - components - modal - ModalInfo', () => {
-//   test('it should not show modals', () =>  {
-//     render(<ModalWrapper />);
+describe('modules - linky - components - modal - ModalInfo', () => {
+  test('it should not show modals', () =>  {
+    render(<ModalWrapper />);
 
-//     const target1 = screen.queryByText('Are You Sure Want to Delete this Linky?');
-//     const target2 = screen.queryByText('Are You Sure Want to Change Your Profile Picture');
+    const target1 = screen.queryByText('Are You Sure Want to Delete this Linky?');
+    const target2 = screen.queryByText('Are You Sure Want to Change Your Profile Picture');
 
-//     expect(target1).not.toBeInTheDocument();
-//     expect(target2).not.toBeInTheDocument();
-//   });
+    expect(target1).not.toBeInTheDocument();
+    expect(target2).not.toBeInTheDocument();
+  });
 
-//   test('it should show modals', async () =>  {
-//     const user = userEvent.setup();
-//     render(<ModalWrapper />);
+  test('it should show modals', async () =>  {
+    const user = userEvent.setup();
+    render(<ModalWrapper />);
 
-//     const btnShowUpdate =  screen.getByRole('button', { name: 'Show Modal Update' });
-//     await user.click(btnShowUpdate);
-//     const target1 = screen.queryByText('Are You Sure Want to Delete this Linky?');
-//     expect(target1).toBeInTheDocument();
-//     const btnCloseUpdate = screen.getByRole('button', { name: 'Delete' });
-//     expect(btnCloseUpdate).not.toBeInTheDocument();
+    const btnShowUpdate =  screen.getByRole('button', { name: 'Show Modal Update' });
+    await user.click(btnShowUpdate);
+    let target1 = screen.queryByText('Are You Sure Want to Change Your Profile Picture');
+    expect(target1).toBeInTheDocument();
 
-//     const btnShowDelete =  screen.getByRole('button', { name: 'Show Modal Delete' });
-//     await user.click(btnShowUpdate);
-//     const target2 = screen.queryByText('Are You Sure Want to Change Your Profile Picture');
-//     expect(target2).toBeInTheDocument();
-//     const btnCloseDelete = screen.getByRole('button', { name: 'Yes' });
+    const btnCloseUpdate = screen.getByRole('button', { name: 'Yes' });
+    await user.click(btnCloseUpdate);
+    target1 = screen.queryByText('Are You Sure Want to Change Your Profile Picture');
+    expect(target1).not.toBeInTheDocument();
 
-//     expect(target2).not.toBeInTheDocument();
-//   });
-// });
+    const btnShowDelete =  screen.getByRole('button', { name: 'Show Modal Delete' });
+    await user.click(btnShowDelete);
+    let target2 = screen.queryByText('Are You Sure Want to Delete this Linky?');
+    expect(target2).toBeInTheDocument();
+
+    const btnCloseDelete = screen.getByRole('button', { name: 'Delete' });
+    await user.click(btnCloseDelete);
+    target2 = screen.queryByText('Are You Sure Want to Delete this Linky?');
+    expect(target2).not.toBeInTheDocument();
+  });
+});
