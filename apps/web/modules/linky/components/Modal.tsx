@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Input, Textarea, Button, Dropdown } from 'ui';
+import Image from 'next/image';
+import iluDelete from 'assets/img/ilustrations/ilu_delete-linky.svg';
+import iluUpdate from 'assets/img/ilustrations/ilu_update-profile.svg';
 
 type formDataProps = {
   name: string;
@@ -12,11 +15,11 @@ type formDataProps = {
 type ModalFormProps = {
   formData?: formDataProps;
   type?: 'edit' | 'create';
-  onSubmit?: () => void;
+  onSubmit?: (val: formDataProps) => void;
 };
 
 type ModalInfoProps = {
-  type?: 'delete' | 'update';
+  type?: 'delete' | 'update-profile';
   onSubmit?: () => void;
 };
 
@@ -50,6 +53,12 @@ export function ModalForm({
     }));
   };
 
+  const onBtnCreateClick = () => {
+    if (isBtnDisabled) return;
+    // TODO: HIT API CREATE
+    onSubmit(inputData);
+  };
+
   useEffect(() => {
     if (
       inputData.name.length === 0
@@ -57,6 +66,7 @@ export function ModalForm({
       || inputData.url.length === 0
       || inputData.tag.length === 0
       || inputData.color.length === 0
+      || inputData.description.length === 0
     ) setIsBtnDisabled(true);
     else setIsBtnDisabled(false)
   }, [inputData]);
@@ -103,6 +113,7 @@ export function ModalForm({
                 onInputChange(val, 'color')}
                 label="color"
                 value={inputData.color}
+                placeholder="Select..."
               />
             </div>
           </div>
@@ -114,7 +125,10 @@ export function ModalForm({
         onChange={(val) => onInputChange(val, 'description')}
       />
       <div className='pt-7 flex gap-5'>
-        <Button variant={isBtnDisabled? 'muted' : 'primary'}>Create</Button>
+        <Button
+          variant={isBtnDisabled? 'muted' : 'primary'}
+          onClick={() => onBtnCreateClick()}
+        >Create</Button>
         <Button variant='error' type='outline'>cancel</Button>
       </div>
     </Modal>
@@ -125,7 +139,35 @@ export function ModalInfo({
   type = 'delete',
   onSubmit
 }: ModalInfoProps) {
+  const onModalSubmit = () => {
+    // TODO: HIT Respective API
+    onSubmit();
+  };
   return (
-    <Modal style={{ minHeight: '150px' }}>Modal Edit</Modal>
+    <Modal style={{ minHeight: '150px', width: '450px' }}>
+      <div className='flex justify-center flex-col'>
+        <span className='w-full text-center font-bold text-base'>{
+          type === 'delete'?
+          'Are You Sure Want to Delete this Linky?'
+          : 'Are You Sure Want to Change Your Profile Picture'
+        }</span>
+        <div className='flex justify-center pt-7'>
+          <Image
+            width={220}
+            src={type === 'delete'? iluDelete : iluUpdate}
+            alt={type === 'delete'? 'Delete Linky Illustration' : 'Update Profile Illustration'} />
+        </div>
+        <p className='w-full text-center pt-5'>{ type === 'delete'? 'deleted linky would not be able to Recover.'
+            : 'Are You Sure Want to update profile picture?'
+        }</p>
+        <div className='pt-7 flex gap-5 justify-center'>
+          <Button
+            variant='primary'
+            onClick={() => onModalSubmit()}
+          >{ type === 'delete'? 'Delete' : 'Yes' }</Button>
+          <Button variant='error' type='outline'>Cancel</Button>
+        </div>
+      </div>
+    </Modal>
   )
 }
