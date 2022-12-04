@@ -12,7 +12,7 @@ type formDataProps = {
 type ModalFormProps = {
   formData?: formDataProps;
   type?: 'edit' | 'create';
-  onSubmit?: () => void;
+  onSubmit?: (val: formDataProps) => void;
 };
 
 type ModalInfoProps = {
@@ -48,6 +48,12 @@ export function ModalForm({
       ...prevState,
       [label]: value,
     }));
+  };
+
+  const onBtnCreateClick = () => {
+    if (isBtnDisabled) return;
+    // TODO: HIT API CREATE
+    onSubmit(inputData);
   };
 
   useEffect(() => {
@@ -103,6 +109,7 @@ export function ModalForm({
                 onInputChange(val, 'color')}
                 label="color"
                 value={inputData.color}
+                placeholder="Select..."
               />
             </div>
           </div>
@@ -114,7 +121,7 @@ export function ModalForm({
         onChange={(val) => onInputChange(val, 'description')}
       />
       <div className='pt-7 flex gap-5'>
-        <Button variant={isBtnDisabled? 'muted' : 'primary'}>Create</Button>
+        <Button variant={isBtnDisabled? 'muted' : 'primary'} onClick={() => onBtnCreateClick()}>Create</Button>
         <Button variant='error' type='outline'>cancel</Button>
       </div>
     </Modal>
