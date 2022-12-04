@@ -63,6 +63,7 @@ export function ModalForm({
       || inputData.url.length === 0
       || inputData.tag.length === 0
       || inputData.color.length === 0
+      || inputData.description.length === 0
     ) setIsBtnDisabled(true);
     else setIsBtnDisabled(false)
   }, [inputData]);
