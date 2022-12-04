@@ -213,12 +213,12 @@ function Modal({ children, title, style }) {
   return /* @__PURE__ */ jsxs3(Fragment, {
     children: [
       /* @__PURE__ */ jsx4("div", {
-        className: "w-full h-[100vh] absolute z-30 bg-black-900 opacity-25"
+        className: "w-full h-[100vh] absolute top-0 left-0 z-30 bg-black-900 opacity-25"
       }),
       /* @__PURE__ */ jsx4("div", {
         className: [
           "w-full h-[100vh] absolute z-30",
-          "flex justify-center align-baseline"
+          "flex justify-center align-baseline top-0 left-0"
         ].join(" "),
         children: /* @__PURE__ */ jsxs3("div", {
           style,
