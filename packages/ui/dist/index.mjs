@@ -208,12 +208,21 @@ function Input({
 }
 
 // src/components/Modal/index.tsx
+import { useEffect as useEffect3 } from "react";
 import { Fragment, jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 function Modal({ children, title, style }) {
+  useEffect3(() => {
+    var _a;
+    (_a = document.querySelector("body")) == null ? void 0 : _a.classList.add("overflow-hidden");
+    return () => {
+      var _a2;
+      (_a2 = document.querySelector("body")) == null ? void 0 : _a2.classList.remove("overflow-hidden");
+    };
+  }, []);
   return /* @__PURE__ */ jsxs3(Fragment, {
     children: [
       /* @__PURE__ */ jsx4("div", {
-        className: "w-full h-[100vh] absolute top-0 left-0 z-30 bg-black-900 opacity-25"
+        className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25"
       }),
       /* @__PURE__ */ jsx4("div", {
         className: [
@@ -224,7 +233,7 @@ function Modal({ children, title, style }) {
           style,
           className: [
             "w-[616px] min-h-[503px] bg-black-100 dark:bg-dark-layout",
-            "top-1/2 absolute -translate-y-1/2",
+            "top-1/2 fixed -translate-y-1/2",
             "p-[25px_30px] rounded-2xl text"
           ].join(" "),
           children: [
@@ -246,7 +255,7 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-import { useEffect as useEffect3, useState as useState3, useRef } from "react";
+import { useEffect as useEffect4, useState as useState3, useRef } from "react";
 
 // src/components/Tooltip/TooltipContent.tsx
 import { jsx as jsx5 } from "react/jsx-runtime";
@@ -270,10 +279,10 @@ function Tooltip({
   const [tooltipDirection, setTooltipDirection] = useState3("top");
   const [halfWidth, setHalfWidth] = useState3(0);
   const tooltipWrapper = useRef(null);
-  useEffect3(() => {
+  useEffect4(() => {
     tipDirection(direction || "bottom");
   }, [direction]);
-  useEffect3(() => {
+  useEffect4(() => {
     var _a, _b;
     if (typeof ((_a = tooltipWrapper.current) == null ? void 0 : _a.clientWidth) === "number") {
       setHalfWidth(Math.trunc(((_b = tooltipWrapper.current) == null ? void 0 : _b.clientWidth) / 2));
@@ -309,7 +318,7 @@ function Tooltip({
 }
 
 // src/components/Snackbar/index.tsx
-import { useEffect as useEffect4, useState as useState4 } from "react";
+import { useEffect as useEffect5, useState as useState4 } from "react";
 import { Fade } from "react-awesome-reveal";
 import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
 function Snackbar({
@@ -321,7 +330,7 @@ function Snackbar({
 }) {
   const [baseColor, setBaseColor] = useState4("bg-red-700");
   const [image, setImage] = useState4("error");
-  useEffect4(() => {
+  useEffect5(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
       setImage("error");
@@ -340,7 +349,7 @@ function Snackbar({
     if (onClose)
       onClose(false);
   }
-  useEffect4(() => {
+  useEffect5(() => {
     if (timer && isShown) {
       setTimeout(() => {
         if (onClose)
@@ -398,7 +407,7 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-import { useState as useState5, useRef as useRef2, useEffect as useEffect5 } from "react";
+import { useState as useState5, useRef as useRef2, useEffect as useEffect6 } from "react";
 import { Fade as Fade2 } from "react-awesome-reveal";
 import { jsx as jsx8, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dropdown({
@@ -449,7 +458,7 @@ function Dropdown({
       children: value2.label
     }, idx);
   });
-  useEffect5(() => {
+  useEffect6(() => {
     if (!inputValue)
       return;
     const matchedData = options.find((data) => data.value === value);
@@ -461,7 +470,7 @@ function Dropdown({
       setInputOptions(filterOptions);
     }
   }, [value]);
-  useEffect5(() => {
+  useEffect6(() => {
     const outsideClickHandler = ({ target }) => {
       const { current } = inputRef;
       if (current && !current.contains(target)) {
@@ -522,7 +531,7 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-import { useEffect as useEffect6, useState as useState6 } from "react";
+import { useEffect as useEffect7, useState as useState6 } from "react";
 import { jsx as jsx9, jsxs as jsxs7 } from "react/jsx-runtime";
 function Checkbox({
   value = "",
@@ -531,7 +540,7 @@ function Checkbox({
   label
 }) {
   const [isChecked, setChecked] = useState6(false);
-  useEffect6(() => {
+  useEffect7(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
       if (isValueIncluded)
@@ -574,7 +583,7 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-import { useState as useState7, useEffect as useEffect7 } from "react";
+import { useState as useState7, useEffect as useEffect8 } from "react";
 import { jsx as jsx10, jsxs as jsxs8 } from "react/jsx-runtime";
 function Textarea({
   placeholder = "Input Text Here...",
@@ -588,7 +597,7 @@ function Textarea({
   const inputId = label.toLowerCase().split(" ").join("-");
   const [sumCharacters, setSumCharacters] = useState7(0);
   const [textboxVal, setTextBoxVal] = useState7("");
-  useEffect7(() => {
+  useEffect8(() => {
     if (limit && value) {
       let inputLength = 0;
       if (value.length < limit) {

@@ -242,12 +242,21 @@ function Input({
 }
 
 // src/components/Modal/index.tsx
+var import_react3 = require("react");
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function Modal({ children, title, style }) {
+  (0, import_react3.useEffect)(() => {
+    var _a;
+    (_a = document.querySelector("body")) == null ? void 0 : _a.classList.add("overflow-hidden");
+    return () => {
+      var _a2;
+      (_a2 = document.querySelector("body")) == null ? void 0 : _a2.classList.remove("overflow-hidden");
+    };
+  }, []);
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, {
     children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", {
-        className: "w-full h-[100vh] absolute top-0 left-0 z-30 bg-black-900 opacity-25"
+        className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25"
       }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", {
         className: [
@@ -258,7 +267,7 @@ function Modal({ children, title, style }) {
           style,
           className: [
             "w-[616px] min-h-[503px] bg-black-100 dark:bg-dark-layout",
-            "top-1/2 absolute -translate-y-1/2",
+            "top-1/2 fixed -translate-y-1/2",
             "p-[25px_30px] rounded-2xl text"
           ].join(" "),
           children: [
@@ -280,7 +289,7 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-var import_react3 = require("react");
+var import_react4 = require("react");
 
 // src/components/Tooltip/TooltipContent.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
@@ -301,13 +310,13 @@ function Tooltip({
   tooltipContent,
   children
 }) {
-  const [tooltipDirection, setTooltipDirection] = (0, import_react3.useState)("top");
-  const [halfWidth, setHalfWidth] = (0, import_react3.useState)(0);
-  const tooltipWrapper = (0, import_react3.useRef)(null);
-  (0, import_react3.useEffect)(() => {
+  const [tooltipDirection, setTooltipDirection] = (0, import_react4.useState)("top");
+  const [halfWidth, setHalfWidth] = (0, import_react4.useState)(0);
+  const tooltipWrapper = (0, import_react4.useRef)(null);
+  (0, import_react4.useEffect)(() => {
     tipDirection(direction || "bottom");
   }, [direction]);
-  (0, import_react3.useEffect)(() => {
+  (0, import_react4.useEffect)(() => {
     var _a, _b;
     if (typeof ((_a = tooltipWrapper.current) == null ? void 0 : _a.clientWidth) === "number") {
       setHalfWidth(Math.trunc(((_b = tooltipWrapper.current) == null ? void 0 : _b.clientWidth) / 2));
@@ -343,7 +352,7 @@ function Tooltip({
 }
 
 // src/components/Snackbar/index.tsx
-var import_react4 = require("react");
+var import_react5 = require("react");
 var import_react_awesome_reveal = require("react-awesome-reveal");
 var import_jsx_runtime7 = require("react/jsx-runtime");
 function Snackbar({
@@ -353,9 +362,9 @@ function Snackbar({
   onClose,
   children
 }) {
-  const [baseColor, setBaseColor] = (0, import_react4.useState)("bg-red-700");
-  const [image, setImage] = (0, import_react4.useState)("error");
-  (0, import_react4.useEffect)(() => {
+  const [baseColor, setBaseColor] = (0, import_react5.useState)("bg-red-700");
+  const [image, setImage] = (0, import_react5.useState)("error");
+  (0, import_react5.useEffect)(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
       setImage("error");
@@ -374,7 +383,7 @@ function Snackbar({
     if (onClose)
       onClose(false);
   }
-  (0, import_react4.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
     if (timer && isShown) {
       setTimeout(() => {
         if (onClose)
@@ -432,7 +441,7 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-var import_react5 = require("react");
+var import_react6 = require("react");
 var import_react_awesome_reveal2 = require("react-awesome-reveal");
 var import_jsx_runtime8 = require("react/jsx-runtime");
 function Dropdown({
@@ -444,13 +453,13 @@ function Dropdown({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [isOpen, setIsOpen] = (0, import_react5.useState)(false);
-  const inputRef = (0, import_react5.useRef)(null);
-  const [inputValue, setInputValue] = (0, import_react5.useState)({
+  const [isOpen, setIsOpen] = (0, import_react6.useState)(false);
+  const inputRef = (0, import_react6.useRef)(null);
+  const [inputValue, setInputValue] = (0, import_react6.useState)({
     label: "",
     value: ""
   });
-  const [inputOptions, setInputOptions] = (0, import_react5.useState)([...options]);
+  const [inputOptions, setInputOptions] = (0, import_react6.useState)([...options]);
   const handleFocus = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -483,7 +492,7 @@ function Dropdown({
       children: value2.label
     }, idx);
   });
-  (0, import_react5.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     if (!inputValue)
       return;
     const matchedData = options.find((data) => data.value === value);
@@ -495,7 +504,7 @@ function Dropdown({
       setInputOptions(filterOptions);
     }
   }, [value]);
-  (0, import_react5.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     const outsideClickHandler = ({ target }) => {
       const { current } = inputRef;
       if (current && !current.contains(target)) {
@@ -556,7 +565,7 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-var import_react6 = require("react");
+var import_react7 = require("react");
 var import_jsx_runtime9 = require("react/jsx-runtime");
 function Checkbox({
   value = "",
@@ -564,8 +573,8 @@ function Checkbox({
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = (0, import_react6.useState)(false);
-  (0, import_react6.useEffect)(() => {
+  const [isChecked, setChecked] = (0, import_react7.useState)(false);
+  (0, import_react7.useEffect)(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
       if (isValueIncluded)
@@ -608,7 +617,7 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-var import_react7 = require("react");
+var import_react8 = require("react");
 var import_jsx_runtime10 = require("react/jsx-runtime");
 function Textarea({
   placeholder = "Input Text Here...",
@@ -620,9 +629,9 @@ function Textarea({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [sumCharacters, setSumCharacters] = (0, import_react7.useState)(0);
-  const [textboxVal, setTextBoxVal] = (0, import_react7.useState)("");
-  (0, import_react7.useEffect)(() => {
+  const [sumCharacters, setSumCharacters] = (0, import_react8.useState)(0);
+  const [textboxVal, setTextBoxVal] = (0, import_react8.useState)("");
+  (0, import_react8.useEffect)(() => {
     if (limit && value) {
       let inputLength = 0;
       if (value.length < limit) {
