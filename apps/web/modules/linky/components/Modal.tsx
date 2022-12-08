@@ -13,20 +13,23 @@ type formDataProps = {
 };
 
 type ModalFormProps = {
-  formData?: formDataProps;
+  value?: formDataProps;
   type?: 'edit' | 'create';
   onSubmit?: (val: formDataProps) => void;
+  onCancel?: () => void;
 };
 
 type ModalInfoProps = {
   type?: 'delete' | 'update-profile';
   onSubmit?: () => void;
+  onCancel?: () => void;
 };
 
 export function ModalForm({
-  formData,
+  value,
   type = 'create',
-  onSubmit
+  onSubmit,
+  onCancel
 }: ModalFormProps) {
   const [ inputData, setInputData ] = useState<formDataProps>({
     name: '',
@@ -34,7 +37,7 @@ export function ModalForm({
     tag: '',
     color: 'red hex',
     description: '',
-    ...formData
+    ...value
   });
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const options = [
@@ -129,7 +132,11 @@ export function ModalForm({
           variant={isBtnDisabled? 'muted' : 'primary'}
           onClick={() => onBtnCreateClick()}
         >Create</Button>
-        <Button variant='error' type='outline'>cancel</Button>
+        <Button
+          variant='error'
+          type='outline'
+          onClick={() => onCancel()}
+        >cancel</Button>
       </div>
     </Modal>
   )
@@ -137,7 +144,8 @@ export function ModalForm({
 
 export function ModalInfo({
   type = 'delete',
-  onSubmit
+  onSubmit,
+  onCancel,
 }: ModalInfoProps) {
   const onModalSubmit = () => {
     // TODO: HIT Respective API
@@ -163,9 +171,13 @@ export function ModalInfo({
         <div className='pt-7 flex gap-5 justify-center'>
           <Button
             variant='primary'
-            onClick={() => onModalSubmit()}
+            onClick={onModalSubmit}
           >{ type === 'delete'? 'Delete' : 'Yes' }</Button>
-          <Button variant='error' type='outline'>Cancel</Button>
+          <Button
+          variant='error'
+          type='outline'
+          onClick={onCancel}
+        >Cancel</Button>
         </div>
       </div>
     </Modal>
