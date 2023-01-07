@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import React, { ReactNode, CSSProperties } from 'react';
 
 type variantStyle = "warning" | "success" | "primary" | "error" | "muted";
 type typeStyle = "solid" | "outline" | "translucent";
@@ -7,8 +7,9 @@ type buttonProps = {
     children?: ReactNode;
     type?: typeStyle;
     onClick?: () => void;
+    btnType?: 'button' | 'reset' | 'submit';
 };
-declare function Button({ variant, children, type, onClick, }: buttonProps): JSX.Element;
+declare function Button({ variant, children, type, onClick, btnType, }: buttonProps): JSX.Element;
 
 type radioProps = {
     value?: string;
@@ -19,15 +20,16 @@ type radioProps = {
 declare function Radio({ value, valueGroup, onChange, label, }: radioProps): JSX.Element;
 
 type inputProps = {
-    onChange?: (event: string) => void;
+    onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
     value?: string;
     placeholder?: string;
     isError?: boolean;
     errorMessage?: string;
     isDisabled?: boolean;
     label?: string;
+    name?: string;
 };
-declare function Input({ onChange, value, placeholder, isError, errorMessage, isDisabled, label, }: inputProps): JSX.Element;
+declare const Input: React.ForwardRefExoticComponent<inputProps & React.RefAttributes<HTMLInputElement>>;
 
 type modalProps = {
     children?: ReactNode;

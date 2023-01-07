@@ -1,16 +1,18 @@
-import React from "react";
+import React, { LegacyRef, useState } from "react";
 
 type inputProps = {
-  onChange?: (event: string) => void;
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   value?: string;
   placeholder?: string;
   isError?: boolean;
   errorMessage?: string;
   isDisabled?: boolean;
   label?: string;
+  name?: string;
 };
 
-export function Input({
+// eslint-disable-next-line react/display-name
+export const Input = React.forwardRef(function Input({
   onChange,
   value = "",
   placeholder = "Input Text Here...",
@@ -18,13 +20,15 @@ export function Input({
   errorMessage = "Error Message Here...",
   isDisabled = false,
   label = "",
-}: inputProps) {
+  name="",
+}: inputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
+  const [ inputValue, setInputValue ] = useState(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (!onChange || isDisabled) return;
-    const { value } = event.target as HTMLInputElement;
-
-    onChange(value);
+    console.log((event.target as HTMLInputElement).value, value, 'test', inputValue);
+    setInputValue((event.target as HTMLInputElement).value);
+    onChange(event);
   };
 
   return (
@@ -37,9 +41,11 @@ export function Input({
         ""
       )}
       <input
+        name={name}
+        ref={ref}
         id={inputId}
         aria-label="input"
-        value={value}
+        value={inputValue}
         placeholder={placeholder}
         onChange={(event) => onInputChange(event)}
         disabled={isDisabled}
@@ -56,10 +62,14 @@ export function Input({
         type="text"
       />
       {isError ? (
-        <span className="text-sm text-red-800">{errorMessage}</span>
+        <span className="text-sm text-red-800 relative w-full">
+          <div className="absolute">
+            {errorMessage}
+          </div>
+        </span>
       ) : (
         ""
       )}
     </div>
   );
-}
+});

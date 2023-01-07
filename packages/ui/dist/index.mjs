@@ -5,7 +5,8 @@ function Button({
   variant = "primary",
   children = "Button",
   type = "solid",
-  onClick
+  onClick,
+  btnType = "button"
 }) {
   const [style, setStyle] = useState("");
   const solid = [
@@ -95,6 +96,7 @@ function Button({
     }
   }, [variant, type]);
   return /* @__PURE__ */ jsx("button", {
+    type: btnType,
     onClick,
     className: `w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] ${style}`,
     children
@@ -157,22 +159,26 @@ function Radio({
 }
 
 // src/components/Input/index.tsx
+import React3, { useState as useState3 } from "react";
 import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
-function Input({
+var Input = React3.forwardRef(function Input2({
   onChange,
   value = "",
   placeholder = "Input Text Here...",
   isError = false,
   errorMessage = "Error Message Here...",
   isDisabled = false,
-  label = ""
-}) {
+  label = "",
+  name = ""
+}, ref) {
+  const [inputValue, setInputValue] = useState3(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event) => {
     if (!onChange || isDisabled)
       return;
-    const { value: value2 } = event.target;
-    onChange(value2);
+    console.log(event.target.value, value, "test", inputValue);
+    setInputValue(event.target.value);
+    onChange(event);
   };
   return /* @__PURE__ */ jsxs2("div", {
     className: "flex flex-col items-start",
@@ -183,9 +189,11 @@ function Input({
         children: label
       }) : "",
       /* @__PURE__ */ jsx3("input", {
+        name,
+        ref,
         id: inputId,
         "aria-label": "input",
-        value,
+        value: inputValue,
         placeholder,
         onChange: (event) => onInputChange(event),
         disabled: isDisabled,
@@ -200,12 +208,15 @@ function Input({
         type: "text"
       }),
       isError ? /* @__PURE__ */ jsx3("span", {
-        className: "text-sm text-red-800",
-        children: errorMessage
+        className: "text-sm text-red-800 relative w-full",
+        children: /* @__PURE__ */ jsx3("div", {
+          className: "absolute",
+          children: errorMessage
+        })
       }) : ""
     ]
   });
-}
+});
 
 // src/components/Modal/index.tsx
 import { useEffect as useEffect3 } from "react";
@@ -255,7 +266,7 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-import { useEffect as useEffect4, useState as useState3, useRef } from "react";
+import { useEffect as useEffect4, useState as useState4, useRef } from "react";
 
 // src/components/Tooltip/TooltipContent.tsx
 import { jsx as jsx5 } from "react/jsx-runtime";
@@ -276,8 +287,8 @@ function Tooltip({
   tooltipContent,
   children
 }) {
-  const [tooltipDirection, setTooltipDirection] = useState3("top");
-  const [halfWidth, setHalfWidth] = useState3(0);
+  const [tooltipDirection, setTooltipDirection] = useState4("top");
+  const [halfWidth, setHalfWidth] = useState4(0);
   const tooltipWrapper = useRef(null);
   useEffect4(() => {
     tipDirection(direction || "bottom");
@@ -318,7 +329,7 @@ function Tooltip({
 }
 
 // src/components/Snackbar/index.tsx
-import { useEffect as useEffect5, useState as useState4 } from "react";
+import { useEffect as useEffect5, useState as useState5 } from "react";
 import { Fade } from "react-awesome-reveal";
 import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
 function Snackbar({
@@ -328,8 +339,8 @@ function Snackbar({
   onClose,
   children
 }) {
-  const [baseColor, setBaseColor] = useState4("bg-red-700");
-  const [image, setImage] = useState4("error");
+  const [baseColor, setBaseColor] = useState5("bg-red-700");
+  const [image, setImage] = useState5("error");
   useEffect5(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
@@ -407,7 +418,7 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-import { useState as useState5, useRef as useRef2, useEffect as useEffect6 } from "react";
+import { useState as useState6, useRef as useRef2, useEffect as useEffect6 } from "react";
 import { Fade as Fade2 } from "react-awesome-reveal";
 import { jsx as jsx8, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dropdown({
@@ -419,13 +430,13 @@ function Dropdown({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [isOpen, setIsOpen] = useState5(false);
+  const [isOpen, setIsOpen] = useState6(false);
   const inputRef = useRef2(null);
-  const [inputValue, setInputValue] = useState5({
+  const [inputValue, setInputValue] = useState6({
     label: "",
     value: ""
   });
-  const [inputOptions, setInputOptions] = useState5([...options]);
+  const [inputOptions, setInputOptions] = useState6([...options]);
   const handleFocus = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -531,7 +542,7 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-import { useEffect as useEffect7, useState as useState6 } from "react";
+import { useEffect as useEffect7, useState as useState7 } from "react";
 import { jsx as jsx9, jsxs as jsxs7 } from "react/jsx-runtime";
 function Checkbox({
   value = "",
@@ -539,7 +550,7 @@ function Checkbox({
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = useState6(false);
+  const [isChecked, setChecked] = useState7(false);
   useEffect7(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
@@ -583,7 +594,7 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-import { useState as useState7, useEffect as useEffect8 } from "react";
+import { useState as useState8, useEffect as useEffect8 } from "react";
 import { jsx as jsx10, jsxs as jsxs8 } from "react/jsx-runtime";
 function Textarea({
   placeholder = "Input Text Here...",
@@ -595,8 +606,8 @@ function Textarea({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [sumCharacters, setSumCharacters] = useState7(0);
-  const [textboxVal, setTextBoxVal] = useState7("");
+  const [sumCharacters, setSumCharacters] = useState8(0);
+  const [textboxVal, setTextBoxVal] = useState8("");
   useEffect8(() => {
     if (limit && value) {
       let inputLength = 0;
