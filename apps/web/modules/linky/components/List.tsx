@@ -22,11 +22,15 @@ export function List({ children }: ListProps) {
     <div className='w-full flex justify-center'>
       <section
       className={[
-          "m-4 bg-black-100 max-w-[750px] w-[750px] p-[10px] flex flex-col gap-y-2",
-          "shadow-[0_1px_4px_0.5px_rgba(0,0,0,0.1)]"
+          "m-[10px] bg-black-100 max-w-[750px] w-[750px] p-[10px] flex flex-col gap-y-2",
+          "shadow-[0_1px_4px_0.5px_rgba(0,0,0,0.1)]",
+          "dark:bg-[#353535] shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]"
         ].join(' ')}
       >
         { children }
+        <div className='w-full flex justify-center'>
+          <div className='w-4 h-4 bg-black-500 rounded-full' />
+        </div>
       </section>
     </div>
   )
@@ -43,7 +47,7 @@ export function LinkItem({
   onDelete,
 }: LinkItemProps) {
   return (
-    <article className='w-full bg-black-200 relative'>
+    <article className='w-full bg-black-200 relative dark:bg-[#282828]'>
       <div className='border-l-[10px] pl-3 border-l-primary-700 pt-1 pb-1 pr-5 min-h-[70px]'>
         <a href={ href }>
           <div><h4 className="font-bold text-base md:!text-xl">{ title }</h4></div>

@@ -598,6 +598,10 @@ video {
   z-index: 30;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }

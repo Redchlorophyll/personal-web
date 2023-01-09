@@ -427,7 +427,7 @@ function Snackbar({
       });
   };
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", {
-    className: "fixed top-4 left-1/2 -translate-x-1/2",
+    className: "fixed top-4 left-1/2 -translate-x-1/2 z-50",
     children: isShown ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react_awesome_reveal.Fade, {
       children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", {
         className: `${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`,
