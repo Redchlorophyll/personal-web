@@ -16,7 +16,7 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { useRouter } from "next/router";
 import ToggleMode from "@/components/ToggleMode";
 import Image from "next/image";
-import Blank from "@/Layouts/Blank";
+import Blank from "~/layouts/Blank";
 import linkyList from "@/config/LinkyList";
 import ReachMeOut from "@/components/ReachMeOut";
 import { Button, Input, Snackbar } from "ui";
