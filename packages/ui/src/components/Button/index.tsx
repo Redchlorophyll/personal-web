@@ -8,6 +8,7 @@ type buttonProps = {
   children?: ReactNode;
   type?: typeStyle;
   onClick?: () => void;
+  btnType?: 'button' | 'reset' | 'submit';
 };
 
 type buttonStyle = {
@@ -20,6 +21,7 @@ export function Button({
   children = "Button",
   type = "solid",
   onClick,
+  btnType = 'button',
 }: buttonProps) {
   const [style, setStyle] = useState<string>("");
 
@@ -115,6 +117,7 @@ export function Button({
 
   return (
     <button
+      type={btnType}
       onClick={onClick}
       className={`w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] ${style}`}
     >

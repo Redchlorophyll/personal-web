@@ -59,7 +59,7 @@ export default function ToggleMode() {
           'flex justify-center'].join(' ')}
       >
         <Image
-          src={image() || '/none.jpg'}
+          src={image()? image() : '/none.jpg'}
           width="25"
           height="25"
           alt={theme === "dark" ? "Dark mode icon" : "Light mode icon"}
