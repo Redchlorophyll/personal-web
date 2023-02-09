@@ -266,6 +266,7 @@ export default function Linky() {
     message: "",
     variant: "success",
   });
+  const [imageFile, setImageFile] = useState<File | undefined>();
   const [data, setData] = useState(linkyList);
   const [activeSwiper, setActiveSwiper] = useState(0);
   const router = useRouter();
@@ -341,6 +342,12 @@ export default function Linky() {
     setData(tmpData);
 
     onCloseModal("modal-delete");
+
+    setSnackbarConfig({
+      isShown: true,
+      message: "Successfully Delete Linky!",
+      variant: "success",
+    });
   };
 
   const onProfileUpdated = () => {
@@ -357,9 +364,8 @@ export default function Linky() {
 
   const onFileChangeCapture = (e: ChangeEvent<HTMLInputElement>) => {
     router.push({ query: { popups: "update-profile" } });
-    console.log(e.target.files[0]);
-    const tmpUrl = URL.createObjectURL(e.target.files[0]);
-    setProfileData((val) => ({ ...val, image: tmpUrl }));
+    setImageFile(e.target.files[0]);
+    console.log(imageFile);
   };
 
   const closeSnackbar = () => {
@@ -374,6 +380,12 @@ export default function Linky() {
     tmpData.list[linkyId] = val;
     setData(tmpData);
     onCloseModal("modal-edit");
+
+    setSnackbarConfig({
+      isShown: true,
+      message: "Sucessfully Edit Linky!",
+      variant: "success",
+    });
   };
 
   const onSubmitCreateLinky = (val: formDataProps) => {
@@ -381,10 +393,26 @@ export default function Linky() {
     tmpData.list.push(val);
     setData(tmpData);
     onCloseModal("modal-create");
+
+    setSnackbarConfig({
+      isShown: true,
+      message: "Sucessfully Create Linky!",
+      variant: "success",
+    });
   };
 
   const onSubmitUpdateProfile = () => {
+    console.log("imagefile", imageFile);
+    const tmpUrl = URL.createObjectURL(imageFile);
+    setProfileData((val) => ({ ...val, image: tmpUrl }));
+
     onCloseModal("update-profile");
+
+    setSnackbarConfig({
+      isShown: true,
+      message: "Profile Picture Succesfully Updated!",
+      variant: "success",
+    });
   };
 
   return (
