@@ -51,7 +51,9 @@ export function LinkItem({
       <div className="border-l-[10px] pl-3 border-l-primary-700 pt-1 pb-1 pr-5 min-h-[70px]">
         <a href={href}>
           <div>
-            <h4 className="font-bold text-base md:!text-xl">{title}</h4>
+            <h4 className="font-bold text-base md:!text-xl dark:text-black-100">
+              {title}
+            </h4>
           </div>
           <div>
             <h5 style={{ color: tagColor }} className="text-sm sm:text-base">
@@ -59,7 +61,9 @@ export function LinkItem({
             </h5>
           </div>
           <div>
-            <p className="text-sm sm:text-base">{children}</p>
+            <p className="text-sm sm:text-base dark:text-black-100">
+              {children}
+            </p>
           </div>
         </a>
 
