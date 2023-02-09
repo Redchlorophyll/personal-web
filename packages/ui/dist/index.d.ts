@@ -1,4 +1,4 @@
-import React, { ReactNode, CSSProperties } from 'react';
+import React, { ReactNode, LegacyRef, CSSProperties } from 'react';
 
 type variantStyle = "warning" | "success" | "primary" | "error" | "muted";
 type typeStyle = "solid" | "outline" | "translucent";
@@ -19,8 +19,16 @@ type radioProps = {
 };
 declare function Radio({ value, valueGroup, onChange, label, }: radioProps): JSX.Element;
 
+type registerProps$1 = {
+    label?: string;
+    onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+    onBlur?: (event: React.FormEvent<HTMLInputElement>) => void;
+    ref?: LegacyRef<HTMLInputElement> | undefined;
+    name?: string;
+};
 type inputProps = {
     onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+    onBlur?: (event: React.FormEvent<HTMLInputElement>) => void;
     value?: string;
     placeholder?: string;
     isError?: boolean;
@@ -28,6 +36,7 @@ type inputProps = {
     isDisabled?: boolean;
     label?: string;
     name?: string;
+    register?: registerProps$1;
 };
 declare const Input: React.ForwardRefExoticComponent<inputProps & React.RefAttributes<HTMLInputElement>>;
 
@@ -78,15 +87,26 @@ type checkboxProps = {
 };
 declare function Checkbox({ value, valueList, onChange, label, }: checkboxProps): JSX.Element;
 
+type registerProps = {
+    label?: string;
+    onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+    onBlur?: (event: React.FormEvent<HTMLInputElement>) => void;
+    ref?: LegacyRef<HTMLTextAreaElement> | undefined;
+    name?: string;
+};
 type textareaProps = {
-    onChange?: (event: string) => void;
+    onChange?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
+    onBlur?: (event: React.FocusEvent<HTMLTextAreaElement, Element>) => void;
     value?: string;
     placeholder?: string;
     limit?: number;
     isDisabled?: boolean;
     label?: string;
     style?: CSSProperties;
+    register?: registerProps;
+    inputName?: string;
+    name?: string;
 };
-declare function Textarea({ placeholder, value, onChange, limit, isDisabled, style, label, }: textareaProps): JSX.Element;
+declare const Textarea: React.ForwardRefExoticComponent<textareaProps & React.RefAttributes<HTMLTextAreaElement>>;
 
 export { Button, Checkbox, Dropdown, Input, Modal, Radio, Snackbar, Textarea, Tooltip, variantType };

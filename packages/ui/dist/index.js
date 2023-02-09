@@ -1,10 +1,27 @@
 "use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
@@ -203,22 +220,28 @@ var import_react3 = __toESM(require("react"));
 var import_jsx_runtime3 = require("react/jsx-runtime");
 var Input = import_react3.default.forwardRef(function Input2({
   onChange,
+  onBlur,
   value = "",
   placeholder = "Input Text Here...",
   isError = false,
   errorMessage = "Error Message Here...",
   isDisabled = false,
   label = "",
-  name = ""
+  name = "",
+  register
 }, ref) {
   const [inputValue, setInputValue] = (0, import_react3.useState)(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event) => {
     if (!onChange || isDisabled)
       return;
-    console.log(event.target.value, value, "test", inputValue);
     setInputValue(event.target.value);
     onChange(event);
+  };
+  const onInputBlur = (event) => {
+    if (!onBlur || isDisabled)
+      return;
+    onBlur(event);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", {
     className: "flex flex-col items-start",
@@ -228,15 +251,31 @@ var Input = import_react3.default.forwardRef(function Input2({
         htmlFor: inputId,
         children: label
       }) : "",
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", {
+      register ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", __spreadProps(__spreadValues({
         name,
-        ref,
         id: inputId,
         "aria-label": "input",
+        placeholder,
+        disabled: isDisabled
+      }, register), {
+        className: [
+          "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
+          "px-[17px] py-[6px] dark:text-black-900",
+          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
+          "disabled:bg-black-200 disabled:text-black-700",
+          "disabled:border-black-600 dark:disabled:bg-black-500",
+          isError ? "border-red-800" : "border-black-800 focus:border-primary-800"
+        ].join(" "),
+        type: "text"
+      })) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", {
+        name,
         value: inputValue,
+        id: inputId,
+        "aria-label": "input",
         placeholder,
         onChange: (event) => onInputChange(event),
         disabled: isDisabled,
+        onBlur: (event) => onInputBlur(event),
         className: [
           "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
           "px-[17px] py-[6px] dark:text-black-900",
@@ -634,46 +673,86 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-var import_react9 = require("react");
+var import_react9 = __toESM(require("react"));
 var import_jsx_runtime10 = require("react/jsx-runtime");
-function Textarea({
+var Textarea = import_react9.default.forwardRef(function Textarea2({
   placeholder = "Input Text Here...",
   value,
   onChange,
+  onBlur,
   limit,
   isDisabled = false,
   style,
-  label = ""
-}) {
+  label = "",
+  register,
+  name
+}, ref) {
   const inputId = label.toLowerCase().split(" ").join("-");
   const [sumCharacters, setSumCharacters] = (0, import_react9.useState)(0);
   const [textboxVal, setTextBoxVal] = (0, import_react9.useState)("");
+  const textareaId = `textarea-${Math.random()}`;
   (0, import_react9.useEffect)(() => {
-    if (limit && value) {
+    setSumCharacters(
+      document.getElementById(inputId).value.length
+    );
+  }, [register == null ? void 0 : register.ref]);
+  (0, import_react9.useEffect)(() => {
+    let tmpVal = value;
+    if (register)
+      tmpVal = document.getElementById(inputId).value;
+    if (limit && tmpVal) {
       let inputLength = 0;
-      if (value.length < limit) {
-        inputLength = value.length;
-        setTextBoxVal(value);
+      if (tmpVal.length < limit) {
+        inputLength = tmpVal.length;
+        setTextBoxVal(tmpVal);
       } else {
-        const trimmedVal = value.substring(0, limit);
+        const trimmedVal = tmpVal.substring(0, limit);
         inputLength = trimmedVal.length;
         setTextBoxVal(trimmedVal);
       }
+      console.log(inputLength);
       setSumCharacters(inputLength);
-    } else if (value || value === "")
-      setTextBoxVal(value);
+    } else if (tmpVal || tmpVal === "")
+      setTextBoxVal(tmpVal);
   }, [value, limit]);
-  const onChangeTextarea = (event) => {
-    if (!onChange)
+  const conditionalOnChange = (val) => {
+    if (!val)
       return;
+    if (register == null ? void 0 : register.onChange) {
+      console.log("masuk sini");
+      register.onChange(val);
+    } else if (onChange) {
+      console.log("atau masuk sini");
+      onChange(val);
+    }
+  };
+  const onChangeTextarea = (event) => {
+    if (!(!onChange || !(register == null ? void 0 : register.onChange)))
+      return;
+    const tmpEvent = __spreadValues({}, event);
     if (!limit) {
-      onChange(event);
+      conditionalOnChange(tmpEvent);
       return;
     }
-    if (!(sumCharacters === 0 || event.length <= limit))
+    if (!(sumCharacters === 0 || tmpEvent.target.value.length <= limit)) {
+      document.getElementById(inputId).value = tmpEvent.target.value.substring(0, limit);
       return;
-    setSumCharacters(textboxVal.length);
-    onChange(event.substring(0, limit));
+    }
+    setSumCharacters(tmpEvent.target.value.length);
+    conditionalOnChange(tmpEvent);
+  };
+  const conditionalOnBlur = (val) => {
+    if (!val)
+      return;
+    if (register == null ? void 0 : register.onBlur)
+      register.onBlur(val);
+    else if (onBlur)
+      onBlur(val);
+  };
+  const onBlurTextarea = (event) => {
+    if (!onBlur || !(register == null ? void 0 : register.onBlur) || isDisabled)
+      return;
+    conditionalOnBlur(event);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", {
     className: "flex flex-col items-start",
@@ -684,12 +763,14 @@ function Textarea({
         children: label
       }) : "",
       /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("textarea", {
+        ref: register ? register.ref : ref,
+        name: register ? register.name : name,
         id: inputId,
         style,
-        value: textboxVal,
         disabled: isDisabled,
         placeholder,
-        onChange: (event) => onChangeTextarea(event.target.value),
+        onChange: (event) => onChangeTextarea(event),
+        onBlur: (event) => onBlurTextarea(event),
         className: [
           "w-full h-[170px] outline-none border-[0.5px] border-solid",
           "border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none",
@@ -709,7 +790,7 @@ function Textarea({
       }) : ""
     ]
   });
-}
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Button,
