@@ -259,7 +259,7 @@ export default function Linky() {
   const inputProfileImageRef = useRef(null);
   const [profileData, setProfileData] = useState<profileDataType>({
     image:
-      "https://lh3.googleusercontent.com/-vFBrzZ6Y1Uc/AAAAAAAAAAI/AAAAAAAAAAA/AFi9ZuFq8uF_OL_QsHmv3VZ9HnpInQiT5w/s48-c/photo.jpg",
+      "https://media.licdn.com/dms/image/D5603AQGnGKppkU2ZRw/profile-displayphoto-shrink_800_800/0/1673371446943?e=1681948800&v=beta&t=7NELWDvP-I3OgXRgwY6a4CqdDQI3qDXCMyAii9xNc7g",
     info,
   });
   const [isFetching, setIsFetching] = useState(true); //dummy until API Exists
@@ -297,8 +297,6 @@ export default function Linky() {
   }, [user]);
 
   useEffect(() => {
-    console.log(router.query);
-    console.log(router.query["linky-id"]);
     if (router.query["linky-id"]) {
       const linkyId = parseInt(router.query["linky-id"] as string, 10);
       setCurrentlyEditedLinky(data.list[linkyId]);
@@ -372,7 +370,6 @@ export default function Linky() {
   const onFileChangeCapture = (e: ChangeEvent<HTMLInputElement>) => {
     router.push({ query: { popups: "update-profile" } });
     setImageFile(e.target.files[0]);
-    console.log(imageFile);
   };
 
   const closeSnackbar = () => {
@@ -409,7 +406,6 @@ export default function Linky() {
   };
 
   const onSubmitUpdateProfile = () => {
-    console.log("imagefile", imageFile);
     const tmpUrl = URL.createObjectURL(imageFile);
     setProfileData((val) => ({ ...val, image: tmpUrl }));
 
