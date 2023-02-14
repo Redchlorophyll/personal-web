@@ -5,11 +5,11 @@ import {
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
-  User
+  User,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { isUserAuthorized } from "@/utils/local-authorization";
-import { Snackbar } from 'ui';
+import { Snackbar } from "ui";
 
 type authContextType = {
   googleSignInWithRedirect?: () => void;
@@ -21,29 +21,29 @@ type authContextType = {
 const AuthContext = createContext<authContextType>({});
 
 export const AuthContextProvider = ({ children }) => {
-  const [ user, setUser ] = useState<User>({} as User);
-  const [ isNotAuthorized, setIsNotAuthorized ] = useState(false);
+  const [user, setUser] = useState<User>({} as User);
+  const [isNotAuthorized, setIsNotAuthorized] = useState(false);
 
   const googleSignInWithRedirect = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
 
-    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem("isLogin", "true");
   };
 
   const googleSignInWithPopUp = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
 
-    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem("isLogin", "true");
     window.dispatchEvent(new Event("storage"));
   };
 
-  const logout = () =>{
-    signOut(auth)
+  const logout = () => {
+    signOut(auth);
     setUser(null);
 
-    localStorage.setItem('isLogin', 'false');
+    localStorage.setItem("isLogin", "false");
     window.dispatchEvent(new Event("storage"));
   };
 
@@ -53,12 +53,11 @@ export const AuthContextProvider = ({ children }) => {
         if (isUserAuthorized(currentUser)) {
           setUser(currentUser);
         } else {
-          console.log('User Not Authorized', currentUser);
           logout();
           setIsNotAuthorized(true);
         }
 
-        localStorage.setItem('isLogin', 'false');
+        localStorage.setItem("isLogin", "false");
         window.dispatchEvent(new Event("storage"));
       }
     });
@@ -67,16 +66,19 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(isNotAuthorized)
-  }, [isNotAuthorized]);
+  useEffect(() => {}, [isNotAuthorized]);
 
   return (
     <AuthContext.Provider
       value={{ googleSignInWithRedirect, googleSignInWithPopUp, logout, user }}
     >
-    <Snackbar isShown={isNotAuthorized} onClose={() => setIsNotAuthorized(false)}>User Not Authorized</Snackbar>
-    {children}
+      <Snackbar
+        isShown={isNotAuthorized}
+        onClose={() => setIsNotAuthorized(false)}
+      >
+        User Not Authorized
+      </Snackbar>
+      {children}
     </AuthContext.Provider>
   );
 };
