@@ -5,6 +5,8 @@ import { store } from "@/store";
 import { Provider } from "react-redux";
 import { AuthContextProvider } from "@/context/Auth";
 import Head from "next/head";
+// eslint-disable-next-line @next/next/no-document-import-in-page
+import { Html } from "next/document";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -19,7 +21,7 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <>
+    <Html lang="en">
       <Head>
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <link
@@ -34,6 +36,6 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </Provider>
       </AuthContextProvider>
-    </>
+    </Html>
   );
 }
