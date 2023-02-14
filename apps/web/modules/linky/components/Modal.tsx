@@ -47,11 +47,12 @@ export function ModalForm({
 }: ModalFormProps) {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [colorDropdown, setColorDropdown] = useState("");
   const options = [
-    { label: "Red", value: "red hex" },
-    { label: "Blue", value: "blue hex" },
-    { label: "Green", value: "green hex" },
-    { label: "Yellow", value: "yellow hex" },
+    { label: "Red", value: "#FF0000" },
+    { label: "Blue", value: "#5465FF" },
+    { label: "Green", value: "#00A507" },
+    { label: "Yellow", value: "#9E7B00" },
   ];
 
   const {
@@ -59,6 +60,7 @@ export function ModalForm({
     register,
     formState: { errors },
     setValue,
+    getValues,
     watch,
   } = useForm({
     defaultValues: {
@@ -71,9 +73,10 @@ export function ModalForm({
     if (isBtnDisabled) return;
 
     if (!isLoading) setIsLoading(true);
+    const data = { ...formVal, color: colorDropdown };
     // TODO: HIT API CREATE
     setTimeout(() => {
-      onSubmit(formVal);
+      onSubmit(data);
     }, 3000);
   };
 
@@ -93,7 +96,7 @@ export function ModalForm({
       value.title.length === 0 ||
       value.url.length === 0 ||
       value.tag.length === 0 ||
-      // data.color.length === 0 ||
+      colorDropdown.length === 0 ||
       value.description.length === 0
     )
       setIsBtnDisabled(true);
@@ -106,17 +109,27 @@ export function ModalForm({
         data.title.length === 0 ||
         data.url.length === 0 ||
         data.tag.length === 0 ||
-        // data.color.length === 0 ||
+        colorDropdown.length === 0 ||
         data.description.length === 0
       )
         setIsBtnDisabled(true);
       else setIsBtnDisabled(false);
     });
 
+    if (
+      getValues("title").length === 0 ||
+      getValues("url").length === 0 ||
+      getValues("tag").length === 0 ||
+      colorDropdown.length === 0 ||
+      getValues("description").length === 0
+    )
+      setIsBtnDisabled(true);
+    else setIsBtnDisabled(false);
+
     return () => {
       subscription.unsubscribe();
     };
-  }, [watch]);
+  }, [watch, colorDropdown]);
 
   return (
     <Modal
@@ -154,6 +167,7 @@ export function ModalForm({
                 options={options}
                 label="color"
                 placeholder="Select..."
+                onChange={(val) => setColorDropdown(val.value)}
               />
             </div>
           </div>

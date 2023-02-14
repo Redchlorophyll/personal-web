@@ -3,8 +3,8 @@ import "@/assets/styles/globals.css";
 import "ui/styles.css";
 import { store } from "@/store";
 import { Provider } from "react-redux";
-import { AuthContextProvider } from '@/context/Auth';
-import Head from 'next/head';
+import { AuthContextProvider } from "@/context/Auth";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -21,6 +21,12 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+        <link
+          rel="apple-touch-icon-precomposed"
+          href="/favicon/apple-touch-icon.png"
+        />
+        <link rel="icon" href="favicon-32x32.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <AuthContextProvider>

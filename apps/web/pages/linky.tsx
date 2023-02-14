@@ -1,10 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  FormEvent,
-  ChangeEvent,
-} from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
+import Head from "next/head";
 import { ModalForm, ModalInfo } from "~/modules/linky/components/Modal";
 import {
   List,
@@ -416,194 +411,230 @@ export default function Linky() {
   };
 
   return (
-    <Blank>
-      <Snackbar
-        isShown={snackbarConfig.isShown}
-        onClose={closeSnackbar}
-        variant={snackbarConfig.variant}
-      >
-        {snackbarConfig.message}
-      </Snackbar>
-      <div className="relative">
-        <section className="w-full md:flex md:justify-center">
-          <div className="md:w-[750px]">
-            <div
-              className={[
-                "flex justify-center p-[10px] h-16 shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]",
-                "md:shadow-none md:!inline-block md:absolute md:translate-x-[633px] md:translate-y-[25px]",
-              ].join(" ")}
-            >
-              <ToggleMode />
+    <>
+      <Head>
+        <title>Linky - Dhonni Ari Hendra Saputra</title>
+        <meta
+          name="description"
+          content="Linky page is Dhonni's tool aim to gather important link and highlight it easier and faster"
+        />
+        <meta
+          property="og:image"
+          content="https://dahs.vercel.app/banner.jpg"
+        />
+        <meta
+          property="og:description"
+          content="Linky page is Dhonni's tool aim to gather important link and highlight it easier and faster"
+        />
+        <meta property="og:title" content="Linky - Dhonni Ari Hendra Saputra" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Linky - Dhonni Ari Hendra Saputra"
+        />
+        <meta
+          name="twitter:description"
+          content="Linky page is Dhonni's tool aim to gather important link and highlight it easier and faster"
+        />
+        <meta
+          name="twitter:image"
+          content="https://dahs.vercel.app/banner.jpg"
+        />
+      </Head>
+      <Blank>
+        <Snackbar
+          isShown={snackbarConfig.isShown}
+          onClose={closeSnackbar}
+          variant={snackbarConfig.variant}
+        >
+          {snackbarConfig.message}
+        </Snackbar>
+        <div className="relative">
+          <section className="w-full md:flex md:justify-center">
+            <div className="md:w-[750px]">
+              <div
+                className={[
+                  "flex justify-center p-[10px] h-16 shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]",
+                  "md:shadow-none md:!inline-block md:absolute md:translate-x-[633px] md:translate-y-[25px]",
+                ].join(" ")}
+              >
+                <ToggleMode />
+              </div>
+              <div className="w-full flex justify-center mt-7">
+                <ProfileInfo
+                  onSuccess={onProfileUpdated}
+                  onUploadImage={onUploadImage}
+                  imageUrl={profileData.image}
+                  profileData={profileData.info}
+                />
+                <input
+                  className="hidden"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  ref={inputProfileImageRef}
+                  onChange={(event) => onFileChangeCapture(event)}
+                />
+              </div>
             </div>
-            <div className="w-full flex justify-center mt-7">
-              <ProfileInfo
-                onSuccess={onProfileUpdated}
-                onUploadImage={onUploadImage}
-                imageUrl={profileData.image}
-                profileData={profileData.info}
-              />
-              <input
-                className="hidden"
-                type="file"
-                accept="image/png, image/jpeg"
-                ref={inputProfileImageRef}
-                onChange={(event) => onFileChangeCapture(event)}
-              />
+          </section>
+
+          {(router.query.popups
+            ? (router.query.popups as string)
+            : ""
+          ).includes("modal-delete") ? (
+            <ModalInfo
+              type="delete"
+              onSubmit={() => onDeleteLinky()}
+              onCancel={() => onCloseModal("modal-delete")}
+            />
+          ) : (
+            ""
+          )}
+
+          {(router.query.popups
+            ? (router.query.popups as string)
+            : ""
+          ).includes("update-profile") ? (
+            <ModalInfo
+              type="update-profile"
+              onSubmit={() => onSubmitUpdateProfile()}
+              onCancel={() => onCloseModal("update-profile")}
+            />
+          ) : (
+            ""
+          )}
+
+          {(router.query.popups
+            ? (router.query.popups as string)
+            : ""
+          ).includes("modal-edit") ? (
+            <ModalForm
+              type="edit"
+              value={currentlyEditedLinky}
+              onSubmit={(val) => onSubmitEditLinky(val)}
+              onCancel={() => onCloseModal("modal-edit")}
+            />
+          ) : (
+            ""
+          )}
+
+          {(router.query.popups
+            ? (router.query.popups as string)
+            : ""
+          ).includes("modal-create") ? (
+            <ModalForm
+              type="create"
+              value={currentlyEditedLinky}
+              onSubmit={(val) => onSubmitCreateLinky(val)}
+              onCancel={() => onCloseModal("modal-create")}
+            />
+          ) : (
+            ""
+          )}
+
+          {!isFetching ? (
+            <>
+              {/* mobile view */}
+              <div className="block sm:hidden">
+                <Swiper
+                  modules={[Navigation]}
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  navigation
+                  onReachBeginning={() => setActiveSwiper(0)}
+                  onReachEnd={() => setActiveSwiper(data.paginated.length - 1)}
+                >
+                  {activeSwiper !== 0 ? (
+                    <div className="absolute top-[50%] z-[1] left-1">
+                      <Arrow type="prev" />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {activeSwiper !== data.paginated.length - 1 ? (
+                    <div className="absolute top-[50%] z-[1] right-1">
+                      <Arrow type="next" />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {data.paginated?.map((page, pageIdx) => {
+                    return (
+                      <SwiperSlide key={`linky-page-${pageIdx}`}>
+                        <List>
+                          {page.map((linky, linkIdx) => {
+                            return (
+                              <LinkItem
+                                key={`linky-${pageIdx}-${linkIdx}`}
+                                title={linky.title}
+                                tag={linky.tag}
+                                tagColor={linky.color}
+                                href={linky.url}
+                                edit={false}
+                              >
+                                {linky.description}
+                              </LinkItem>
+                            );
+                          })}
+                        </List>
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </div>
+
+              <section className="hidden sm:block m-4">
+                {isAdmin ? (
+                  <div className="hidden sm:visible w-full md:flex justify-center">
+                    <div className="w-[750px] flex justify-end">
+                      <Button onClick={() => onCreateLink()}>+ Create</Button>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                <List>
+                  {data.list?.map((linky, idx) => {
+                    return (
+                      <LinkItem
+                        key={`link-${idx}`}
+                        title={linky.title}
+                        tag={linky.tag}
+                        tagColor={linky.color}
+                        href={linky.url}
+                        onEdit={() => onOpenEditModal(idx)}
+                        onDelete={() => onOpenDeleteModal(idx)}
+                        edit={isAdmin}
+                      >
+                        {linky.description}
+                      </LinkItem>
+                    );
+                  })}
+                </List>
+              </section>
+            </>
+          ) : (
+            <div>
+              <List>
+                <LoadingLinkItem />
+                <LoadingLinkItem />
+                <LoadingLinkItem />
+                <LoadingLinkItem />
+              </List>
             </div>
-          </div>
+          )}
+        </div>
+
+        <section className="flex justify-center w-full h-[20vh] pt-4 mb-48">
+          <ReachMeOut />
         </section>
 
-        {(router.query.popups ? (router.query.popups as string) : "").includes(
-          "modal-delete"
-        ) ? (
-          <ModalInfo
-            type="delete"
-            onSubmit={() => onDeleteLinky()}
-            onCancel={() => onCloseModal("modal-delete")}
-          />
-        ) : (
-          ""
-        )}
-
-        {(router.query.popups ? (router.query.popups as string) : "").includes(
-          "update-profile"
-        ) ? (
-          <ModalInfo
-            type="update-profile"
-            onSubmit={() => onSubmitUpdateProfile()}
-            onCancel={() => onCloseModal("update-profile")}
-          />
-        ) : (
-          ""
-        )}
-
-        {(router.query.popups ? (router.query.popups as string) : "").includes(
-          "modal-edit"
-        ) ? (
-          <ModalForm
-            type="edit"
-            value={currentlyEditedLinky}
-            onSubmit={(val) => onSubmitEditLinky(val)}
-            onCancel={() => onCloseModal("modal-edit")}
-          />
-        ) : (
-          ""
-        )}
-
-        {(router.query.popups ? (router.query.popups as string) : "").includes(
-          "modal-create"
-        ) ? (
-          <ModalForm
-            type="create"
-            value={currentlyEditedLinky}
-            onSubmit={(val) => onSubmitCreateLinky(val)}
-            onCancel={() => onCloseModal("modal-create")}
-          />
-        ) : (
-          ""
-        )}
-
-        {!isFetching ? (
-          <>
-            {/* mobile view */}
-            <div className="block sm:hidden">
-              <Swiper
-                modules={[Navigation]}
-                spaceBetween={50}
-                slidesPerView={1}
-                navigation
-                onReachBeginning={() => setActiveSwiper(0)}
-                onReachEnd={() => setActiveSwiper(data.paginated.length - 1)}
-              >
-                {activeSwiper !== 0 ? (
-                  <div className="absolute top-[50%] z-[1] left-1">
-                    <Arrow type="prev" />
-                  </div>
-                ) : (
-                  ""
-                )}
-                {activeSwiper !== data.paginated.length - 1 ? (
-                  <div className="absolute top-[50%] z-[1] right-1">
-                    <Arrow type="next" />
-                  </div>
-                ) : (
-                  ""
-                )}
-                {data.paginated?.map((page, pageIdx) => {
-                  return (
-                    <SwiperSlide key={`linky-page-${pageIdx}`}>
-                      <List>
-                        {page.map((linky, linkIdx) => {
-                          return (
-                            <LinkItem
-                              key={`linky-${pageIdx}-${linkIdx}`}
-                              title={linky.title}
-                              tag={linky.tag}
-                              tagColor={linky.color}
-                              href={linky.url}
-                              edit={false}
-                            >
-                              {linky.description}
-                            </LinkItem>
-                          );
-                        })}
-                      </List>
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </div>
-
-            <section className="hidden sm:block m-4">
-              {isAdmin ? (
-                <div className="hidden sm:visible w-full md:flex justify-center">
-                  <div className="w-[750px] flex justify-end">
-                    <Button onClick={() => onCreateLink()}>+ Create</Button>
-                  </div>
-                </div>
-              ) : (
-                ""
-              )}
-
-              <List>
-                {data.list?.map((linky, idx) => {
-                  return (
-                    <LinkItem
-                      key={`link-${idx}`}
-                      title={linky.title}
-                      tag={linky.tag}
-                      tagColor={linky.color}
-                      href={linky.url}
-                      onEdit={() => onOpenEditModal(idx)}
-                      onDelete={() => onOpenDeleteModal(idx)}
-                      edit={isAdmin}
-                    >
-                      {linky.description}
-                    </LinkItem>
-                  );
-                })}
-              </List>
-            </section>
-          </>
-        ) : (
-          <div>
-            <List>
-              <LoadingLinkItem />
-              <LoadingLinkItem />
-              <LoadingLinkItem />
-              <LoadingLinkItem />
-            </List>
-          </div>
-        )}
-      </div>
-
-      <section className="flex justify-center w-full h-[20vh] pt-4 mb-48">
-        <ReachMeOut />
-      </section>
-
-      <footer className="text-xs md:text-base relative bottom-5 w-full text-center text-[#acacac]">
-        copyright @ Dhonni Ari Hendra Saputra
-      </footer>
-    </Blank>
+        <footer className="text-xs md:text-base relative bottom-5 w-full text-center text-[#acacac]">
+          copyright @ Dhonni Ari Hendra Saputra
+        </footer>
+      </Blank>
+    </>
   );
 }
