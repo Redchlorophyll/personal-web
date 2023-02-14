@@ -1,10 +1,4 @@
-import React, {
-  LegacyRef,
-  CSSProperties,
-  useState,
-  useEffect,
-  useLayoutEffect,
-} from "react";
+import React, { LegacyRef, CSSProperties, useState, useEffect } from "react";
 
 type registerProps = {
   label?: string;

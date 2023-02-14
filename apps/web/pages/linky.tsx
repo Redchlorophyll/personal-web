@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import Head from "next/head";
-import { ModalForm, ModalInfo } from "~/modules/linky/components/Modal";
+import dynamic from "next/dynamic";
 import {
   List,
   LinkItem,
@@ -14,13 +14,24 @@ import Image from "next/image";
 import Blank from "~/layouts/Blank";
 import linkyList from "@/config/LinkyList";
 import ReachMeOut from "@/components/ReachMeOut";
-import { Button, Input, Snackbar } from "ui";
+import { Button } from "ui";
 import { UserAuth } from "@/context/Auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import info from "@/config/info";
 import "swiper/css";
+
+const Snackbar = dynamic(() => import("ui").then((mod) => mod.Snackbar), {
+  ssr: false,
+});
+const Input = dynamic(() => import("ui").then((mod) => mod.Input));
+const ModalForm = dynamic(() =>
+  import("~/modules/linky/components/Modal").then((mod) => mod.ModalForm)
+);
+const ModalInfo = dynamic(() =>
+  import("~/modules/linky/components/Modal").then((mod) => mod.ModalInfo)
+);
 
 type formDataProps = {
   title: string;

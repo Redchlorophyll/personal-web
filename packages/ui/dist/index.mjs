@@ -636,10 +636,7 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-import React9, {
-  useState as useState8,
-  useEffect as useEffect9
-} from "react";
+import React9, { useState as useState8, useEffect as useEffect9 } from "react";
 import { jsx as jsx10, jsxs as jsxs8 } from "react/jsx-runtime";
 var Textarea = React9.forwardRef(function Textarea2({
   placeholder = "Input Text Here...",
