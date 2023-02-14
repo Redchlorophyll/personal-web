@@ -146,7 +146,7 @@ function ProfileInfo({
       <div className="mr-5">
         {/* image */}
         <div className="w-[54px] md:w-[80px] h-[54px] md:h-[80px] rounded-full overflow-hidden bg-red-300 relative">
-          <Image fill src={imageUrl} alt="Profile Image" />
+          <Image fill src={imageUrl} alt="Profile Image" quality={40} />
         </div>
         {user !== null && Object.keys(user).length !== 0 ? (
           <div className="hidden md:block absolute translate-x-[55px] -translate-y-[20px]">
