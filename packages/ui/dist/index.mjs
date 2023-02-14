@@ -1,3 +1,23 @@
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+
 // src/components/Button/index.tsx
 import { useEffect, useState } from "react";
 import { jsx } from "react/jsx-runtime";
@@ -5,7 +25,8 @@ function Button({
   variant = "primary",
   children = "Button",
   type = "solid",
-  onClick
+  onClick,
+  btnType = "button"
 }) {
   const [style, setStyle] = useState("");
   const solid = [
@@ -95,6 +116,7 @@ function Button({
     }
   }, [variant, type]);
   return /* @__PURE__ */ jsx("button", {
+    type: btnType,
     onClick,
     className: `w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] ${style}`,
     children
@@ -157,22 +179,32 @@ function Radio({
 }
 
 // src/components/Input/index.tsx
+import React3, { useState as useState3 } from "react";
 import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
-function Input({
+var Input = React3.forwardRef(function Input2({
   onChange,
+  onBlur,
   value = "",
   placeholder = "Input Text Here...",
   isError = false,
   errorMessage = "Error Message Here...",
   isDisabled = false,
-  label = ""
-}) {
+  label = "",
+  name = "",
+  register
+}, ref) {
+  const [inputValue, setInputValue] = useState3(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event) => {
     if (!onChange || isDisabled)
       return;
-    const { value: value2 } = event.target;
-    onChange(value2);
+    setInputValue(event.target.value);
+    onChange(event);
+  };
+  const onInputBlur = (event) => {
+    if (!onBlur || isDisabled)
+      return;
+    onBlur(event);
   };
   return /* @__PURE__ */ jsxs2("div", {
     className: "flex flex-col items-start",
@@ -182,13 +214,31 @@ function Input({
         htmlFor: inputId,
         children: label
       }) : "",
-      /* @__PURE__ */ jsx3("input", {
+      register ? /* @__PURE__ */ jsx3("input", __spreadProps(__spreadValues({
+        name,
         id: inputId,
         "aria-label": "input",
-        value,
+        placeholder,
+        disabled: isDisabled
+      }, register), {
+        className: [
+          "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
+          "px-[17px] py-[6px] dark:text-black-900",
+          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
+          "disabled:bg-black-200 disabled:text-black-700",
+          "disabled:border-black-600 dark:disabled:bg-black-500",
+          isError ? "border-red-800" : "border-black-800 focus:border-primary-800"
+        ].join(" "),
+        type: "text"
+      })) : /* @__PURE__ */ jsx3("input", {
+        name,
+        value: inputValue,
+        id: inputId,
+        "aria-label": "input",
         placeholder,
         onChange: (event) => onInputChange(event),
         disabled: isDisabled,
+        onBlur: (event) => onInputBlur(event),
         className: [
           "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
           "px-[17px] py-[6px] dark:text-black-900",
@@ -200,31 +250,43 @@ function Input({
         type: "text"
       }),
       isError ? /* @__PURE__ */ jsx3("span", {
-        className: "text-sm text-red-800",
-        children: errorMessage
+        className: "text-sm text-red-800 relative w-full",
+        children: /* @__PURE__ */ jsx3("div", {
+          className: "absolute",
+          children: errorMessage
+        })
       }) : ""
     ]
   });
-}
+});
 
 // src/components/Modal/index.tsx
+import { useEffect as useEffect4 } from "react";
 import { Fragment, jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 function Modal({ children, title, style }) {
+  useEffect4(() => {
+    var _a;
+    (_a = document.querySelector("body")) == null ? void 0 : _a.classList.add("overflow-hidden");
+    return () => {
+      var _a2;
+      (_a2 = document.querySelector("body")) == null ? void 0 : _a2.classList.remove("overflow-hidden");
+    };
+  }, []);
   return /* @__PURE__ */ jsxs3(Fragment, {
     children: [
       /* @__PURE__ */ jsx4("div", {
-        className: "w-full h-[100vh] absolute z-30 bg-black-900 opacity-25"
+        className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25"
       }),
       /* @__PURE__ */ jsx4("div", {
         className: [
           "w-full h-[100vh] absolute z-30",
-          "flex justify-center align-baseline"
+          "flex justify-center align-baseline top-0 left-0"
         ].join(" "),
         children: /* @__PURE__ */ jsxs3("div", {
           style,
           className: [
             "w-[616px] min-h-[503px] bg-black-100 dark:bg-dark-layout",
-            "top-1/2 absolute -translate-y-1/2",
+            "top-1/2 fixed -translate-y-1/2",
             "p-[25px_30px] rounded-2xl text"
           ].join(" "),
           children: [
@@ -246,7 +308,7 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-import { useEffect as useEffect3, useState as useState3, useRef } from "react";
+import { useEffect as useEffect5, useState as useState4, useRef } from "react";
 
 // src/components/Tooltip/TooltipContent.tsx
 import { jsx as jsx5 } from "react/jsx-runtime";
@@ -267,13 +329,13 @@ function Tooltip({
   tooltipContent,
   children
 }) {
-  const [tooltipDirection, setTooltipDirection] = useState3("top");
-  const [halfWidth, setHalfWidth] = useState3(0);
+  const [tooltipDirection, setTooltipDirection] = useState4("top");
+  const [halfWidth, setHalfWidth] = useState4(0);
   const tooltipWrapper = useRef(null);
-  useEffect3(() => {
+  useEffect5(() => {
     tipDirection(direction || "bottom");
   }, [direction]);
-  useEffect3(() => {
+  useEffect5(() => {
     var _a, _b;
     if (typeof ((_a = tooltipWrapper.current) == null ? void 0 : _a.clientWidth) === "number") {
       setHalfWidth(Math.trunc(((_b = tooltipWrapper.current) == null ? void 0 : _b.clientWidth) / 2));
@@ -309,7 +371,7 @@ function Tooltip({
 }
 
 // src/components/Snackbar/index.tsx
-import { useEffect as useEffect4, useState as useState4 } from "react";
+import { useEffect as useEffect6, useState as useState5 } from "react";
 import { Fade } from "react-awesome-reveal";
 import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
 function Snackbar({
@@ -319,9 +381,9 @@ function Snackbar({
   onClose,
   children
 }) {
-  const [baseColor, setBaseColor] = useState4("bg-red-700");
-  const [image, setImage] = useState4("error");
-  useEffect4(() => {
+  const [baseColor, setBaseColor] = useState5("bg-red-700");
+  const [image, setImage] = useState5("error");
+  useEffect6(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
       setImage("error");
@@ -340,7 +402,7 @@ function Snackbar({
     if (onClose)
       onClose(false);
   }
-  useEffect4(() => {
+  useEffect6(() => {
     if (timer && isShown) {
       setTimeout(() => {
         if (onClose)
@@ -367,7 +429,7 @@ function Snackbar({
       });
   };
   return /* @__PURE__ */ jsx7("div", {
-    className: "fixed top-4 left-1/2 -translate-x-1/2",
+    className: "fixed top-4 left-1/2 -translate-x-1/2 z-50",
     children: isShown ? /* @__PURE__ */ jsx7(Fade, {
       children: /* @__PURE__ */ jsxs5("div", {
         className: `${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`,
@@ -398,7 +460,7 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-import { useState as useState5, useRef as useRef2, useEffect as useEffect5 } from "react";
+import { useState as useState6, useRef as useRef2, useEffect as useEffect7 } from "react";
 import { Fade as Fade2 } from "react-awesome-reveal";
 import { jsx as jsx8, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dropdown({
@@ -410,13 +472,13 @@ function Dropdown({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [isOpen, setIsOpen] = useState5(false);
+  const [isOpen, setIsOpen] = useState6(false);
   const inputRef = useRef2(null);
-  const [inputValue, setInputValue] = useState5({
+  const [inputValue, setInputValue] = useState6({
     label: "",
     value: ""
   });
-  const [inputOptions, setInputOptions] = useState5([...options]);
+  const [inputOptions, setInputOptions] = useState6([...options]);
   const handleFocus = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -449,16 +511,19 @@ function Dropdown({
       children: value2.label
     }, idx);
   });
-  useEffect5(() => {
-    setInputValue(value);
+  useEffect7(() => {
+    if (!inputValue)
+      return;
+    const matchedData = options.find((data) => data.value === value);
+    setInputValue(matchedData);
     if (type === "combobox") {
       const filterOptions = options.filter(
-        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.label.toLowerCase()) || "")
+        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.toLowerCase()) || "")
       );
       setInputOptions(filterOptions);
     }
   }, [value]);
-  useEffect5(() => {
+  useEffect7(() => {
     const outsideClickHandler = ({ target }) => {
       const { current } = inputRef;
       if (current && !current.contains(target)) {
@@ -485,12 +550,12 @@ function Dropdown({
         children: [
           /* @__PURE__ */ jsx8("input", {
             id: inputId,
-            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
+            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[5px_17px_5px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
             type: "text",
             placeholder,
             readOnly: !!(type === "dropdown"),
             onClick: () => handleFocus(),
-            value: inputValue == null ? void 0 : inputValue.label,
+            value: (inputValue == null ? void 0 : inputValue.label) || "",
             onChange: (e) => onInputChange(e)
           }),
           type === "dropdown" ? /* @__PURE__ */ jsx8("div", {
@@ -500,7 +565,7 @@ function Dropdown({
             children: /* @__PURE__ */ jsxs6("div", {
               className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]",
               children: [
-                inputOptions.length > 0 && (value == null ? void 0 : value.label) !== "" && (value == null ? void 0 : value.value) !== "" && type === "dropdown" ? /* @__PURE__ */ jsx8("button", {
+                inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ jsx8("button", {
                   onClick: () => setActiveVal({
                     label: "",
                     value: ""
@@ -519,7 +584,7 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-import { useEffect as useEffect6, useState as useState6 } from "react";
+import { useEffect as useEffect8, useState as useState7 } from "react";
 import { jsx as jsx9, jsxs as jsxs7 } from "react/jsx-runtime";
 function Checkbox({
   value = "",
@@ -527,8 +592,8 @@ function Checkbox({
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = useState6(false);
-  useEffect6(() => {
+  const [isChecked, setChecked] = useState7(false);
+  useEffect8(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
       if (isValueIncluded)
@@ -571,46 +636,86 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-import { useState as useState7, useEffect as useEffect7 } from "react";
+import React9, { useState as useState8, useEffect as useEffect9 } from "react";
 import { jsx as jsx10, jsxs as jsxs8 } from "react/jsx-runtime";
-function Textarea({
+var Textarea = React9.forwardRef(function Textarea2({
   placeholder = "Input Text Here...",
   value,
   onChange,
+  onBlur,
   limit,
   isDisabled = false,
   style,
-  label = ""
-}) {
+  label = "",
+  register,
+  name
+}, ref) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [sumCharacters, setSumCharacters] = useState7(0);
-  const [textboxVal, setTextBoxVal] = useState7("");
-  useEffect7(() => {
-    if (limit && value) {
+  const [sumCharacters, setSumCharacters] = useState8(0);
+  const [textboxVal, setTextBoxVal] = useState8("");
+  const textareaId = `textarea-${Math.random()}`;
+  useEffect9(() => {
+    setSumCharacters(
+      document.getElementById(inputId).value.length
+    );
+  }, [register == null ? void 0 : register.ref]);
+  useEffect9(() => {
+    let tmpVal = value;
+    if (register)
+      tmpVal = document.getElementById(inputId).value;
+    if (limit && tmpVal) {
       let inputLength = 0;
-      if (value.length < limit) {
-        inputLength = value.length;
-        setTextBoxVal(value);
+      if (tmpVal.length < limit) {
+        inputLength = tmpVal.length;
+        setTextBoxVal(tmpVal);
       } else {
-        const trimmedVal = value.substring(0, limit);
+        const trimmedVal = tmpVal.substring(0, limit);
         inputLength = trimmedVal.length;
         setTextBoxVal(trimmedVal);
       }
+      console.log(inputLength);
       setSumCharacters(inputLength);
-    } else if (value || value === "")
-      setTextBoxVal(value);
+    } else if (tmpVal || tmpVal === "")
+      setTextBoxVal(tmpVal);
   }, [value, limit]);
-  const onChangeTextarea = (event) => {
-    if (!onChange)
+  const conditionalOnChange = (val) => {
+    if (!val)
       return;
+    if (register == null ? void 0 : register.onChange) {
+      console.log("masuk sini");
+      register.onChange(val);
+    } else if (onChange) {
+      console.log("atau masuk sini");
+      onChange(val);
+    }
+  };
+  const onChangeTextarea = (event) => {
+    if (!(!onChange || !(register == null ? void 0 : register.onChange)))
+      return;
+    const tmpEvent = __spreadValues({}, event);
     if (!limit) {
-      onChange(event);
+      conditionalOnChange(tmpEvent);
       return;
     }
-    if (!(sumCharacters === 0 || event.length <= limit))
+    if (!(sumCharacters === 0 || tmpEvent.target.value.length <= limit)) {
+      document.getElementById(inputId).value = tmpEvent.target.value.substring(0, limit);
       return;
-    setSumCharacters(textboxVal.length);
-    onChange(event.substring(0, limit));
+    }
+    setSumCharacters(tmpEvent.target.value.length);
+    conditionalOnChange(tmpEvent);
+  };
+  const conditionalOnBlur = (val) => {
+    if (!val)
+      return;
+    if (register == null ? void 0 : register.onBlur)
+      register.onBlur(val);
+    else if (onBlur)
+      onBlur(val);
+  };
+  const onBlurTextarea = (event) => {
+    if (!onBlur || !(register == null ? void 0 : register.onBlur) || isDisabled)
+      return;
+    conditionalOnBlur(event);
   };
   return /* @__PURE__ */ jsxs8("div", {
     className: "flex flex-col items-start",
@@ -621,12 +726,14 @@ function Textarea({
         children: label
       }) : "",
       /* @__PURE__ */ jsx10("textarea", {
+        ref: register ? register.ref : ref,
+        name: register ? register.name : name,
         id: inputId,
         style,
-        value: textboxVal,
         disabled: isDisabled,
         placeholder,
-        onChange: (event) => onChangeTextarea(event.target.value),
+        onChange: (event) => onChangeTextarea(event),
+        onBlur: (event) => onBlurTextarea(event),
         className: [
           "w-full h-[170px] outline-none border-[0.5px] border-solid",
           "border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none",
@@ -646,7 +753,7 @@ function Textarea({
       }) : ""
     ]
   });
-}
+});
 export {
   Button,
   Checkbox,

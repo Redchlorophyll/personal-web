@@ -1,8 +1,27 @@
 "use strict";
+var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
@@ -15,6 +34,10 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.tsx
@@ -39,7 +62,8 @@ function Button({
   variant = "primary",
   children = "Button",
   type = "solid",
-  onClick
+  onClick,
+  btnType = "button"
 }) {
   const [style, setStyle] = (0, import_react.useState)("");
   const solid = [
@@ -129,6 +153,7 @@ function Button({
     }
   }, [variant, type]);
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+    type: btnType,
     onClick,
     className: `w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] ${style}`,
     children
@@ -191,22 +216,32 @@ function Radio({
 }
 
 // src/components/Input/index.tsx
+var import_react3 = __toESM(require("react"));
 var import_jsx_runtime3 = require("react/jsx-runtime");
-function Input({
+var Input = import_react3.default.forwardRef(function Input2({
   onChange,
+  onBlur,
   value = "",
   placeholder = "Input Text Here...",
   isError = false,
   errorMessage = "Error Message Here...",
   isDisabled = false,
-  label = ""
-}) {
+  label = "",
+  name = "",
+  register
+}, ref) {
+  const [inputValue, setInputValue] = (0, import_react3.useState)(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event) => {
     if (!onChange || isDisabled)
       return;
-    const { value: value2 } = event.target;
-    onChange(value2);
+    setInputValue(event.target.value);
+    onChange(event);
+  };
+  const onInputBlur = (event) => {
+    if (!onBlur || isDisabled)
+      return;
+    onBlur(event);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", {
     className: "flex flex-col items-start",
@@ -216,13 +251,31 @@ function Input({
         htmlFor: inputId,
         children: label
       }) : "",
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", {
+      register ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", __spreadProps(__spreadValues({
+        name,
         id: inputId,
         "aria-label": "input",
-        value,
+        placeholder,
+        disabled: isDisabled
+      }, register), {
+        className: [
+          "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
+          "px-[17px] py-[6px] dark:text-black-900",
+          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
+          "disabled:bg-black-200 disabled:text-black-700",
+          "disabled:border-black-600 dark:disabled:bg-black-500",
+          isError ? "border-red-800" : "border-black-800 focus:border-primary-800"
+        ].join(" "),
+        type: "text"
+      })) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("input", {
+        name,
+        value: inputValue,
+        id: inputId,
+        "aria-label": "input",
         placeholder,
         onChange: (event) => onInputChange(event),
         disabled: isDisabled,
+        onBlur: (event) => onInputBlur(event),
         className: [
           "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
           "px-[17px] py-[6px] dark:text-black-900",
@@ -234,31 +287,43 @@ function Input({
         type: "text"
       }),
       isError ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", {
-        className: "text-sm text-red-800",
-        children: errorMessage
+        className: "text-sm text-red-800 relative w-full",
+        children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", {
+          className: "absolute",
+          children: errorMessage
+        })
       }) : ""
     ]
   });
-}
+});
 
 // src/components/Modal/index.tsx
+var import_react4 = require("react");
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function Modal({ children, title, style }) {
+  (0, import_react4.useEffect)(() => {
+    var _a;
+    (_a = document.querySelector("body")) == null ? void 0 : _a.classList.add("overflow-hidden");
+    return () => {
+      var _a2;
+      (_a2 = document.querySelector("body")) == null ? void 0 : _a2.classList.remove("overflow-hidden");
+    };
+  }, []);
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, {
     children: [
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", {
-        className: "w-full h-[100vh] absolute z-30 bg-black-900 opacity-25"
+        className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25"
       }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", {
         className: [
           "w-full h-[100vh] absolute z-30",
-          "flex justify-center align-baseline"
+          "flex justify-center align-baseline top-0 left-0"
         ].join(" "),
         children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", {
           style,
           className: [
             "w-[616px] min-h-[503px] bg-black-100 dark:bg-dark-layout",
-            "top-1/2 absolute -translate-y-1/2",
+            "top-1/2 fixed -translate-y-1/2",
             "p-[25px_30px] rounded-2xl text"
           ].join(" "),
           children: [
@@ -280,7 +345,7 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-var import_react3 = require("react");
+var import_react5 = require("react");
 
 // src/components/Tooltip/TooltipContent.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
@@ -301,13 +366,13 @@ function Tooltip({
   tooltipContent,
   children
 }) {
-  const [tooltipDirection, setTooltipDirection] = (0, import_react3.useState)("top");
-  const [halfWidth, setHalfWidth] = (0, import_react3.useState)(0);
-  const tooltipWrapper = (0, import_react3.useRef)(null);
-  (0, import_react3.useEffect)(() => {
+  const [tooltipDirection, setTooltipDirection] = (0, import_react5.useState)("top");
+  const [halfWidth, setHalfWidth] = (0, import_react5.useState)(0);
+  const tooltipWrapper = (0, import_react5.useRef)(null);
+  (0, import_react5.useEffect)(() => {
     tipDirection(direction || "bottom");
   }, [direction]);
-  (0, import_react3.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
     var _a, _b;
     if (typeof ((_a = tooltipWrapper.current) == null ? void 0 : _a.clientWidth) === "number") {
       setHalfWidth(Math.trunc(((_b = tooltipWrapper.current) == null ? void 0 : _b.clientWidth) / 2));
@@ -343,7 +408,7 @@ function Tooltip({
 }
 
 // src/components/Snackbar/index.tsx
-var import_react4 = require("react");
+var import_react6 = require("react");
 var import_react_awesome_reveal = require("react-awesome-reveal");
 var import_jsx_runtime7 = require("react/jsx-runtime");
 function Snackbar({
@@ -353,9 +418,9 @@ function Snackbar({
   onClose,
   children
 }) {
-  const [baseColor, setBaseColor] = (0, import_react4.useState)("bg-red-700");
-  const [image, setImage] = (0, import_react4.useState)("error");
-  (0, import_react4.useEffect)(() => {
+  const [baseColor, setBaseColor] = (0, import_react6.useState)("bg-red-700");
+  const [image, setImage] = (0, import_react6.useState)("error");
+  (0, import_react6.useEffect)(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
       setImage("error");
@@ -374,7 +439,7 @@ function Snackbar({
     if (onClose)
       onClose(false);
   }
-  (0, import_react4.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     if (timer && isShown) {
       setTimeout(() => {
         if (onClose)
@@ -401,7 +466,7 @@ function Snackbar({
       });
   };
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", {
-    className: "fixed top-4 left-1/2 -translate-x-1/2",
+    className: "fixed top-4 left-1/2 -translate-x-1/2 z-50",
     children: isShown ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react_awesome_reveal.Fade, {
       children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", {
         className: `${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`,
@@ -432,7 +497,7 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-var import_react5 = require("react");
+var import_react7 = require("react");
 var import_react_awesome_reveal2 = require("react-awesome-reveal");
 var import_jsx_runtime8 = require("react/jsx-runtime");
 function Dropdown({
@@ -444,13 +509,13 @@ function Dropdown({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [isOpen, setIsOpen] = (0, import_react5.useState)(false);
-  const inputRef = (0, import_react5.useRef)(null);
-  const [inputValue, setInputValue] = (0, import_react5.useState)({
+  const [isOpen, setIsOpen] = (0, import_react7.useState)(false);
+  const inputRef = (0, import_react7.useRef)(null);
+  const [inputValue, setInputValue] = (0, import_react7.useState)({
     label: "",
     value: ""
   });
-  const [inputOptions, setInputOptions] = (0, import_react5.useState)([...options]);
+  const [inputOptions, setInputOptions] = (0, import_react7.useState)([...options]);
   const handleFocus = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -483,16 +548,19 @@ function Dropdown({
       children: value2.label
     }, idx);
   });
-  (0, import_react5.useEffect)(() => {
-    setInputValue(value);
+  (0, import_react7.useEffect)(() => {
+    if (!inputValue)
+      return;
+    const matchedData = options.find((data) => data.value === value);
+    setInputValue(matchedData);
     if (type === "combobox") {
       const filterOptions = options.filter(
-        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.label.toLowerCase()) || "")
+        (data) => data.label.toLowerCase().includes((value == null ? void 0 : value.toLowerCase()) || "")
       );
       setInputOptions(filterOptions);
     }
   }, [value]);
-  (0, import_react5.useEffect)(() => {
+  (0, import_react7.useEffect)(() => {
     const outsideClickHandler = ({ target }) => {
       const { current } = inputRef;
       if (current && !current.contains(target)) {
@@ -519,12 +587,12 @@ function Dropdown({
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("input", {
             id: inputId,
-            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[6px_17px_6px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
+            className: `peer ${type === "dropdown" ? "cursor-pointer" : ""} bg-black-100 w-full p-[5px_17px_5px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`,
             type: "text",
             placeholder,
             readOnly: !!(type === "dropdown"),
             onClick: () => handleFocus(),
-            value: inputValue == null ? void 0 : inputValue.label,
+            value: (inputValue == null ? void 0 : inputValue.label) || "",
             onChange: (e) => onInputChange(e)
           }),
           type === "dropdown" ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", {
@@ -534,7 +602,7 @@ function Dropdown({
             children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", {
               className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]",
               children: [
-                inputOptions.length > 0 && (value == null ? void 0 : value.label) !== "" && (value == null ? void 0 : value.value) !== "" && type === "dropdown" ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("button", {
+                inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("button", {
                   onClick: () => setActiveVal({
                     label: "",
                     value: ""
@@ -553,7 +621,7 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-var import_react6 = require("react");
+var import_react8 = require("react");
 var import_jsx_runtime9 = require("react/jsx-runtime");
 function Checkbox({
   value = "",
@@ -561,8 +629,8 @@ function Checkbox({
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = (0, import_react6.useState)(false);
-  (0, import_react6.useEffect)(() => {
+  const [isChecked, setChecked] = (0, import_react8.useState)(false);
+  (0, import_react8.useEffect)(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
       if (isValueIncluded)
@@ -605,46 +673,86 @@ function Checkbox({
 }
 
 // src/components/Textarea/index.tsx
-var import_react7 = require("react");
+var import_react9 = __toESM(require("react"));
 var import_jsx_runtime10 = require("react/jsx-runtime");
-function Textarea({
+var Textarea = import_react9.default.forwardRef(function Textarea2({
   placeholder = "Input Text Here...",
   value,
   onChange,
+  onBlur,
   limit,
   isDisabled = false,
   style,
-  label = ""
-}) {
+  label = "",
+  register,
+  name
+}, ref) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [sumCharacters, setSumCharacters] = (0, import_react7.useState)(0);
-  const [textboxVal, setTextBoxVal] = (0, import_react7.useState)("");
-  (0, import_react7.useEffect)(() => {
-    if (limit && value) {
+  const [sumCharacters, setSumCharacters] = (0, import_react9.useState)(0);
+  const [textboxVal, setTextBoxVal] = (0, import_react9.useState)("");
+  const textareaId = `textarea-${Math.random()}`;
+  (0, import_react9.useEffect)(() => {
+    setSumCharacters(
+      document.getElementById(inputId).value.length
+    );
+  }, [register == null ? void 0 : register.ref]);
+  (0, import_react9.useEffect)(() => {
+    let tmpVal = value;
+    if (register)
+      tmpVal = document.getElementById(inputId).value;
+    if (limit && tmpVal) {
       let inputLength = 0;
-      if (value.length < limit) {
-        inputLength = value.length;
-        setTextBoxVal(value);
+      if (tmpVal.length < limit) {
+        inputLength = tmpVal.length;
+        setTextBoxVal(tmpVal);
       } else {
-        const trimmedVal = value.substring(0, limit);
+        const trimmedVal = tmpVal.substring(0, limit);
         inputLength = trimmedVal.length;
         setTextBoxVal(trimmedVal);
       }
+      console.log(inputLength);
       setSumCharacters(inputLength);
-    } else if (value || value === "")
-      setTextBoxVal(value);
+    } else if (tmpVal || tmpVal === "")
+      setTextBoxVal(tmpVal);
   }, [value, limit]);
-  const onChangeTextarea = (event) => {
-    if (!onChange)
+  const conditionalOnChange = (val) => {
+    if (!val)
       return;
+    if (register == null ? void 0 : register.onChange) {
+      console.log("masuk sini");
+      register.onChange(val);
+    } else if (onChange) {
+      console.log("atau masuk sini");
+      onChange(val);
+    }
+  };
+  const onChangeTextarea = (event) => {
+    if (!(!onChange || !(register == null ? void 0 : register.onChange)))
+      return;
+    const tmpEvent = __spreadValues({}, event);
     if (!limit) {
-      onChange(event);
+      conditionalOnChange(tmpEvent);
       return;
     }
-    if (!(sumCharacters === 0 || event.length <= limit))
+    if (!(sumCharacters === 0 || tmpEvent.target.value.length <= limit)) {
+      document.getElementById(inputId).value = tmpEvent.target.value.substring(0, limit);
       return;
-    setSumCharacters(textboxVal.length);
-    onChange(event.substring(0, limit));
+    }
+    setSumCharacters(tmpEvent.target.value.length);
+    conditionalOnChange(tmpEvent);
+  };
+  const conditionalOnBlur = (val) => {
+    if (!val)
+      return;
+    if (register == null ? void 0 : register.onBlur)
+      register.onBlur(val);
+    else if (onBlur)
+      onBlur(val);
+  };
+  const onBlurTextarea = (event) => {
+    if (!onBlur || !(register == null ? void 0 : register.onBlur) || isDisabled)
+      return;
+    conditionalOnBlur(event);
   };
   return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", {
     className: "flex flex-col items-start",
@@ -655,12 +763,14 @@ function Textarea({
         children: label
       }) : "",
       /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("textarea", {
+        ref: register ? register.ref : ref,
+        name: register ? register.name : name,
         id: inputId,
         style,
-        value: textboxVal,
         disabled: isDisabled,
         placeholder,
-        onChange: (event) => onChangeTextarea(event.target.value),
+        onChange: (event) => onChangeTextarea(event),
+        onBlur: (event) => onBlurTextarea(event),
         className: [
           "w-full h-[170px] outline-none border-[0.5px] border-solid",
           "border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none",
@@ -680,7 +790,7 @@ function Textarea({
       }) : ""
     ]
   });
-}
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Button,

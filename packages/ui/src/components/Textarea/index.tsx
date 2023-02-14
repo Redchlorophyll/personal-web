@@ -1,54 +1,119 @@
-import React, { CSSProperties, useState, useEffect } from "react";
+import React, { LegacyRef, CSSProperties, useState, useEffect } from "react";
+
+type registerProps = {
+  label?: string;
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FormEvent<HTMLInputElement>) => void;
+  ref?: LegacyRef<HTMLTextAreaElement> | undefined;
+  name?: string;
+};
 
 type textareaProps = {
-  onChange?: (event: string) => void;
+  onChange?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement, Element>) => void;
   value?: string;
   placeholder?: string;
   limit?: number; //total characters in textarea
   isDisabled?: boolean;
   label?: string;
   style?: CSSProperties;
+  register?: registerProps;
+  inputName?: string;
+  name?: string;
 };
 
-export function Textarea({
-  placeholder = "Input Text Here...",
-  value,
-  onChange,
-  limit,
-  isDisabled = false,
-  style,
-  label = "",
-}: textareaProps) {
+export const Textarea = React.forwardRef(function Textarea(
+  {
+    placeholder = "Input Text Here...",
+    value,
+    onChange,
+    onBlur,
+    limit,
+    isDisabled = false,
+    style,
+    label = "",
+    register,
+    name,
+  }: textareaProps,
+  ref: LegacyRef<HTMLTextAreaElement> | undefined
+) {
   const inputId = label.toLowerCase().split(" ").join("-");
   const [sumCharacters, setSumCharacters] = useState<number>(0);
   const [textboxVal, setTextBoxVal] = useState<string>("");
+  const textareaId = `textarea-${Math.random()}`;
 
   useEffect(() => {
-    if (limit && value) {
+    setSumCharacters(
+      (document.getElementById(inputId) as HTMLInputElement).value.length
+    );
+  }, [register?.ref]);
+
+  useEffect(() => {
+    let tmpVal = value;
+    if (register)
+      tmpVal = (document.getElementById(inputId) as HTMLInputElement).value;
+    if (limit && tmpVal) {
       let inputLength = 0;
-      if (value.length < limit) {
-        inputLength = value.length;
-        setTextBoxVal(value);
+      if (tmpVal.length < limit) {
+        inputLength = tmpVal.length;
+        setTextBoxVal(tmpVal);
       } else {
-        const trimmedVal = value.substring(0, limit);
+        const trimmedVal = tmpVal.substring(0, limit);
         inputLength = trimmedVal.length;
         setTextBoxVal(trimmedVal);
       }
+      console.log(inputLength);
       setSumCharacters(inputLength);
-    } else if (value || value === "") setTextBoxVal(value);
+    } else if (tmpVal || tmpVal === "") setTextBoxVal(tmpVal);
   }, [value, limit]);
 
-  const onChangeTextarea = (event: string) => {
-    if (!onChange) return;
+  const conditionalOnChange = (val: React.FormEvent<HTMLTextAreaElement>) => {
+    if (!val) return;
+    if (register?.onChange) {
+      console.log("masuk sini");
+      register.onChange(val as unknown as React.FormEvent<HTMLInputElement>);
+    } else if (onChange) {
+      console.log("atau masuk sini");
+      onChange(val);
+    }
+  };
+
+  const onChangeTextarea = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    if (!(!onChange || !register?.onChange)) return;
+    const tmpEvent = { ...event };
 
     if (!limit) {
-      onChange(event);
+      conditionalOnChange(tmpEvent);
       return;
     }
-    if (!(sumCharacters === 0 || event.length <= limit)) return;
-    setSumCharacters(textboxVal.length);
 
-    onChange(event.substring(0, limit));
+    if (
+      !(
+        sumCharacters === 0 ||
+        (tmpEvent.target as HTMLInputElement).value.length <= limit
+      )
+    ) {
+      (document.getElementById(inputId) as HTMLInputElement).value = (
+        tmpEvent.target as HTMLInputElement
+      ).value.substring(0, limit);
+      return;
+    }
+    setSumCharacters((tmpEvent.target as HTMLInputElement).value.length);
+    conditionalOnChange(tmpEvent);
+  };
+
+  const conditionalOnBlur = (val: React.FocusEvent<HTMLTextAreaElement>) => {
+    if (!val) return;
+    if (register?.onBlur)
+      register.onBlur(val as unknown as React.FormEvent<HTMLInputElement>);
+    else if (onBlur) onBlur(val);
+  };
+
+  const onBlurTextarea = (
+    event: React.FocusEvent<HTMLTextAreaElement, Element>
+  ) => {
+    if (!onBlur || !register?.onBlur || isDisabled) return;
+    conditionalOnBlur(event);
   };
 
   return (
@@ -61,12 +126,14 @@ export function Textarea({
         ""
       )}
       <textarea
+        ref={register ? register.ref : ref}
+        name={register ? register.name : name}
         id={inputId}
         style={style}
-        value={textboxVal}
         disabled={isDisabled}
         placeholder={placeholder}
-        onChange={(event) => onChangeTextarea(event.target.value)}
+        onChange={(event) => onChangeTextarea(event)}
+        onBlur={(event) => onBlurTextarea(event)}
         className={[
           "w-full h-[170px] outline-none border-[0.5px] border-solid",
           "border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none",
@@ -84,4 +151,4 @@ export function Textarea({
       )}
     </div>
   );
-};
+});
