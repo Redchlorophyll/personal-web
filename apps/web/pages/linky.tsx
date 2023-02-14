@@ -73,6 +73,7 @@ function Arrow({ type = "next" }: { type: "prev" | "next" }) {
             }
           : {}
       }
+      aria-label={type}
       className="w-[34px] h-[34px] h- bg-primary-700 rounded-full p-[2.5px] shadow-[0px_2px_8px_1px_rgba(0,0,0,0.3)]"
       onClick={() => onArrowClick()}
     >
