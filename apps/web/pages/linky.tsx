@@ -435,6 +435,7 @@ export default function Linky() {
           content="Linky page is Dhonni's tool aim to gather important link and highlight it easier and faster"
         />
         <meta property="og:title" content="Linky - Dhonni Ari Hendra Saputra" />
+        <meta property="og:url" content="https://dahs.vercel.app/linky" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta
