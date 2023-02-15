@@ -459,6 +459,7 @@ export default function Linky() {
         >
           {snackbarConfig.message}
         </Snackbar>
+        <h1 className="hidden">Linky - Dhonni Ari Hendra Saputra</h1>
         <div className="relative">
           <section className="w-full md:flex md:justify-center">
             <div className="md:w-[750px]">
