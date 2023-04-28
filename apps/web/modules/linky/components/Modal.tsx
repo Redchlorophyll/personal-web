@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Input, Textarea, Button, Dropdown } from "ui";
+import { Modal, Input, Textarea, Button, Dropdown } from "shared-ui";
 import Image from "next/image";
 
 import { useForm } from "react-hook-form";

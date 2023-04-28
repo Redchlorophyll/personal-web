@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Tooltip } from "ui";
+import { Tooltip } from "shared-ui";
 
 type ListProps = {
   children: ReactNode;

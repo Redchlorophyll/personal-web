@@ -14,7 +14,7 @@ import Image from "next/image";
 import Blank from "~/layouts/Blank";
 import linkyList from "@/config/LinkyList";
 import ReachMeOut from "@/components/ReachMeOut";
-import { Button } from "ui";
+import { Button } from "shared-ui";
 import { UserAuth } from "@/context/Auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,10 +22,10 @@ import * as yup from "yup";
 import info from "@/config/info";
 import "swiper/css";
 
-const Snackbar = dynamic(() => import("ui").then((mod) => mod.Snackbar), {
+const Snackbar = dynamic(() => import("shared-ui").then((mod) => mod.Snackbar), {
   ssr: false,
 });
-const Input = dynamic(() => import("ui").then((mod) => mod.Input));
+const Input = dynamic(() => import("shared-ui").then((mod) => mod.Input));
 const ModalForm = dynamic(() =>
   import("~/modules/linky/components/Modal").then((mod) => mod.ModalForm)
 );

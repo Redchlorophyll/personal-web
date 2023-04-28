@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "@/assets/styles/globals.css";
-import "ui/styles.css";
+import "shared-ui/styles.css";
 import { store } from "@/store";
 import { Provider } from "react-redux";
 import { AuthContextProvider } from "@/context/Auth";

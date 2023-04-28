@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { UserAuth } from "@/context/Auth";
-import { Button } from "ui";
+import { Button } from "shared-ui";
 import Image from "next/image";
 
 export default function GoogleLogin() {

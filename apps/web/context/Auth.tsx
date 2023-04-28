@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { isUserAuthorized } from "@/utils/local-authorization";
-import { Snackbar } from "ui";
+import { Snackbar } from "shared-ui";
 
 type authContextType = {
   googleSignInWithRedirect?: () => void;
