@@ -1,14 +1,14 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import Layout from "~/Layouts";
-import userEvent from "@testing-library/user-event";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Layout from '~/Layouts';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
-jest.mock("next/dynamic", () => ({
+jest.mock('next/dynamic', () => ({
   __esModule: true,
   default: (...props) => {
-    const dynamicModule = jest.requireActual("next/dynamic");
+    const dynamicModule = jest.requireActual('next/dynamic');
     const dynamicActualComp = dynamicModule.default;
     const RequiredComponent = dynamicActualComp(props[0]);
     RequiredComponent.preload
@@ -18,26 +18,26 @@ jest.mock("next/dynamic", () => ({
   },
 }));
 
-jest.mock("next/router", () => ({
+jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }));
 
 const push = jest.fn();
 const back = jest.fn();
 
-const useRouter = jest.spyOn(require("next/router"), "useRouter");
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
-describe("component - navbar", () => {
+describe('component - navbar', () => {
   useRouter.mockImplementation(() => ({
-    route: "/",
-    pathname: "",
-    query: "",
-    asPath: "/",
+    route: '/',
+    pathname: '',
+    query: '',
+    asPath: '/',
     push,
     back,
   }));
 
-  test("it should render properly", async () => {
+  test('it should render properly', async () => {
     const user = userEvent.setup();
     render(
       <Provider store={store}>
@@ -45,12 +45,12 @@ describe("component - navbar", () => {
       </Provider>
     );
 
-    const home = screen.getByText("Home");
-    const blog = screen.getByText("Blog");
-    const project = screen.getByText("Project");
-    const aboutMe = screen.getByText("About Me");
-    const pageContent = screen.getByText("content");
-    const target = screen.getByAltText("back icon");
+    const home = screen.getByText('Home');
+    const blog = screen.getByText('Blog');
+    const project = screen.getByText('Project');
+    const aboutMe = screen.getByText('About Me');
+    const pageContent = screen.getByText('content');
+    const target = screen.getByAltText('back icon');
 
     expect(home).toBeInTheDocument();
     expect(blog).toBeInTheDocument();

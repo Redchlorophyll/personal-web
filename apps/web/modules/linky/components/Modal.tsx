@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Input, Textarea, Button, Dropdown } from "shared-ui";
-import Image from "next/image";
+import React, { useState, useEffect } from 'react';
+import { Modal, Input, Textarea, Button, Dropdown } from 'shared-ui';
+import Image from 'next/image';
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-import iluDelete from "assets/img/ilustrations/ilu_delete-linky.svg";
-import iluUpdate from "assets/img/ilustrations/ilu_update-profile.svg";
+import iluDelete from 'assets/img/ilustrations/ilu_delete-linky.svg';
+import iluUpdate from 'assets/img/ilustrations/ilu_update-profile.svg';
 
 type formDataProps = {
   id?: number | string;
@@ -20,13 +20,13 @@ type formDataProps = {
 
 type ModalFormProps = {
   value?: formDataProps;
-  type?: "edit" | "create";
+  type?: 'edit' | 'create';
   onSubmit?: (val: formDataProps) => void;
   onCancel?: () => void;
 };
 
 type ModalInfoProps = {
-  type?: "delete" | "update-profile";
+  type?: 'delete' | 'update-profile';
   onSubmit?: () => void;
   onCancel?: () => void;
 };
@@ -41,18 +41,18 @@ const linkySchema = yup.object({
 
 export function ModalForm({
   value,
-  type = "create",
+  type = 'create',
   onSubmit,
   onCancel,
 }: ModalFormProps) {
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [colorDropdown, setColorDropdown] = useState("");
+  const [colorDropdown, setColorDropdown] = useState('');
   const options = [
-    { label: "Red", value: "#FF0000" },
-    { label: "Blue", value: "#5465FF" },
-    { label: "Green", value: "#00A507" },
-    { label: "Yellow", value: "#9E7B00" },
+    { label: 'Red', value: '#FF0000' },
+    { label: 'Blue', value: '#5465FF' },
+    { label: 'Green', value: '#00A507' },
+    { label: 'Yellow', value: '#9E7B00' },
   ];
 
   const {
@@ -81,10 +81,10 @@ export function ModalForm({
   };
 
   useEffect(() => {
-    if (type === "edit") {
+    if (type === 'edit') {
       const objList = Object.keys(value);
       objList.forEach(
-        (data: "title" | "tag" | "url" | "color" | "description") => {
+        (data: 'title' | 'tag' | 'url' | 'color' | 'description') => {
           setValue(data, value[data]);
         }
       );
@@ -117,11 +117,11 @@ export function ModalForm({
     });
 
     if (
-      getValues("title").length === 0 ||
-      getValues("url").length === 0 ||
-      getValues("tag").length === 0 ||
+      getValues('title').length === 0 ||
+      getValues('url').length === 0 ||
+      getValues('tag').length === 0 ||
       colorDropdown.length === 0 ||
-      getValues("description").length === 0
+      getValues('description').length === 0
     )
       setIsBtnDisabled(true);
     else setIsBtnDisabled(false);
@@ -133,22 +133,22 @@ export function ModalForm({
 
   return (
     <Modal
-      style={{ minHeight: "150px" }}
-      title={type === "create" ? "Create Linky" : "Edit Linky"}
+      style={{ minHeight: '150px' }}
+      title={type === 'create' ? 'Create Linky' : 'Edit Linky'}
     >
       <form onSubmit={handleSubmit(onSubmitLinky)}>
         <div>
           <div className="w-[300px] mb-4">
             <Input
               label="Name*"
-              register={register("title")}
+              register={register('title')}
               placeholder="Input Name Here..."
             />
           </div>
           <div className="w-[300px] mb-4">
             <Input
               label="Link*"
-              register={register("url")}
+              register={register('url')}
               errorMessage={errors.url?.message as string}
               isError={errors.url ? true : false}
               placeholder="Input Link Here..."
@@ -158,7 +158,7 @@ export function ModalForm({
             <div className="w-[300px]">
               <Input
                 label="Tag*"
-                register={register("tag")}
+                register={register('tag')}
                 placeholder="Input Tag Name Here..."
               />
             </div>
@@ -174,22 +174,22 @@ export function ModalForm({
         </div>
         <Textarea
           label="Description"
-          register={register("description")}
+          register={register('description')}
           placeholder="Describe link here..."
         />
         <div className="pt-7 flex gap-5">
           <Button
             btnType="submit"
-            variant={isBtnDisabled ? "muted" : "primary"}
+            variant={isBtnDisabled ? 'muted' : 'primary'}
           >
             {isLoading ? (
               <div className="translate-y-[2px] inline-block pr-1">
                 <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
               </div>
             ) : (
-              ""
+              ''
             )}
-            {type === "create" ? "Create" : "Edit"}
+            {type === 'create' ? 'Create' : 'Edit'}
           </Button>
           <Button variant="error" type="outline" onClick={() => onCancel()}>
             cancel
@@ -201,7 +201,7 @@ export function ModalForm({
 }
 
 export function ModalInfo({
-  type = "delete",
+  type = 'delete',
   onSubmit,
   onCancel,
 }: ModalInfoProps) {
@@ -214,33 +214,33 @@ export function ModalInfo({
     }, 3000);
   };
   return (
-    <Modal style={{ minHeight: "150px", width: "450px" }}>
+    <Modal style={{ minHeight: '150px', width: '450px' }}>
       <div className="flex justify-center flex-col">
         <span className="w-full text-center font-bold text-base">
-          {type === "delete"
-            ? "Are You Sure Want to Delete this Linky?"
-            : "Are You Sure Want to Change Your Profile Picture"}
+          {type === 'delete'
+            ? 'Are You Sure Want to Delete this Linky?'
+            : 'Are You Sure Want to Change Your Profile Picture'}
         </span>
         <div className="flex justify-center pt-7">
           <Image
             width={220}
-            src={type === "delete" ? iluDelete : iluUpdate}
+            src={type === 'delete' ? iluDelete : iluUpdate}
             alt={
-              type === "delete"
-                ? "Delete Linky Illustration"
-                : "Update Profile Illustration"
+              type === 'delete'
+                ? 'Delete Linky Illustration'
+                : 'Update Profile Illustration'
             }
           />
         </div>
         <p className="w-full text-center pt-5">
-          {type === "delete"
-            ? "deleted linky would not be able to Recover."
-            : "Are You Sure Want to update profile picture?"}
+          {type === 'delete'
+            ? 'deleted linky would not be able to Recover.'
+            : 'Are You Sure Want to update profile picture?'}
         </p>
         <div className="pt-7 flex gap-5 justify-center">
           <Button
-            variant={type === "update-profile" ? "primary" : "error"}
-            type={type === "update-profile" ? "solid" : "outline"}
+            variant={type === 'update-profile' ? 'primary' : 'error'}
+            type={type === 'update-profile' ? 'solid' : 'outline'}
             onClick={onModalSubmit}
           >
             {isLoading ? (
@@ -248,13 +248,13 @@ export function ModalInfo({
                 <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
               </div>
             ) : (
-              ""
+              ''
             )}
-            {type === "delete" ? "Delete" : "Yes"}
+            {type === 'delete' ? 'Delete' : 'Yes'}
           </Button>
           <Button
-            variant={type === "update-profile" ? "error" : "primary"}
-            type={type === "update-profile" ? "outline" : "solid"}
+            variant={type === 'update-profile' ? 'error' : 'primary'}
+            type={type === 'update-profile' ? 'outline' : 'solid'}
             onClick={onCancel}
           >
             Cancel

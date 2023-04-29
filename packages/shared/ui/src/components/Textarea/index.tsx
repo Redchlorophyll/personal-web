@@ -1,4 +1,4 @@
-import React, { LegacyRef, CSSProperties, useState, useEffect } from "react";
+import React, { LegacyRef, CSSProperties, useState, useEffect } from 'react';
 
 type registerProps = {
   label?: string;
@@ -24,22 +24,22 @@ type textareaProps = {
 
 export const Textarea = React.forwardRef(function Textarea(
   {
-    placeholder = "Input Text Here...",
+    placeholder = 'Input Text Here...',
     value,
     onChange,
     onBlur,
     limit,
     isDisabled = false,
     style,
-    label = "",
+    label = '',
     register,
     name,
   }: textareaProps,
   ref: LegacyRef<HTMLTextAreaElement> | undefined
 ) {
-  const inputId = label.toLowerCase().split(" ").join("-");
+  const inputId = label.toLowerCase().split(' ').join('-');
   const [sumCharacters, setSumCharacters] = useState<number>(0);
-  const [textboxVal, setTextBoxVal] = useState<string>("");
+  const [textboxVal, setTextBoxVal] = useState<string>('');
   const textareaId = `textarea-${Math.random()}`;
 
   useEffect(() => {
@@ -62,9 +62,9 @@ export const Textarea = React.forwardRef(function Textarea(
         inputLength = trimmedVal.length;
         setTextBoxVal(trimmedVal);
       }
-      
+
       setSumCharacters(inputLength);
-    } else if (tmpVal || tmpVal === "") setTextBoxVal(tmpVal);
+    } else if (tmpVal || tmpVal === '') setTextBoxVal(tmpVal);
   }, [value, limit]);
 
   const conditionalOnChange = (val: React.FormEvent<HTMLTextAreaElement>) => {
@@ -121,7 +121,7 @@ export const Textarea = React.forwardRef(function Textarea(
           {label}
         </label>
       ) : (
-        ""
+        ''
       )}
       <textarea
         ref={register ? register.ref : ref}
@@ -133,19 +133,19 @@ export const Textarea = React.forwardRef(function Textarea(
         onChange={(event) => onChangeTextarea(event)}
         onBlur={(event) => onBlurTextarea(event)}
         className={[
-          "w-full h-[170px] outline-none border-[0.5px] border-solid",
-          "border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none",
-          "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] dark:text-black-900",
-          "disabled:bg-black-200 disabled:text-black-700",
-          "disabled:border-black-600 dark:disabled:bg-black-500",
-        ].join(" ")}
+          'w-full h-[170px] outline-none border-[0.5px] border-solid',
+          'border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none',
+          'focus:dark:drop-shadow-[0px_1px_17px_#406FCB] dark:text-black-900',
+          'disabled:bg-black-200 disabled:text-black-700',
+          'disabled:border-black-600 dark:disabled:bg-black-500',
+        ].join(' ')}
       />
       {limit ? (
         <span className="text-black-700 text-sm p-1">
           {sumCharacters}/{limit} Characters
         </span>
       ) : (
-        ""
+        ''
       )}
     </div>
   );

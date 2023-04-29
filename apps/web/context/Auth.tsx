@@ -1,4 +1,4 @@
-import { useContext, createContext, useEffect, useState } from "react";
+import { useContext, createContext, useEffect, useState } from 'react';
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -6,10 +6,10 @@ import {
   signOut,
   onAuthStateChanged,
   User,
-} from "firebase/auth";
-import { auth } from "@/config/firebase";
-import { isUserAuthorized } from "@/utils/local-authorization";
-import { Snackbar } from "shared-ui";
+} from 'firebase/auth';
+import { auth } from '@/config/firebase';
+import { isUserAuthorized } from '@/utils/local-authorization';
+import { Snackbar } from 'shared-ui';
 
 type authContextType = {
   googleSignInWithRedirect?: () => void;
@@ -28,23 +28,23 @@ export const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
 
-    localStorage.setItem("isLogin", "true");
+    localStorage.setItem('isLogin', 'true');
   };
 
   const googleSignInWithPopUp = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
 
-    localStorage.setItem("isLogin", "true");
-    window.dispatchEvent(new Event("storage"));
+    localStorage.setItem('isLogin', 'true');
+    window.dispatchEvent(new Event('storage'));
   };
 
   const logout = () => {
     signOut(auth);
     setUser(null);
 
-    localStorage.setItem("isLogin", "false");
-    window.dispatchEvent(new Event("storage"));
+    localStorage.setItem('isLogin', 'false');
+    window.dispatchEvent(new Event('storage'));
   };
 
   useEffect(() => {
@@ -57,8 +57,8 @@ export const AuthContextProvider = ({ children }) => {
           setIsNotAuthorized(true);
         }
 
-        localStorage.setItem("isLogin", "false");
-        window.dispatchEvent(new Event("storage"));
+        localStorage.setItem('isLogin', 'false');
+        window.dispatchEvent(new Event('storage'));
       }
     });
     return () => {

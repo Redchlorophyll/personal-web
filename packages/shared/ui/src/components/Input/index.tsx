@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useState } from "react";
+import React, { LegacyRef, useEffect, useState } from 'react';
 
 type registerProps = {
   label?: string;
@@ -26,19 +26,19 @@ export const Input = React.forwardRef(function Input(
   {
     onChange,
     onBlur,
-    value = "",
-    placeholder = "Input Text Here...",
+    value = '',
+    placeholder = 'Input Text Here...',
     isError = false,
-    errorMessage = "Error Message Here...",
+    errorMessage = 'Error Message Here...',
     isDisabled = false,
-    label = "",
-    name = "",
+    label = '',
+    name = '',
     register,
   }: inputProps,
   ref: LegacyRef<HTMLInputElement> | undefined
 ) {
   const [inputValue, setInputValue] = useState(value);
-  const inputId = label.toLowerCase().split(" ").join("-");
+  const inputId = label.toLowerCase().split(' ').join('-');
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (!onChange || isDisabled) return;
 
@@ -58,7 +58,7 @@ export const Input = React.forwardRef(function Input(
           {label}
         </label>
       ) : (
-        ""
+        ''
       )}
       {register ? (
         <input
@@ -69,15 +69,15 @@ export const Input = React.forwardRef(function Input(
           disabled={isDisabled}
           {...register}
           className={[
-            "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
-            "px-[17px] py-[6px] dark:text-black-900",
-            "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
-            "disabled:bg-black-200 disabled:text-black-700",
-            "disabled:border-black-600 dark:disabled:bg-black-500",
+            'w-full h-[34px] rounded-[7px] border-[0.5px] border-solid',
+            'px-[17px] py-[6px] dark:text-black-900',
+            'focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none',
+            'disabled:bg-black-200 disabled:text-black-700',
+            'disabled:border-black-600 dark:disabled:bg-black-500',
             isError
-              ? "border-red-800"
-              : "border-black-800 focus:border-primary-800",
-          ].join(" ")}
+              ? 'border-red-800'
+              : 'border-black-800 focus:border-primary-800',
+          ].join(' ')}
           type="text"
         />
       ) : (
@@ -91,15 +91,15 @@ export const Input = React.forwardRef(function Input(
           disabled={isDisabled}
           onBlur={(event) => onInputBlur(event)}
           className={[
-            "w-full h-[34px] rounded-[7px] border-[0.5px] border-solid",
-            "px-[17px] py-[6px] dark:text-black-900",
-            "focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none",
-            "disabled:bg-black-200 disabled:text-black-700",
-            "disabled:border-black-600 dark:disabled:bg-black-500",
+            'w-full h-[34px] rounded-[7px] border-[0.5px] border-solid',
+            'px-[17px] py-[6px] dark:text-black-900',
+            'focus:dark:drop-shadow-[0px_1px_17px_#406FCB] outline-none',
+            'disabled:bg-black-200 disabled:text-black-700',
+            'disabled:border-black-600 dark:disabled:bg-black-500',
             isError
-              ? "border-red-800"
-              : "border-black-800 focus:border-primary-800",
-          ].join(" ")}
+              ? 'border-red-800'
+              : 'border-black-800 focus:border-primary-800',
+          ].join(' ')}
           type="text"
         />
       )}
@@ -108,7 +108,7 @@ export const Input = React.forwardRef(function Input(
           <div className="absolute">{errorMessage}</div>
         </span>
       ) : (
-        ""
+        ''
       )}
     </div>
   );

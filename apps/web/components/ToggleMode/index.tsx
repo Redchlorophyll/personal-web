@@ -1,27 +1,27 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleDark, toggleLight, localStorageTheme } from "@/stores/theme";
-import type { RootState } from "@/store";
-import Image from "next/image";
-import icSunny from "@/assets/img/icons/ic_sunny.svg";
-import icMoon from "@/assets/img/icons/ic_moon.svg";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleDark, toggleLight, localStorageTheme } from '@/stores/theme';
+import type { RootState } from '@/store';
+import Image from 'next/image';
+import icSunny from '@/assets/img/icons/ic_sunny.svg';
+import icMoon from '@/assets/img/icons/ic_moon.svg';
 
 export default function ToggleMode() {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch();
 
   function onChangeMode(): void {
-    if (localStorage.getItem("theme") === "dark") {
-      localStorage.setItem("theme", "light");
+    if (localStorage.getItem('theme') === 'dark') {
+      localStorage.setItem('theme', 'light');
       dispatch(toggleLight());
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
     } else if (
-      localStorage.getItem("theme") === "light" ||
-      !localStorage.getItem("theme")
+      localStorage.getItem('theme') === 'light' ||
+      !localStorage.getItem('theme')
     ) {
-      localStorage.setItem("theme", "dark");
+      localStorage.setItem('theme', 'dark');
       dispatch(toggleDark());
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add('dark');
     }
   }
 
@@ -30,14 +30,14 @@ export default function ToggleMode() {
   }, []);
 
   const image = () => {
-    if (theme === "dark") return icMoon;
+    if (theme === 'dark') return icMoon;
     else if (theme === 'light') return icSunny;
   };
 
   return (
     <div
       className={`${
-        theme === "light" ? "bg-black-300" : "bg-yellow-700"
+        theme === 'light' ? 'bg-black-300' : 'bg-yellow-700'
       } w-24 h-12 rounded-full relative left transition-all duration-700`}
     >
       <input
@@ -45,24 +45,26 @@ export default function ToggleMode() {
         aria-label="toggle-mode"
         id="toggle-mode"
         className="opacity-0 peer w-24 h-24 z-10"
-        checked={theme === "dark"}
+        checked={theme === 'dark'}
         onChange={onChangeMode}
       />
       <label
         htmlFor="toggle-mode"
-        className={['rounded-full absolute',
+        className={[
+          'rounded-full absolute',
           'bg-black-100 p-1 left-2 top-1',
           'peer-checked:bg-black-800',
           'peer-checked:left-12',
           'transition-all duration-1000',
           'w-10 h-10',
-          'flex justify-center'].join(' ')}
+          'flex justify-center',
+        ].join(' ')}
       >
         <Image
-          src={image()? image() : '/none.jpg'}
+          src={image() ? image() : '/none.jpg'}
           width="25"
           height="25"
-          alt={theme === "dark" ? "Dark mode icon" : "Light mode icon"}
+          alt={theme === 'dark' ? 'Dark mode icon' : 'Light mode icon'}
         />
       </label>
     </div>

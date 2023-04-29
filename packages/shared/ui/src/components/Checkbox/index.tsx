@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 type checkboxProps = {
   value?: string;
@@ -8,7 +8,7 @@ type checkboxProps = {
 };
 
 export function Checkbox({
-  value = "",
+  value = '',
   valueList = [],
   onChange,
   label,
@@ -51,7 +51,7 @@ export function Checkbox({
           {label}
         </div>
       ) : (
-        ""
+        ''
       )}
     </label>
   );

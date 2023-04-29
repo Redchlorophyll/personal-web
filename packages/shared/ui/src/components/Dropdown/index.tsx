@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Fade } from "react-awesome-reveal";
+import React, { useState, useRef, useEffect } from 'react';
+import { Fade } from 'react-awesome-reveal';
 
 type optVal = {
   label: string;
@@ -11,24 +11,24 @@ type dropdownProps = {
   placeholder?: string;
   value?: string;
   onChange?: (value: optVal | undefined) => void;
-  type?: "dropdown" | "combobox";
+  type?: 'dropdown' | 'combobox';
   label?: string;
 };
 
 export function Dropdown({
-  type = "dropdown",
-  options = [{ label: "sampel", value: "sampelVal" }],
-  placeholder = "choose an option...",
+  type = 'dropdown',
+  options = [{ label: 'sampel', value: 'sampelVal' }],
+  placeholder = 'choose an option...',
   onChange,
   value,
-  label = "",
+  label = '',
 }: dropdownProps) {
-  const inputId = label.toLowerCase().split(" ").join("-");
+  const inputId = label.toLowerCase().split(' ').join('-');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLHeadingElement>(null);
   const [inputValue, setInputValue] = useState<optVal | undefined>({
-    label: "",
-    value: "",
+    label: '',
+    value: '',
   });
   const [inputOptions, setInputOptions] = useState<Array<optVal>>([...options]);
 
@@ -48,14 +48,14 @@ export function Dropdown({
   };
 
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    if (type === "dropdown") return;
+    if (type === 'dropdown') return;
     const filterOptions = options.filter((data) =>
       data.label.toLowerCase().includes(event.currentTarget.value.toLowerCase())
     );
     setInputOptions(filterOptions);
     setInputValue({
       label: event.currentTarget.value,
-      value: event.currentTarget.value.toLocaleLowerCase().split(" ").join("-"),
+      value: event.currentTarget.value.toLocaleLowerCase().split(' ').join('-'),
     });
   };
 
@@ -76,9 +76,9 @@ export function Dropdown({
     const matchedData = options.find((data: optVal) => data.value === value);
     setInputValue(matchedData);
 
-    if (type === "combobox") {
+    if (type === 'combobox') {
       const filterOptions = options.filter((data) =>
-        data.label.toLowerCase().includes(value?.toLowerCase() || "")
+        data.label.toLowerCase().includes(value?.toLowerCase() || '')
       );
       setInputOptions(filterOptions);
     }
@@ -93,10 +93,10 @@ export function Dropdown({
       }
     };
 
-    document.addEventListener("mousedown", outsideClickHandler);
+    document.addEventListener('mousedown', outsideClickHandler);
 
     return () => {
-      document.removeEventListener("mousedown", outsideClickHandler);
+      document.removeEventListener('mousedown', outsideClickHandler);
     };
   });
 
@@ -107,7 +107,7 @@ export function Dropdown({
           {label}
         </label>
       ) : (
-        ""
+        ''
       )}
       <div
         ref={inputRef}
@@ -117,32 +117,32 @@ export function Dropdown({
         <input
           id={inputId}
           className={`peer ${
-            type === "dropdown" ? "cursor-pointer" : ""
+            type === 'dropdown' ? 'cursor-pointer' : ''
           } bg-black-100 w-full p-[5px_17px_5px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]`}
           type="text"
           placeholder={placeholder}
-          readOnly={!!(type === "dropdown")}
+          readOnly={!!(type === 'dropdown')}
           onClick={() => handleFocus()}
           value={inputValue?.label || ''}
           onChange={(e) => onInputChange(e)}
         />
 
-        {type === "dropdown" ? (
+        {type === 'dropdown' ? (
           <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
         ) : (
-          ""
+          ''
         )}
         {isOpen && inputOptions.length > 0 ? (
           <Fade>
             <div className="w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]">
               {inputOptions.length > 0 &&
-              value !== "" &&
-              type === "dropdown" ? (
+              value !== '' &&
+              type === 'dropdown' ? (
                 <button
                   onClick={() =>
                     setActiveVal({
-                      label: "",
-                      value: "",
+                      label: '',
+                      value: '',
                     })
                   }
                   className="w-full text-left text-black-700 cursor-pointer list-inside leading-6 border-b-[1px] border-black-500 hover:bg-black-400"
@@ -150,13 +150,13 @@ export function Dropdown({
                   Clear Selection
                 </button>
               ) : (
-                ""
+                ''
               )}
               {optionHtml}
             </div>
           </Fade>
         ) : (
-          ""
+          ''
         )}
       </div>
     </div>

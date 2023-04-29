@@ -1,5 +1,5 @@
-import * as React from "react";
-export * from "./components/Button/index";
+import * as React from 'react';
+export * from './components/Button/index';
 export * from './components/Radio/index';
 export * from './components/Input/index';
 export * from './components/Modal/index';

@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import Navbar from "@/components/Navbar";
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Navbar from '@/components/Navbar';
 
 describe('component - navbar', () => {
   test('it should render properly', () => {
@@ -10,5 +10,4 @@ describe('component - navbar', () => {
 
     expect(target).toBeInTheDocument();
   });
-
 });

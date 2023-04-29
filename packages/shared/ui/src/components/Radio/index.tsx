@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 type radioProps = {
   value?: string;
@@ -8,8 +8,8 @@ type radioProps = {
 };
 
 export function Radio({
-  value = "",
-  valueGroup = "",
+  value = '',
+  valueGroup = '',
   onChange,
   label,
 }: radioProps) {
@@ -25,9 +25,9 @@ export function Radio({
   const onClickRadio = () => {
     if (!onChange) return;
     if (!isChecked) {
-      onChange(value || "");
+      onChange(value || '');
     } else {
-      onChange("");
+      onChange('');
     }
     setChecked(!isChecked);
   };
@@ -54,7 +54,7 @@ export function Radio({
           test
         </div>
       ) : (
-        ""
+        ''
       )}
     </label>
   );

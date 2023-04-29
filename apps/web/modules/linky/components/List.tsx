@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { Tooltip } from "shared-ui";
+import React, { ReactNode } from 'react';
+import { Tooltip } from 'shared-ui';
 
 type ListProps = {
   children: ReactNode;
@@ -22,10 +22,10 @@ export function List({ children }: ListProps) {
     <div className="w-full flex justify-center">
       <section
         className={[
-          "m-[10px] bg-black-100 max-w-[750px] w-[750px] p-[10px] flex flex-col gap-y-2",
-          "shadow-[0_1px_4px_0.5px_rgba(0,0,0,0.1)]",
-          "dark:bg-[#353535] shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]",
-        ].join(" ")}
+          'm-[10px] bg-black-100 max-w-[750px] w-[750px] p-[10px] flex flex-col gap-y-2',
+          'shadow-[0_1px_4px_0.5px_rgba(0,0,0,0.1)]',
+          'dark:bg-[#353535] shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]',
+        ].join(' ')}
       >
         {children}
         <div className="w-full flex justify-center">
@@ -37,10 +37,10 @@ export function List({ children }: ListProps) {
 }
 
 export function LinkItem({
-  title = "",
-  tag = "",
-  tagColor = "",
-  href = "",
+  title = '',
+  tag = '',
+  tagColor = '',
+  href = '',
   children,
   edit = false,
   onEdit,
@@ -69,7 +69,7 @@ export function LinkItem({
 
         {edit ? (
           <div className="gap-1 absolute top-1 right-2 hidden md:flex">
-            <Tooltip tooltipContent={"Delete Linky"} direction={"bottom"}>
+            <Tooltip tooltipContent={'Delete Linky'} direction={'bottom'}>
               <div className="w-6">
                 <button
                   onClick={() => onDelete()}
@@ -79,7 +79,7 @@ export function LinkItem({
                 </button>
               </div>
             </Tooltip>
-            <Tooltip tooltipContent={"Edit Linky"} direction={"bottom"}>
+            <Tooltip tooltipContent={'Edit Linky'} direction={'bottom'}>
               <div className="w-6">
                 <button
                   onClick={() => onEdit()}
@@ -91,7 +91,7 @@ export function LinkItem({
             </Tooltip>
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
     </article>

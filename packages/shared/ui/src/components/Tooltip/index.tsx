@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useState, useRef } from "react";
-import TooltipContent from "./TooltipContent";
+import React, { ReactNode, useEffect, useState, useRef } from 'react';
+import TooltipContent from './TooltipContent';
 
-type direction = "top" | "bottom" | "left" | "right";
+type direction = 'top' | 'bottom' | 'left' | 'right';
 
 type tooltipProps = {
   children?: ReactNode;
@@ -10,29 +10,29 @@ type tooltipProps = {
 };
 
 export function Tooltip({
-  direction = "bottom",
+  direction = 'bottom',
   tooltipContent,
   children,
 }: tooltipProps) {
-  const [tooltipDirection, setTooltipDirection] = useState<direction>("top");
+  const [tooltipDirection, setTooltipDirection] = useState<direction>('top');
   const [halfWidth, setHalfWidth] = useState<Number>(0);
   const tooltipWrapper = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    tipDirection(direction || "bottom");
+    tipDirection(direction || 'bottom');
   }, [direction]);
 
   useEffect(() => {
-    if (typeof tooltipWrapper.current?.clientWidth === "number") {
+    if (typeof tooltipWrapper.current?.clientWidth === 'number') {
       setHalfWidth(Math.trunc(tooltipWrapper.current?.clientWidth / 2));
     }
   }, []);
 
   const tipDirection = (tip: direction) => {
-    if (tip === "top") setTooltipDirection("bottom");
-    if (tip === "bottom") setTooltipDirection("top");
-    if (tip === "left") setTooltipDirection("right");
-    if (tip === "right") setTooltipDirection("left");
+    if (tip === 'top') setTooltipDirection('bottom');
+    if (tip === 'bottom') setTooltipDirection('top');
+    if (tip === 'left') setTooltipDirection('right');
+    if (tip === 'right') setTooltipDirection('left');
   };
 
   return (
@@ -40,16 +40,16 @@ export function Tooltip({
       <div>{children}</div>
       <div
         style={
-          direction === "top" || direction === "bottom"
+          direction === 'top' || direction === 'bottom'
             ? { transform: `translateX(${halfWidth}px)` }
             : {}
         }
         className={
-          "absolute " +
-          (direction === "top" ? `-top-10 ` : "") +
-          (direction === "left" ? "-top-3 -translate-x-full -left-2 " : "") +
-          (direction === "right" ? "-top-3 translate-x-2 left-full " : "") +
-          "invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300"
+          'absolute ' +
+          (direction === 'top' ? `-top-10 ` : '') +
+          (direction === 'left' ? '-top-3 -translate-x-full -left-2 ' : '') +
+          (direction === 'right' ? '-top-3 translate-x-2 left-full ' : '') +
+          'invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300'
         }
       >
         <TooltipContent tipLocation={tooltipDirection}>

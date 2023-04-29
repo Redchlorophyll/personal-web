@@ -1,36 +1,39 @@
-import React, { useState, useEffect, useRef, ChangeEvent } from "react";
-import Head from "next/head";
-import dynamic from "next/dynamic";
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import {
   List,
   LinkItem,
   LoadingLinkItem,
-} from "~/modules/linky/components/List";
-import { Navigation } from "swiper";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { useRouter } from "next/router";
-import ToggleMode from "@/components/ToggleMode";
-import Image from "next/image";
-import Blank from "~/layouts/Blank";
-import linkyList from "@/config/LinkyList";
-import ReachMeOut from "@/components/ReachMeOut";
-import { Button } from "shared-ui";
-import { UserAuth } from "@/context/Auth";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import info from "@/config/info";
-import "swiper/css";
+} from '~/modules/linky/components/List';
+import { Navigation } from 'swiper';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { useRouter } from 'next/router';
+import ToggleMode from '@/components/ToggleMode';
+import Image from 'next/image';
+import Blank from '~/layouts/Blank';
+import linkyList from '@/config/LinkyList';
+import ReachMeOut from '@/components/ReachMeOut';
+import { Button } from 'shared-ui';
+import { UserAuth } from '@/context/Auth';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import info from '@/config/info';
+import 'swiper/css';
 
-const Snackbar = dynamic(() => import("shared-ui").then((mod) => mod.Snackbar), {
-  ssr: false,
-});
-const Input = dynamic(() => import("shared-ui").then((mod) => mod.Input));
+const Snackbar = dynamic(
+  () => import('shared-ui').then((mod) => mod.Snackbar),
+  {
+    ssr: false,
+  }
+);
+const Input = dynamic(() => import('shared-ui').then((mod) => mod.Input));
 const ModalForm = dynamic(() =>
-  import("~/modules/linky/components/Modal").then((mod) => mod.ModalForm)
+  import('~/modules/linky/components/Modal').then((mod) => mod.ModalForm)
 );
 const ModalInfo = dynamic(() =>
-  import("~/modules/linky/components/Modal").then((mod) => mod.ModalInfo)
+  import('~/modules/linky/components/Modal').then((mod) => mod.ModalInfo)
 );
 
 type formDataProps = {
@@ -56,20 +59,20 @@ type profileDataType = {
   info: infoType;
 };
 
-function Arrow({ type = "next" }: { type: "prev" | "next" }) {
+function Arrow({ type = 'next' }: { type: 'prev' | 'next' }) {
   const swiper = useSwiper();
 
   const onArrowClick = () => {
-    if (type === "prev") swiper.slidePrev();
-    else if (type === "next") swiper.slideNext();
+    if (type === 'prev') swiper.slidePrev();
+    else if (type === 'next') swiper.slideNext();
   };
 
   return (
     <button
       style={
-        type === "prev"
+        type === 'prev'
           ? {
-              transform: "rotate(180deg)",
+              transform: 'rotate(180deg)',
             }
           : {}
       }
@@ -153,7 +156,7 @@ function ProfileInfo({
             <EditButton onClick={() => onUploadImage()} />
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
       <div className="md:w-[500px] transition-all">
@@ -162,7 +165,7 @@ function ProfileInfo({
             <div className="mb-4">
               <Input
                 label="Name*"
-                register={register("name")}
+                register={register('name')}
                 errorMessage={errors.name?.message as string}
                 isError={errors.name ? true : false}
               />
@@ -172,13 +175,13 @@ function ProfileInfo({
                 label="Mini Note*"
                 errorMessage={errors.note?.message as string}
                 isError={errors.note ? true : false}
-                register={register("note")}
+                register={register('note')}
               />
             </div>
             <div className="mb-4">
               <Input
                 label="Social Media"
-                register={register("facebook")}
+                register={register('facebook')}
                 errorMessage={errors.facebook?.message as string}
                 isError={errors.facebook ? true : false}
               />
@@ -186,7 +189,7 @@ function ProfileInfo({
             <div className="mb-4">
               <Input
                 placeholder="LinkedIn Url"
-                register={register("linkedin")}
+                register={register('linkedin')}
                 errorMessage={errors.linkedin?.message as string}
                 isError={errors.linkedin ? true : false}
               />
@@ -194,7 +197,7 @@ function ProfileInfo({
             <div className="mb-4">
               <Input
                 placeholder="Github Url"
-                register={register("github")}
+                register={register('github')}
                 errorMessage={errors.github?.message as string}
                 isError={errors.github ? true : false}
               />
@@ -202,7 +205,7 @@ function ProfileInfo({
             <div className="mb-4">
               <Input
                 placeholder="Instagram Url"
-                register={register("instagram")}
+                register={register('instagram')}
                 errorMessage={errors.instagram?.message as string}
                 isError={errors.instagram ? true : false}
               />
@@ -216,7 +219,7 @@ function ProfileInfo({
                       <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
                     </div>
                   ) : (
-                    ""
+                    ''
                   )}
                   Save
                 </Button>
@@ -234,18 +237,18 @@ function ProfileInfo({
           <div>
             <div className="flex">
               <h2 className="text-base md:!text-xl mb-1">
-                {getValues("name")}
+                {getValues('name')}
               </h2>
               {user !== null && Object.keys(user).length !== 0 ? (
                 <div className="hidden md:block translate-x-[5px] -translate-y-[10px]">
                   <EditButton onClick={() => setEdit(true)} />
                 </div>
               ) : (
-                ""
+                ''
               )}
             </div>
             <h3 className="text-sm md:!text-lg text-black-700">
-              {getValues("note")}
+              {getValues('note')}
             </h3>
           </div>
         )}
@@ -259,7 +262,7 @@ export default function Linky() {
   const inputProfileImageRef = useRef(null);
   const [profileData, setProfileData] = useState<profileDataType>({
     image:
-      "https://media.licdn.com/dms/image/D5603AQGnGKppkU2ZRw/profile-displayphoto-shrink_800_800/0/1673371446943?e=1681948800&v=beta&t=7NELWDvP-I3OgXRgwY6a4CqdDQI3qDXCMyAii9xNc7g",
+      'https://media.licdn.com/dms/image/D5603AQGnGKppkU2ZRw/profile-displayphoto-shrink_800_800/0/1673371446943?e=1681948800&v=beta&t=7NELWDvP-I3OgXRgwY6a4CqdDQI3qDXCMyAii9xNc7g',
     info,
   });
   const [isFetching, setIsFetching] = useState(true); //dummy until API Exists
@@ -267,11 +270,11 @@ export default function Linky() {
   const [snackbarConfig, setSnackbarConfig] = useState<{
     isShown: boolean;
     message: string;
-    variant: "error" | "info" | "success" | "warning";
+    variant: 'error' | 'info' | 'success' | 'warning';
   }>({
     isShown: false,
-    message: "",
-    variant: "success",
+    message: '',
+    variant: 'success',
   });
   const [imageFile, setImageFile] = useState<File | undefined>();
   const [data, setData] = useState(linkyList);
@@ -279,11 +282,11 @@ export default function Linky() {
   const router = useRouter();
   const [currentlyEditedLinky, setCurrentlyEditedLinky] =
     useState<formDataProps>({
-      title: "",
-      tag: "",
-      url: "",
-      color: "",
-      description: "",
+      title: '',
+      tag: '',
+      url: '',
+      color: '',
+      description: '',
     });
 
   useEffect(() => {
@@ -297,34 +300,34 @@ export default function Linky() {
   }, [user]);
 
   useEffect(() => {
-    if (router.query["linky-id"]) {
-      const linkyId = parseInt(router.query["linky-id"] as string, 10);
+    if (router.query['linky-id']) {
+      const linkyId = parseInt(router.query['linky-id'] as string, 10);
       setCurrentlyEditedLinky(data.list[linkyId]);
     }
   }, [router.query]);
 
   const onOpenEditModal = (id: number) => {
     setCurrentlyEditedLinky(data.list[id]);
-    router.push({ query: { popups: "modal-edit", "linky-id": id } });
+    router.push({ query: { popups: 'modal-edit', 'linky-id': id } });
   };
 
   const onCreateLink = () => {
     // clear all data before opening modal
     setCurrentlyEditedLinky({
-      title: "",
-      tag: "",
-      url: "",
-      color: "",
-      description: "",
+      title: '',
+      tag: '',
+      url: '',
+      color: '',
+      description: '',
     });
 
     // opening modal by create new url params
-    router.push({ query: { popups: "modal-create" } });
+    router.push({ query: { popups: 'modal-create' } });
   };
 
   const onCloseModal = (type) => {
     const filteredPopups = (router.query.popups as string)
-      .split(",")
+      .split(',')
       .filter((popup) => popup !== type);
 
     if (filteredPopups.length === 0) {
@@ -334,32 +337,32 @@ export default function Linky() {
       return;
     }
 
-    router.push({ query: { popups: filteredPopups.join(",") } });
+    router.push({ query: { popups: filteredPopups.join(',') } });
   };
 
   const onOpenDeleteModal = (id) => {
-    router.push({ query: { popups: "modal-delete", "linky-id": id } });
+    router.push({ query: { popups: 'modal-delete', 'linky-id': id } });
   };
 
   const onDeleteLinky = () => {
     const tmpData = data;
-    tmpData.list.splice(parseInt(router.query["linky-id"] as string, 10), 1);
+    tmpData.list.splice(parseInt(router.query['linky-id'] as string, 10), 1);
     setData(tmpData);
 
-    onCloseModal("modal-delete");
+    onCloseModal('modal-delete');
 
     setSnackbarConfig({
       isShown: true,
-      message: "Successfully Delete Linky!",
-      variant: "success",
+      message: 'Successfully Delete Linky!',
+      variant: 'success',
     });
   };
 
   const onProfileUpdated = () => {
     setSnackbarConfig({
       isShown: true,
-      message: "Profile Succesfully Updated!",
-      variant: "success",
+      message: 'Profile Succesfully Updated!',
+      variant: 'success',
     });
   };
 
@@ -368,7 +371,7 @@ export default function Linky() {
   };
 
   const onFileChangeCapture = (e: ChangeEvent<HTMLInputElement>) => {
-    router.push({ query: { popups: "update-profile" } });
+    router.push({ query: { popups: 'update-profile' } });
     setImageFile(e.target.files[0]);
   };
 
@@ -379,16 +382,16 @@ export default function Linky() {
   };
 
   const onSubmitEditLinky = (val: formDataProps) => {
-    const linkyId = parseInt(router.query["linky-id"] as string, 10);
+    const linkyId = parseInt(router.query['linky-id'] as string, 10);
     const tmpData = data;
     tmpData.list[linkyId] = val;
     setData(tmpData);
-    onCloseModal("modal-edit");
+    onCloseModal('modal-edit');
 
     setSnackbarConfig({
       isShown: true,
-      message: "Sucessfully Edit Linky!",
-      variant: "success",
+      message: 'Sucessfully Edit Linky!',
+      variant: 'success',
     });
   };
 
@@ -396,12 +399,12 @@ export default function Linky() {
     const tmpData = data;
     tmpData.list.push(val);
     setData(tmpData);
-    onCloseModal("modal-create");
+    onCloseModal('modal-create');
 
     setSnackbarConfig({
       isShown: true,
-      message: "Sucessfully Create Linky!",
-      variant: "success",
+      message: 'Sucessfully Create Linky!',
+      variant: 'success',
     });
   };
 
@@ -409,12 +412,12 @@ export default function Linky() {
     const tmpUrl = URL.createObjectURL(imageFile);
     setProfileData((val) => ({ ...val, image: tmpUrl }));
 
-    onCloseModal("update-profile");
+    onCloseModal('update-profile');
 
     setSnackbarConfig({
       isShown: true,
-      message: "Profile Picture Succesfully Updated!",
-      variant: "success",
+      message: 'Profile Picture Succesfully Updated!',
+      variant: 'success',
     });
   };
 
@@ -465,9 +468,9 @@ export default function Linky() {
             <div className="md:w-[750px]">
               <div
                 className={[
-                  "flex justify-center p-[10px] h-16 shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]",
-                  "md:shadow-none md:!inline-block md:absolute md:translate-x-[633px] md:translate-y-[25px]",
-                ].join(" ")}
+                  'flex justify-center p-[10px] h-16 shadow-[0_2px_8px_1px_rgba(0,0,0,0.1)]',
+                  'md:shadow-none md:!inline-block md:absolute md:translate-x-[633px] md:translate-y-[25px]',
+                ].join(' ')}
               >
                 <ToggleMode />
               </div>
@@ -491,56 +494,56 @@ export default function Linky() {
 
           {(router.query.popups
             ? (router.query.popups as string)
-            : ""
-          ).includes("modal-delete") ? (
+            : ''
+          ).includes('modal-delete') ? (
             <ModalInfo
               type="delete"
               onSubmit={() => onDeleteLinky()}
-              onCancel={() => onCloseModal("modal-delete")}
+              onCancel={() => onCloseModal('modal-delete')}
             />
           ) : (
-            ""
+            ''
           )}
 
           {(router.query.popups
             ? (router.query.popups as string)
-            : ""
-          ).includes("update-profile") ? (
+            : ''
+          ).includes('update-profile') ? (
             <ModalInfo
               type="update-profile"
               onSubmit={() => onSubmitUpdateProfile()}
-              onCancel={() => onCloseModal("update-profile")}
+              onCancel={() => onCloseModal('update-profile')}
             />
           ) : (
-            ""
+            ''
           )}
 
           {(router.query.popups
             ? (router.query.popups as string)
-            : ""
-          ).includes("modal-edit") ? (
+            : ''
+          ).includes('modal-edit') ? (
             <ModalForm
               type="edit"
               value={currentlyEditedLinky}
               onSubmit={(val) => onSubmitEditLinky(val)}
-              onCancel={() => onCloseModal("modal-edit")}
+              onCancel={() => onCloseModal('modal-edit')}
             />
           ) : (
-            ""
+            ''
           )}
 
           {(router.query.popups
             ? (router.query.popups as string)
-            : ""
-          ).includes("modal-create") ? (
+            : ''
+          ).includes('modal-create') ? (
             <ModalForm
               type="create"
               value={currentlyEditedLinky}
               onSubmit={(val) => onSubmitCreateLinky(val)}
-              onCancel={() => onCloseModal("modal-create")}
+              onCancel={() => onCloseModal('modal-create')}
             />
           ) : (
-            ""
+            ''
           )}
 
           {!isFetching ? (
@@ -560,14 +563,14 @@ export default function Linky() {
                       <Arrow type="prev" />
                     </div>
                   ) : (
-                    ""
+                    ''
                   )}
                   {activeSwiper !== data.paginated.length - 1 ? (
                     <div className="absolute top-[50%] z-[1] right-1">
                       <Arrow type="next" />
                     </div>
                   ) : (
-                    ""
+                    ''
                   )}
                   {data.paginated?.map((page, pageIdx) => {
                     return (
@@ -602,7 +605,7 @@ export default function Linky() {
                     </div>
                   </div>
                 ) : (
-                  ""
+                  ''
                 )}
 
                 <List>

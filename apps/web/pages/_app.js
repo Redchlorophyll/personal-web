@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import "@/assets/styles/globals.css";
-import "shared-ui/styles.css";
-import { store } from "@/store";
-import { Provider } from "react-redux";
-import { AuthContextProvider } from "@/context/Auth";
-import Head from "next/head";
+import React, { useEffect } from 'react';
+import '@/assets/styles/globals.css';
+import 'shared-ui/styles.css';
+import { store } from '@/store';
+import { Provider } from 'react-redux';
+import { AuthContextProvider } from '@/context/Auth';
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.classList.add('dark');
     } else if (
-      localStorage.getItem("theme") === "light" ||
-      !localStorage.getItem("theme")
+      localStorage.getItem('theme') === 'light' ||
+      !localStorage.getItem('theme')
     ) {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 

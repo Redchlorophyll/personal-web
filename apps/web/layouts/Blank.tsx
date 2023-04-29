@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect } from "react";
-import AdminNavbar from "@/components/AdminNavbar";
+import React, { ReactNode, useEffect } from 'react';
+import AdminNavbar from '@/components/AdminNavbar';
 
 type BlankProps = {
   children: ReactNode;
@@ -8,12 +8,12 @@ type BlankProps = {
 export default function Blank({ children }: BlankProps) {
   useEffect(() => {
     const classList = [
-      "bg-light-layout",
-      "dark:bg-dark-layout",
-      "dark:bg-dark-layout",
-      "dark:text-black-100",
+      'bg-light-layout',
+      'dark:bg-dark-layout',
+      'dark:bg-dark-layout',
+      'dark:text-black-100',
     ];
-    document.querySelector("body")?.classList.add(...classList);
+    document.querySelector('body')?.classList.add(...classList);
   }, []);
 
   const urlList = [
@@ -26,9 +26,7 @@ export default function Blank({ children }: BlankProps) {
   return (
     <div>
       <AdminNavbar />
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }

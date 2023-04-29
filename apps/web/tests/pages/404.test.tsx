@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import EmptyPage from "@/pages/404";
-import { Provider } from "react-redux";
-import { store } from "@/store";
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import EmptyPage from '@/pages/404';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
 jest.mock('next/dynamic', () => ({
   __esModule: true,
@@ -24,27 +24,27 @@ jest.mock('next/router', () => ({
 const push = jest.fn();
 const back = jest.fn();
 
-const useRouter = jest.spyOn(require('next/router'), "useRouter");
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 describe('component - navbar', () => {
   useRouter.mockImplementation(() => ({
-    route: "/",
-    pathname: "",
-    query: "",
-    asPath: "/",
+    route: '/',
+    pathname: '',
+    query: '',
+    asPath: '/',
     push,
     back,
   }));
 
   test('it should render properly', () => {
     render(
-    <Provider store={store}>
-      <EmptyPage />
-    </Provider>);
+      <Provider store={store}>
+        <EmptyPage />
+      </Provider>
+    );
 
     const target = screen.getByText('OOPS! Page Not Found');
 
     expect(target).toBeInTheDocument();
   });
-
 });

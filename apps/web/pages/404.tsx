@@ -1,8 +1,8 @@
-import Image from "next/image";
-import ilu404 from "@/assets/img/ilustrations/ilu_404.png";
-import { Button } from "shared-ui";
-import Link from "next/link";
-import Layout from "~/layouts";
+import Image from 'next/image';
+import ilu404 from '@/assets/img/ilustrations/ilu_404.png';
+import { Button } from 'shared-ui';
+import Link from 'next/link';
+import Layout from '~/layouts';
 
 export default function FourOhFour() {
   return (
