@@ -21,7 +21,7 @@ function InputWrapper(props: { isDisabled?: boolean }) {
 
 describe("shared - ui - Input", () => {
   test("It should render properly", () => {
-    render(<InputWrapper />);
+    render(<InputWrapper />)
     const target = screen.getByLabelText("input");
 
     expect(target).toBeInTheDocument();

@@ -24,7 +24,7 @@ function ButtonWrapper() {
 
 describe("shared - ui - Button", () => {
   test("It should render properly", () => {
-    render(<ButtonWrapper />);
+    render(<ButtonWrapper />)
     const target = screen.getByText("Test");
 
     expect(target).toBeInTheDocument();

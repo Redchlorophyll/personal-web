@@ -23,7 +23,7 @@ function DropdownWrapper(props: props) {
     { label: "SeaBank", value: "seabank" },
     { label: "myBank", value: "myBank" },
   ]);
-  const [activeBank, setActiveBank] = useState<string>('');
+  const [activeBank, setActiveBank] = useState<string>('')
 
   return (
     <div>

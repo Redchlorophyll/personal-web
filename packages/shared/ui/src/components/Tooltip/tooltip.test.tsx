@@ -1,27 +1,27 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { Tooltip } from "./index";
-import userEvent from "@testing-library/user-event";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { Tooltip } from './index';
+import userEvent from '@testing-library/user-event';
 
-describe("shared - ui - tooltip", () => {
-  test("it should render properly", () => {
+describe('shared - ui - tooltip', () => {
+  test('it should render properly', () => {
     render(
-      <Tooltip tooltipContent={"this is tooltip"}>Click me Please!</Tooltip>
+      <Tooltip tooltipContent={'this is tooltip'}>Click me Please!</Tooltip>
     );
-    const target = screen.getByText("Click me Please!");
+    const target = screen.getByText('Click me Please!');
 
     expect(target).toBeInTheDocument();
   });
 
-  test("it should show tooltip content when being hovered", async () => {
+  test('it should show tooltip content when being hovered', async () => {
     const user = userEvent.setup();
     render(
-      <Tooltip tooltipContent={"this is tooltip"}>Click me Please!</Tooltip>
+      <Tooltip tooltipContent={'this is tooltip'}>Click me Please!</Tooltip>
     );
-    const target = screen.getByText("Click me Please!");
+    const target = screen.getByText('Click me Please!');
     await user.hover(target);
-    const tooltipContent = screen.getByText("this is tooltip");
+    const tooltipContent = screen.getByText('this is tooltip');
 
     expect(tooltipContent).toBeInTheDocument();
   });

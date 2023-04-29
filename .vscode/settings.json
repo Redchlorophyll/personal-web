@@ -13,5 +13,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "eslint.workingDirectories": ["./packages/ui", "./apps/web", ".apps/docs"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.workingDirectories": [
+    "./packages/shared/ui",
+    "./apps/web",
+    ".apps/docs"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
