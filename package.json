@@ -12,17 +12,6 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
     "postinstall": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx,css,md}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
-  },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
