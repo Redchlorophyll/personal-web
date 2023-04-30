@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Tooltip } from 'shared-ui';
+import { IcEdit, IcTrash } from 'shared-icon';
 
 type ListProps = {
   children: ReactNode;
@@ -18,7 +19,6 @@ type LinkItemProps = {
 
 export function List({ children }: ListProps) {
   return (
-    // 0px 1.06619px 4.26474px 0.533093px rgba(0, 0, 0, 0.1);
     <div className="w-full flex justify-center">
       <section
         className={[
@@ -75,7 +75,7 @@ export function LinkItem({
                   onClick={() => onDelete()}
                   className="bg-red-700 w-5 h-5 rounded-full p-[5px]"
                 >
-                  <div className="bg-[url('../img/icons/ic_trash.svg')] w-[10px] h-[10px] bg-contain" />
+                  <IcTrash className="-translate-y-[1px] -translate-x-[1px]" />
                 </button>
               </div>
             </Tooltip>
@@ -85,7 +85,7 @@ export function LinkItem({
                   onClick={() => onEdit()}
                   className="bg-black-100 w-5 h-5 rounded-full p-[5px]"
                 >
-                  <div className="bg-[url('../img/icons/ic_edit.svg')] w-[10px] h-[10px] bg-contain" />
+                  <IcEdit />
                 </button>
               </div>
             </Tooltip>

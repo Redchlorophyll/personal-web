@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Fade } from 'react-awesome-reveal';
+import { IcArrow } from 'shared-icon';
 
 type optVal = {
   label: string;
@@ -127,10 +128,8 @@ export function Dropdown({
           onChange={(e) => onInputChange(e)}
         />
 
-        {type === 'dropdown' ? (
-          <div className="bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
-        ) : (
-          ''
+        {type === 'dropdown' && (
+          <IcArrow className="z-1 absolute left-full top-[13px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" />
         )}
         {isOpen && inputOptions.length > 0 ? (
           <Fade>

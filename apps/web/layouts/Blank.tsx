@@ -16,13 +16,6 @@ export default function Blank({ children }: BlankProps) {
     document.querySelector('body')?.classList.add(...classList);
   }, []);
 
-  const urlList = [
-    { label: 'Home', href: '/', wip: true },
-    { label: 'Blog', href: '/blog', wip: true },
-    { label: 'Project', href: '/project', wip: true },
-    { label: 'About Me', href: '/about-me', wip: true },
-  ];
-
   return (
     <div>
       <AdminNavbar />

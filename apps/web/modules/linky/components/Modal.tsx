@@ -3,11 +3,9 @@ import { Modal, Input, Textarea, Button, Dropdown } from 'shared-ui';
 import Image from 'next/image';
 
 import { useForm } from 'react-hook-form';
+import { IcLoading } from 'shared-icon';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import iluDelete from 'assets/img/ilustrations/ilu_delete-linky.svg';
-import iluUpdate from 'assets/img/ilustrations/ilu_update-profile.svg';
 
 type formDataProps = {
   id?: number | string;
@@ -184,7 +182,7 @@ export function ModalForm({
           >
             {isLoading ? (
               <div className="translate-y-[2px] inline-block pr-1">
-                <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
+                <IcLoading className="animate-spin" />
               </div>
             ) : (
               ''
@@ -224,7 +222,12 @@ export function ModalInfo({
         <div className="flex justify-center pt-7">
           <Image
             width={220}
-            src={type === 'delete' ? iluDelete : iluUpdate}
+            height={220}
+            src={
+              type === 'delete'
+                ? '/ilustrations/ilu_delete-linky.svg'
+                : '/ilustrations/ilu_update-profile.svg'
+            }
             alt={
               type === 'delete'
                 ? 'Delete Linky Illustration'
@@ -243,12 +246,10 @@ export function ModalInfo({
             type={type === 'update-profile' ? 'solid' : 'outline'}
             onClick={onModalSubmit}
           >
-            {isLoading ? (
+            {isLoading && (
               <div className="translate-y-[2px] inline-block pr-1">
-                <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
+                <IcLoading className="animate-spin" />
               </div>
-            ) : (
-              ''
             )}
             {type === 'delete' ? 'Delete' : 'Yes'}
           </Button>

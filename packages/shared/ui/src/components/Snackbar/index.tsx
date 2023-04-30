@@ -1,5 +1,12 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
+import {
+  IcSnackbarClose,
+  IcInfo,
+  IcWarning,
+  IcError,
+  IcChecked,
+} from 'shared-icon';
 
 export type variantType = 'error' | 'info' | 'success' | 'warning';
 
@@ -9,6 +16,21 @@ type SnackbarProps = {
   timer?: number;
   isShown?: boolean;
   onClose?: (value: boolean) => void;
+};
+
+const SnackbarIcon = ({ type }: { type: variantType }) => {
+  switch (type) {
+    case 'error':
+      return <IcError />;
+    case 'info':
+      return <IcInfo />;
+    case 'warning':
+      return <IcWarning />;
+    case 'success':
+      return <IcChecked />;
+    default:
+      return null;
+  }
 };
 
 export function Snackbar({
@@ -30,7 +52,7 @@ export function Snackbar({
       setImage('info');
     } else if (variant === 'success') {
       setBaseColor('bg-green-700');
-      setImage('checked');
+      setImage('success');
     } else if (variant === 'warning') {
       setBaseColor('bg-orange-700');
       setImage('warning');
@@ -49,17 +71,6 @@ export function Snackbar({
     }
   }, [timer, isShown]);
 
-  const snackbarIcon = () => {
-    if (image === 'error')
-      return <div className={`bg-icon-error w-[30px] h-[30px] bg-cover`} />;
-    else if (image === 'info')
-      return <div className={`bg-icon-info w-[30px] h-[30px] bg-cover`} />;
-    else if (image === 'warning')
-      return <div className={`bg-icon-warning w-[30px] h-[25px] bg-cover`} />;
-    else if (image === 'checked')
-      return <div className={`bg-icon-checked w-[30px] h-[30px] bg-cover`} />;
-  };
-
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
       {isShown ? (
@@ -67,21 +78,18 @@ export function Snackbar({
           <div
             className={`${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`}
           >
-            <div>{snackbarIcon()}</div>
-            <div>
-              <p className="text-base translate-y-[2px] min-w-[10rem]">
-                {children ? children : 'Snackbar Children Goes Here!'}
-              </p>
-            </div>
+            <SnackbarIcon type={image as variantType} />
+            <p className="text-base translate-y-[2px] min-w-[10rem] block">
+              {children ? children : 'Snackbar Children Goes Here!'}
+            </p>
             {!timer ? (
-              <div className="-translate-y-1 translate-x-4">
-                <button
-                  onClick={() => onCloseAction()}
-                  data-testid="close-snackbar"
-                >
-                  <div className="bg-icon-close w-[30px] h-[30px]" />
-                </button>
-              </div>
+              <button
+                onClick={() => onCloseAction()}
+                data-testid="close-snackbar"
+                className="-translate-y-1 translate-x-4"
+              >
+                <IcSnackbarClose />
+              </button>
             ) : (
               ''
             )}

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { UserAuth } from '@/context/Auth';
 import { Button } from 'shared-ui';
 import Image from 'next/image';
+import { IcLoading } from 'shared-icon';
 
 export default function GoogleLogin() {
   const { googleSignInWithRedirect, user, logout } = UserAuth();
@@ -34,8 +35,10 @@ export default function GoogleLogin() {
         <div className="pb-5">
           <h1 className="mb-2">Google Sign Up</h1>
           {isLoggedIn && Object.keys(user || {}).length === 0 ? (
-            <div className="flex justify-center">
-              <div className="bg-[url('../img/icons/ic_loading.svg')] w-[40px] h-[40px] bg-contain animate-spin" />
+            <div className="flex justify-center h-12 translate-y-5">
+              <div className="absolute animate-spin">
+                <IcLoading className="scale-[4]" />
+              </div>
             </div>
           ) : (
             ''
