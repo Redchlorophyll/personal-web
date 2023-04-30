@@ -4,7 +4,6 @@ import 'shared-ui/styles.css';
 import { store } from '@/store';
 import { Provider } from 'react-redux';
 import { AuthContextProvider } from '@/context/Auth';
-import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {

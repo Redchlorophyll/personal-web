@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDark, toggleLight, localStorageTheme } from '@/stores/theme';
 import type { RootState } from '@/store';
-import Image from 'next/image';
-import icSunny from '@/assets/img/icons/ic_sunny.svg';
-import icMoon from '@/assets/img/icons/ic_moon.svg';
+import { IcMoon, IcSunny } from 'shared-icon';
 
 export default function ToggleMode() {
   const theme = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch();
+  const isSunny = theme === 'light';
 
   function onChangeMode(): void {
     if (localStorage.getItem('theme') === 'dark') {
@@ -28,11 +27,6 @@ export default function ToggleMode() {
   useEffect((): void => {
     dispatch(localStorageTheme());
   }, []);
-
-  const image = () => {
-    if (theme === 'dark') return icMoon;
-    else if (theme === 'light') return icSunny;
-  };
 
   return (
     <div
@@ -57,15 +51,14 @@ export default function ToggleMode() {
           'peer-checked:left-12',
           'transition-all duration-1000',
           'w-10 h-10',
-          'flex justify-center',
+          'justify-center',
         ].join(' ')}
       >
-        <Image
-          src={image() ? image() : '/none.jpg'}
-          width="25"
-          height="25"
-          alt={theme === 'dark' ? 'Dark mode icon' : 'Light mode icon'}
-        />
+        {isSunny ? (
+          <IcSunny className="scale-90 -translate-x-[2px]" />
+        ) : (
+          <IcMoon className="scale-90 translate-x-[3px] -translate-y-[1px]" />
+        )}
       </label>
     </div>
   );

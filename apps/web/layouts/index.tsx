@@ -1,8 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ToggleMode from '@/components/ToggleMode';
-import Image from 'next/image';
-import icBack from '@/assets/img/icons/ic_back.svg';
+import { IcBack } from 'shared-icon';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -59,7 +58,7 @@ export default function DefaultLayout({
             onClick={() => router.back()}
             className="md:hidden p-4 w-[60%]"
           >
-            <Image src={icBack} alt="back icon" />
+            <IcBack />
           </button>
         ) : (
           ''

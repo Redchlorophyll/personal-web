@@ -353,7 +353,28 @@ function Tooltip({
 // src/components/Snackbar/index.tsx
 import { useEffect as useEffect6, useState as useState5 } from "react";
 import { Fade } from "react-awesome-reveal";
+import {
+  IcSnackbarClose,
+  IcInfo,
+  IcWarning,
+  IcError,
+  IcChecked
+} from "shared-icon";
 import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
+var SnackbarIcon = ({ type }) => {
+  switch (type) {
+    case "error":
+      return /* @__PURE__ */ jsx7(IcError, {});
+    case "info":
+      return /* @__PURE__ */ jsx7(IcInfo, {});
+    case "warning":
+      return /* @__PURE__ */ jsx7(IcWarning, {});
+    case "success":
+      return /* @__PURE__ */ jsx7(IcChecked, {});
+    default:
+      return null;
+  }
+};
 function Snackbar({
   variant = "error",
   isShown = false,
@@ -372,7 +393,7 @@ function Snackbar({
       setImage("info");
     } else if (variant === "success") {
       setBaseColor("bg-green-700");
-      setImage("checked");
+      setImage("success");
     } else if (variant === "warning") {
       setBaseColor("bg-orange-700");
       setImage("warning");
@@ -390,31 +411,22 @@ function Snackbar({
       }, timer);
     }
   }, [timer, isShown]);
-  const snackbarIcon = () => {
-    if (image === "error")
-      return /* @__PURE__ */ jsx7("div", { className: `bg-icon-error w-[30px] h-[30px] bg-cover` });
-    else if (image === "info")
-      return /* @__PURE__ */ jsx7("div", { className: `bg-icon-info w-[30px] h-[30px] bg-cover` });
-    else if (image === "warning")
-      return /* @__PURE__ */ jsx7("div", { className: `bg-icon-warning w-[30px] h-[25px] bg-cover` });
-    else if (image === "checked")
-      return /* @__PURE__ */ jsx7("div", { className: `bg-icon-checked w-[30px] h-[30px] bg-cover` });
-  };
   return /* @__PURE__ */ jsx7("div", { className: "fixed top-4 left-1/2 -translate-x-1/2 z-50", children: isShown ? /* @__PURE__ */ jsx7(Fade, { children: /* @__PURE__ */ jsxs5(
     "div",
     {
       className: `${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`,
       children: [
-        /* @__PURE__ */ jsx7("div", { children: snackbarIcon() }),
-        /* @__PURE__ */ jsx7("div", { children: /* @__PURE__ */ jsx7("p", { className: "text-base translate-y-[2px] min-w-[10rem]", children: children ? children : "Snackbar Children Goes Here!" }) }),
-        !timer ? /* @__PURE__ */ jsx7("div", { className: "-translate-y-1 translate-x-4", children: /* @__PURE__ */ jsx7(
+        /* @__PURE__ */ jsx7(SnackbarIcon, { type: image }),
+        /* @__PURE__ */ jsx7("p", { className: "text-base translate-y-[2px] min-w-[10rem] block", children: children ? children : "Snackbar Children Goes Here!" }),
+        !timer ? /* @__PURE__ */ jsx7(
           "button",
           {
             onClick: () => onCloseAction(),
             "data-testid": "close-snackbar",
-            children: /* @__PURE__ */ jsx7("div", { className: "bg-icon-close w-[30px] h-[30px]" })
+            className: "-translate-y-1 translate-x-4",
+            children: /* @__PURE__ */ jsx7(IcSnackbarClose, {})
           }
-        ) }) : ""
+        ) : ""
       ]
     }
   ) }) : "" });
@@ -423,6 +435,7 @@ function Snackbar({
 // src/components/Dropdown/index.tsx
 import { useState as useState6, useRef as useRef2, useEffect as useEffect7 } from "react";
 import { Fade as Fade2 } from "react-awesome-reveal";
+import { IcArrow } from "shared-icon";
 import { jsx as jsx8, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dropdown({
   type = "dropdown",
@@ -522,7 +535,7 @@ function Dropdown({
               onChange: (e) => onInputChange(e)
             }
           ),
-          type === "dropdown" ? /* @__PURE__ */ jsx8("div", { className: "bg-black-100 bg-dropdown-arrow w-5 h-3 bg-cover z-[1] absolute left-full top-[10px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" }) : "",
+          type === "dropdown" && /* @__PURE__ */ jsx8(IcArrow, { className: "z-1 absolute left-full top-[13px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" }),
           isOpen && inputOptions.length > 0 ? /* @__PURE__ */ jsx8(Fade2, { children: /* @__PURE__ */ jsxs6("div", { className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]", children: [
             inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ jsx8(
               "button",
@@ -545,6 +558,7 @@ function Dropdown({
 
 // src/components/Checkbox/index.tsx
 import { useEffect as useEffect8, useState as useState7 } from "react";
+import { IcCheckboxCheck } from "shared-icon";
 import { jsx as jsx9, jsxs as jsxs7 } from "react/jsx-runtime";
 function Checkbox({
   value = "",
@@ -583,7 +597,7 @@ function Checkbox({
         checked: isChecked
       }
     ),
-    /* @__PURE__ */ jsx9("div", { className: "inline-block w-[24px] h-[24px] bg-black-100 border-solid border-[1px] border-black-800 rounded-[3px] peer-checked:bg-primary-800 peer-checked:border-primary-800 p-[6px_3px_4px_1px] peer-checked:drop-shadow-[0px_1px_4px_#6F9DF8]", children: /* @__PURE__ */ jsx9("div", { className: "bg-checkbox-check w-[20px] h-[13px] bg-cover" }) }),
+    /* @__PURE__ */ jsx9("div", { className: "inline-block w-[24px] h-[24px] bg-black-100 border-solid border-[1px] border-black-800 rounded-[3px] peer-checked:bg-primary-800 peer-checked:border-primary-800 p-[6px_3px_4px_1px] peer-checked:drop-shadow-[0px_1px_4px_#6F9DF8]", children: /* @__PURE__ */ jsx9(IcCheckboxCheck, {}) }),
     label ? /* @__PURE__ */ jsx9("div", { className: "inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2", children: label }) : ""
   ] });
 }

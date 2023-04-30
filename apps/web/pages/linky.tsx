@@ -14,13 +14,14 @@ import Image from 'next/image';
 import Blank from '~/layouts/Blank';
 import linkyList from '@/config/LinkyList';
 import ReachMeOut from '@/components/ReachMeOut';
-import { Button } from 'shared-ui';
+import { Button, Checkbox } from 'shared-ui';
 import { UserAuth } from '@/context/Auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import info from '@/config/info';
 import 'swiper/css';
+import { IcLoading, IcArrowToggle, IcEdit } from 'shared-icon';
 
 const Snackbar = dynamic(
   () => import('shared-ui').then((mod) => mod.Snackbar),
@@ -80,7 +81,7 @@ function Arrow({ type = 'next' }: { type: 'prev' | 'next' }) {
       className="w-[34px] h-[34px] h- bg-primary-700 rounded-full p-[2.5px] shadow-[0px_2px_8px_1px_rgba(0,0,0,0.3)]"
       onClick={() => onArrowClick()}
     >
-      <div className="bg-[url('../img/icons/ic_arrow-toggle.svg')] w-6 h-6 rounded-full bg-contain" />
+      <IcArrowToggle />
     </button>
   );
 }
@@ -91,7 +92,7 @@ function EditButton({ onClick }: { onClick: () => void }) {
       className="bg-black-100 w-5 h-5 rounded-full p-[5px] shadow-[0_2px_4px_rgba(0,0,0,0.25)]"
       onClick={() => onClick()}
     >
-      <div className="bg-[url('../img/icons/ic_edit.svg')] w-[10px] h-[10px] bg-contain" />
+      <IcEdit />
     </button>
   );
 }
@@ -144,8 +145,15 @@ function ProfileInfo({
     }, 2000);
   };
 
+  const [checkboxVal, setCheckboxVal] = useState([]);
+
   return (
     <div className="flex md:-translate-x-[70px]">
+      <Checkbox
+        valueList={checkboxVal}
+        value="test"
+        onChange={(val) => setCheckboxVal(val)}
+      />
       <div className="mr-5">
         {/* image */}
         <div className="w-[54px] md:w-[80px] h-[54px] md:h-[80px] rounded-full overflow-hidden bg-red-300 relative">
@@ -216,7 +224,7 @@ function ProfileInfo({
                 <Button btnType="submit">
                   {isSubmitted ? (
                     <div className="translate-y-[2px] inline-block pr-1">
-                      <div className="bg-[url('../img/icons/ic_loading.svg')] w-[15px] h-[15px] bg-contain animate-spin" />
+                      <IcLoading className="animate-spin" />
                     </div>
                   ) : (
                     ''
@@ -549,7 +557,7 @@ export default function Linky() {
           {!isFetching ? (
             <>
               {/* mobile view */}
-              <div className="block sm:hidden">
+              <div className="block sm:!hidden">
                 <Swiper
                   modules={[Navigation]}
                   spaceBetween={50}
