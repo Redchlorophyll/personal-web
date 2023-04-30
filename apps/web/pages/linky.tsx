@@ -145,15 +145,8 @@ function ProfileInfo({
     }, 2000);
   };
 
-  const [checkboxVal, setCheckboxVal] = useState([]);
-
   return (
     <div className="flex md:-translate-x-[70px]">
-      <Checkbox
-        valueList={checkboxVal}
-        value="test"
-        onChange={(val) => setCheckboxVal(val)}
-      />
       <div className="mr-5">
         {/* image */}
         <div className="w-[54px] md:w-[80px] h-[54px] md:h-[80px] rounded-full overflow-hidden bg-red-300 relative">
