@@ -1,14 +1,20 @@
 import React from 'react';
 import info from '@/config/info';
+import Image from 'next/image';
 import { Linkedin, Github, Instagram, Facebook } from 'shared-icon';
 
 export default function ReachMeOut() {
   return (
     <section aria-labelledby="title">
       <div id="title" className="w-full flex justify-center text-center">
-        <div className="-translate-x-2">
-          Reach Me Out Here!
-          <span className="absolute translate-x-2 bg-[url('/illustration/fire.png')] bg-contain w-[20px] h-[20px]" />
+        <div className="-translate-x-2">Reach Me Out Here!</div>
+        <div>
+          <Image
+            src={'/ilustrations/fire.png'}
+            width={20}
+            height={20}
+            alt={'fire icons'}
+          />
         </div>
       </div>
 
