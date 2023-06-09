@@ -13,11 +13,12 @@
     "postinstall": "husky install"
   },
   "devDependencies": {
+    "@turbo/gen": "^1.10.2",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "v1.10.2"
   }
 }

@@ -1,0 +1,28 @@
+{
+  "name": "{{package}}",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist"
+  },
+  "description": "package to store files related icon",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "yarn run svgr",
+    "build": "yarn run tsup",
+    "postbuild": "yarn run build-cleanup",
+    "predev": "yarn run svgr",
+    "dev": "yarn run tsup",
+    "postdev": "yarn run build-cleanup",
+    "clean": "rm -rf dist",
+    "build-cleanup": "rm -rf src/svg-component",
+    "tsup": "tsup src/svg-component/index.ts --format esm,cjs --dts --external react",
+    "svgr": "node ../../../node_modules/@svgr/cli/bin/svgr --typescript --out-dir src/svg-component -- src/svg"
+  },
+  "devDependencies": {
+    "@svgr/cli": "^7.0.0",
+    "tsconfig": "*",
+    "tsup": "^6.1.3",
+    "typescript": "^4.5.2"
+  }
+}
