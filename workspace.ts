@@ -8,8 +8,8 @@ const workspace = {
     },
 
     {
-      name: 'dashboard',
-      value: 'dashboard',
+      name: 'docs',
+      value: 'docs',
     },
   ],
   packages: [

@@ -1,3 +1,4 @@
+import fs from 'fs-extra';
 import type { PlopTypes } from '@turbo/gen';
 import workspace from '../../workspace';
 
@@ -49,6 +50,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
           'what type of package you thought want to make (example: "ui")',
         choices: workspace.packageTypes,
       },
+      {
+        type: 'checkbox',
+        name: 'affectedApp',
+        message: 'what app that will consume this package',
+        choices: workspace.apps,
+      },
     ],
     actions: [
       {
@@ -73,6 +80,34 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       name: '{{package}}',
       value: '{{pathCase package}}',
     },`,
+      },
+      function addPackageInsideApp(answers: {
+        affectedApp?: Array<string>;
+        package?: string;
+      }) {
+        if (!answers.package) {
+          return 'no package provided, skipping append file';
+        }
+
+        if (!answers.affectedApp) {
+          return 'no apps provided, skipping append file';
+        }
+
+        answers.affectedApp.forEach((app) => {
+          const packageJson = JSON.parse(
+            fs.readFileSync(`apps/${app}/package.json`, 'utf-8')
+          );
+
+          packageJson.devDependencies[answers.package || ''] = '*';
+
+          const newPackageJson = JSON.stringify(packageJson, null, 2);
+
+          fs.writeFileSync(`apps/${app}/package.json`, newPackageJson, 'utf-8');
+        });
+
+        return answers.affectedApp
+          .map((app) => `/apps/${app}/package.json`)
+          .join(' & ');
       },
     ],
   });
