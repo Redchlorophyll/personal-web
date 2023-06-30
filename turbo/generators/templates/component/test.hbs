@@ -1,0 +1,11 @@
+import { render } from '@testing-library/react';
+import {{pascalCase name}} from './{{kebabCase name}}';
+
+describe('<{{pascalCase name}} />', () => {
+  test('should render properly', () => {
+    const { baseElement } = render(<{{pascalCase name}} />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+});

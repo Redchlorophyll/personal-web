@@ -10,7 +10,10 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "create:component": "turbo gen component",
+    "create:package": "turbo gen package",
+    "create:app": "turbo gen app"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.2",
