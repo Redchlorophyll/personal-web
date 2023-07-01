@@ -1,0 +1,17 @@
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { AppState, AppDispatch } from './src/store';
+
+export { store } from './src/store';
+
+/* PLOP_INJECT_SLICE */
+
+export { Provider } from 'react-redux';
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
+
+/* PLOP_INJECT_UTILS */
+
+/* PLOP_INJECT_ENUMS */
+
+/* PLOP_INJECT_INTERFACES */

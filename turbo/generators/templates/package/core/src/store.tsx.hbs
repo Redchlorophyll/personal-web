@@ -1,0 +1,34 @@
+import { configureStore, ThunkAction } from '@reduxjs/toolkit';
+// Or from '@reduxjs/toolkit/query/react'
+import { setupListeners } from '@reduxjs/toolkit/query';
+
+/* PLOP_INJECT_IMPORT_REDUX */
+
+import { Action } from 'redux';
+//import { createWrapper } from "next-redux-wrapper";
+
+const makeStore = () =>
+  configureStore({
+    reducer: {
+      /* PLOP_INJECT_REDUCER */
+    },
+  });
+
+export const store = makeStore();
+
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  AppState,
+  unknown,
+  Action
+>;
+
+// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+setupListeners(store.dispatch);
+
+//export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });

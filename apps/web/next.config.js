@@ -7,7 +7,10 @@ module.exports = withTM({
     domains: ['i.pinimg.com', 'lh3.googleusercontent.com', 'media.licdn.com'],
   },
   experimental: {
-    transpilePackages: ['shared-core'],
+    transpilePackages: [
+      /* PLOP_INJECT_CORE_PACKAGE */
+      'shared-core',
+    ],
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   webpack(config) {

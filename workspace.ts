@@ -32,8 +32,8 @@ const workspace = {
     },
 
     {
-      name: 'util',
-      value: 'util',
+      name: 'core',
+      value: 'core',
     },
 
     {
