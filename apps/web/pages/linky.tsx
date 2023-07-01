@@ -263,7 +263,7 @@ export default function Linky() {
   const inputProfileImageRef = useRef(null);
   const [profileData, setProfileData] = useState<profileDataType>({
     image:
-      'https://media.licdn.com/dms/image/D5603AQGnGKppkU2ZRw/profile-displayphoto-shrink_800_800/0/1673371446943?e=1681948800&v=beta&t=7NELWDvP-I3OgXRgwY6a4CqdDQI3qDXCMyAii9xNc7g',
+      'https://media.licdn.com/dms/image/D5603AQHsvsKdiqGqDQ/profile-displayphoto-shrink_800_800/0/1680023383414?e=1693440000&v=beta&t=vTxpSMJ4FMim9C_xUsxLOFikVOaOzTU_pcj51RaMNME',
     info,
   });
   const [isFetching, setIsFetching] = useState(true); //dummy until API Exists

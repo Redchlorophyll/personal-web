@@ -8,7 +8,7 @@ import {
   User,
 } from 'firebase/auth';
 import { auth } from '@/config/firebase';
-import { isUserAuthorized } from '@/utils/local-authorization';
+import { isUserAuthorized } from 'shared-core';
 import { Snackbar } from 'shared-ui';
 
 type authContextType = {

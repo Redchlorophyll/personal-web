@@ -1,9 +1,14 @@
 const withTM = require('next-transpile-modules')(['ui']);
+const path = require('path');
 
 module.exports = withTM({
   reactStrictMode: true,
   images: {
     domains: ['i.pinimg.com', 'lh3.googleusercontent.com', 'media.licdn.com'],
+  },
+  experimental: {
+    transpilePackages: ['shared-core'],
+    outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

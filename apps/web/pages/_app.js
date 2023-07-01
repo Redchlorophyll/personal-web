@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import '@/assets/styles/globals.css';
 import 'shared-ui/styles.css';
-import { store } from '@/store';
-import { Provider } from 'react-redux';
+import { store, Provider } from 'shared-core';
 import { AuthContextProvider } from '@/context/Auth';
 
 export default function App({ Component, pageProps }) {

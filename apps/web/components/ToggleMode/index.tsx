@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleDark, toggleLight, localStorageTheme } from '@/stores/theme';
-import type { RootState } from '@/store';
+import { themeSlice } from 'shared-core';
+import { useAppSelector, useAppDispatch } from 'shared-core';
 import { IcMoon, IcSunny } from 'shared-icon';
 
+const { toggleDark, toggleLight, localStorageTheme } = themeSlice.actions;
+
 export default function ToggleMode() {
-  const theme = useSelector((state: RootState) => state.theme.theme);
-  const dispatch = useDispatch();
+  const theme = useAppSelector((state) => state.theme.theme);
+  const dispatch = useAppDispatch();
   const isSunny = theme === 'light';
 
   function onChangeMode(): void {
