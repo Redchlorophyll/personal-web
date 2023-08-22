@@ -105,8 +105,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
     actions: (data) => {
       const { affectedApp, type, packageName } = data || {};
 
-      const plopActionForAffectedApp: Array<Array<any>> = affectedApp.map(
-        (app) => {
+      const plopActionForAffectedApp: Array<Array<PlopTypes.ActionType>> =
+        affectedApp.map((app) => {
           return [
             {
               type: 'append',
@@ -121,8 +121,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
               template: `'${packageName}',`,
             },
           ];
-        }
-      );
+        });
 
       return [
         {
@@ -185,6 +184,8 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             .join(' & ');
         },
         function runNodeInstallAfterCreation() {
+          // after package creation we need to run this.
+          // when this successfully run we doesn't require to install dependency again
           child.execSync('yarn install', { stdio: [0, 1, 2] });
 
           return 'node_modules installed';
