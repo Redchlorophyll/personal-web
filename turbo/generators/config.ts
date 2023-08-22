@@ -85,7 +85,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
     prompts: [
       {
         type: 'input',
-        name: 'package',
+        name: 'packageName',
         message: 'create new package with kebab-case (example: "shared-ui")',
       },
       {
@@ -102,66 +102,94 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         choices: workspace.apps,
       },
     ],
-    actions: [
-      {
-        type: 'addMany',
-        destination: 'packages/{{pathCase package}}',
-        base: 'templates/package/{{type}}',
-        templateFiles: [
-          'templates/package/{{type}}/**.hbs',
-          'templates/package/{{type}}/src/**.hbs',
-          'templates/package/{{type}}/src/components/**.hbs', // for ui type package
-          'templates/package/{{type}}/src/svg/**.hbs', // for icon type package
-          'templates/package/{{type}}/src/data/**.hbs', // for data type package
-          'templates/package/{{type}}/src/enums/**.hbs', // for core type package
-          'templates/package/{{type}}/src/interfaces/**.hbs', // for util type package
-          'templates/package/{{type}}/src/stores/**.hbs', // for util type package
-          'templates/package/{{type}}/src/utils/**.hbs', // for util type package
-        ],
-      },
-      {
-        type: 'append',
-        path: 'workspace.ts',
-        pattern: `/* PLOP_INJECT_PACKAGE */`,
-        template: `
-    {
-      name: '{{package}}',
-      value: '{{pathCase package}}',
-    },`,
-      },
-      function addPackageInsideApp(answers: {
-        affectedApp?: Array<string>;
-        package?: string;
-      }) {
-        if (!answers.package) {
-          return 'no package provided, skipping append file';
+    actions: (data) => {
+      const { affectedApp, type, packageName } = data || {};
+
+      const plopActionForAffectedApp: Array<Array<any>> = affectedApp.map(
+        (app) => {
+          return [
+            {
+              type: 'append',
+              path: `apps/${app}/pages/_app.js`,
+              pattern: `/* PLOP_INJECT_STYLING */`,
+              template: `import '${packageName}/styles.css';`,
+            },
+            {
+              type: 'append',
+              path: `apps/${app}/pages/next.config.js`,
+              pattern: `/* PLOP_INJECT_CORE_PACKAGE */`,
+              template: `'${packageName}',`,
+            },
+          ];
         }
+      );
 
-        if (!answers.affectedApp) {
-          return 'no apps provided, skipping append file';
-        }
+      return [
+        {
+          type: 'addMany',
+          destination: `packages/{{pathCase packageName}}`,
+          base: 'templates/package/{{type}}',
+          templateFiles: [
+            `templates/package/${type}/**.hbs`,
+            `templates/package/${type}/src/**.hbs`,
+            `templates/package/${type}/src/components/**.hbs`, // for ui type package
+            `templates/package/${type}/src/svg/**.hbs`, // for icon type package
+            `templates/package/${type}/src/data/**.hbs`, // for data type package
+            `templates/package/${type}/src/enums/**.hbs`, // for core type package
+            `templates/package/${type}/src/interfaces/**.hbs'=`, // for util type package
+            `templates/package/${type}/src/stores/**.hbs`, // for util type package
+            `templates/package/${type}/src/utils/**.hbs`, // for util type package
+          ],
+        },
+        {
+          type: 'append',
+          path: 'workspace.ts',
+          pattern: `/* PLOP_INJECT_PACKAGE */`,
+          template: `
+      {
+        name: '${packageName}',
+        value: '{{pathCase packageName}}',
+      },`,
+        },
+        ...plopActionForAffectedApp.flat(),
+        function addPackageInsideApp(answers: {
+          affectedApp?: Array<string>;
+          package?: string;
+        }) {
+          if (!answers.package) {
+            return 'no package provided, skipping append file';
+          }
 
-        answers.affectedApp.forEach((app) => {
-          const packageJson = JSON.parse(
-            fs.readFileSync(`apps/${app}/package.json`, 'utf-8')
-          );
+          if (!answers.affectedApp) {
+            return 'no apps provided, skipping append file';
+          }
 
-          packageJson.devDependencies[answers.package || ''] = '*';
+          answers.affectedApp.forEach((app) => {
+            const packageJson = JSON.parse(
+              fs.readFileSync(`apps/${app}/package.json`, 'utf-8')
+            );
 
-          const newPackageJson = JSON.stringify(packageJson, null, 2);
+            packageJson.devDependencies[answers.package || ''] = '*';
 
-          fs.writeFileSync(`apps/${app}/package.json`, newPackageJson, 'utf-8');
-        });
+            const newPackageJson = JSON.stringify(packageJson, null, 2);
 
-        return answers.affectedApp
-          .map((app) => `/apps/${app}/package.json`)
-          .join(' & ');
-      },
-      function runNodeInstallAfterCreation() {
-        child.execSync('yarn install', { stdio: [0, 1, 2] });
+            fs.writeFileSync(
+              `apps/${app}/package.json`,
+              newPackageJson,
+              'utf-8'
+            );
+          });
 
-        return 'node_modules installed';
-      },
-    ],
+          return answers.affectedApp
+            .map((app) => `/apps/${app}/package.json`)
+            .join(' & ');
+        },
+        function runNodeInstallAfterCreation() {
+          child.execSync('yarn install', { stdio: [0, 1, 2] });
+
+          return 'node_modules installed';
+        },
+      ];
+    },
   });
 }
