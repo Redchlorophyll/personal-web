@@ -5,7 +5,7 @@ import { IcMoon, IcSunny } from 'shared-icon';
 
 const { toggleDark, toggleLight, localStorageTheme } = themeSlice.actions;
 
-export default function ToggleMode() {
+export function ToggleMode() {
   const theme = useAppSelector((state) => state.theme.theme);
   const dispatch = useAppDispatch();
   const isSunny = theme === 'light';

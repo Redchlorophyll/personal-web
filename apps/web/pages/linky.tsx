@@ -9,12 +9,11 @@ import {
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { useRouter } from 'next/router';
-import ToggleMode from '@/components/ToggleMode';
 import Image from 'next/image';
 import Blank from '~/layouts/Blank';
 import linkyList from '@/config/LinkyList';
-import ReachMeOut from '@/components/ReachMeOut';
-import { Button, Checkbox } from 'shared-ui';
+import { ReachMeOut } from 'web-ui';
+import { Button, ToggleMode } from 'shared-ui';
 import { UserAuth } from '@/context/Auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -642,7 +641,7 @@ export default function Linky() {
         </div>
 
         <section className="flex justify-center w-full h-[20vh] pt-4 mb-48">
-          <ReachMeOut />
+          <ReachMeOut socialMedia={info} />
         </section>
 
         <footer className="text-xs md:text-base relative bottom-5 w-full text-center text-[#acacac]">

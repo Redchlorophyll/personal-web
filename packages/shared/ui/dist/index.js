@@ -55,13 +55,76 @@ __export(src_exports, {
   Radio: () => Radio,
   Snackbar: () => Snackbar,
   Textarea: () => Textarea,
+  ToggleMode: () => ToggleMode,
   Tooltip: () => Tooltip
 });
 module.exports = __toCommonJS(src_exports);
 
-// src/components/Button/index.tsx
+// src/components/toggle-mode/toggle-mode.tsx
 var import_react = require("react");
+var import_shared_core = require("shared-core");
+var import_shared_core2 = require("shared-core");
+var import_shared_icon = require("shared-icon");
 var import_jsx_runtime = require("react/jsx-runtime");
+var { toggleDark, toggleLight, localStorageTheme } = import_shared_core.themeSlice.actions;
+function ToggleMode() {
+  const theme = (0, import_shared_core2.useAppSelector)((state) => state.theme.theme);
+  const dispatch = (0, import_shared_core2.useAppDispatch)();
+  const isSunny = theme === "light";
+  function onChangeMode() {
+    if (localStorage.getItem("theme") === "dark") {
+      localStorage.setItem("theme", "light");
+      dispatch(toggleLight());
+      document.documentElement.classList.remove("dark");
+    } else if (localStorage.getItem("theme") === "light" || !localStorage.getItem("theme")) {
+      localStorage.setItem("theme", "dark");
+      dispatch(toggleDark());
+      document.documentElement.classList.add("dark");
+    }
+  }
+  (0, import_react.useEffect)(() => {
+    dispatch(localStorageTheme());
+  }, []);
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
+    "div",
+    {
+      className: `${theme === "light" ? "bg-black-300" : "bg-yellow-700"} w-24 h-12 rounded-full relative left transition-all duration-700`,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          "input",
+          {
+            type: "checkbox",
+            "aria-label": "toggle-mode",
+            id: "toggle-mode",
+            className: "opacity-0 peer w-24 h-24 z-10",
+            checked: theme === "dark",
+            onChange: onChangeMode
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+          "label",
+          {
+            htmlFor: "toggle-mode",
+            className: [
+              "rounded-full absolute",
+              "bg-black-100 p-1 left-2 top-1",
+              "peer-checked:bg-black-800",
+              "peer-checked:left-12",
+              "transition-all duration-1000",
+              "w-10 h-10",
+              "justify-center"
+            ].join(" "),
+            children: isSunny ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_shared_icon.IcSunny, { className: "scale-90 -translate-x-[2px]" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_shared_icon.IcMoon, { className: "scale-90 translate-x-[3px] -translate-y-[1px]" })
+          }
+        )
+      ]
+    }
+  );
+}
+
+// src/components/Button/index.tsx
+var import_react2 = require("react");
+var import_jsx_runtime2 = require("react/jsx-runtime");
 function Button({
   variant = "primary",
   children = "Button",
@@ -69,7 +132,7 @@ function Button({
   onClick,
   btnType = "button"
 }) {
-  const [style, setStyle] = (0, import_react.useState)("");
+  const [style, setStyle] = (0, import_react2.useState)("");
   const solid = [
     {
       variant: "warning",
@@ -136,7 +199,7 @@ function Button({
       style: "bg-black-300 text-black-900"
     }
   ];
-  (0, import_react.useEffect)(() => {
+  (0, import_react2.useEffect)(() => {
     if (type === "solid") {
       const designValue = solid.filter(
         (val) => val.variant === variant
@@ -156,7 +219,7 @@ function Button({
       setStyle(designValue[0]["style"] || "");
     }
   }, [variant, type]);
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
     "button",
     {
       type: btnType,
@@ -168,16 +231,16 @@ function Button({
 }
 
 // src/components/Radio/index.tsx
-var import_react2 = require("react");
-var import_jsx_runtime2 = require("react/jsx-runtime");
+var import_react3 = require("react");
+var import_jsx_runtime3 = require("react/jsx-runtime");
 function Radio({
   value = "",
   valueGroup = "",
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = (0, import_react2.useState)(false);
-  (0, import_react2.useEffect)(() => {
+  const [isChecked, setChecked] = (0, import_react3.useState)(false);
+  (0, import_react3.useEffect)(() => {
     if (value) {
       if (value === valueGroup)
         setChecked(true);
@@ -198,8 +261,8 @@ function Radio({
   const onChangeRadio = () => {
     return;
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("label", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("label", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
       "input",
       {
         type: "radio",
@@ -210,15 +273,15 @@ function Radio({
         checked: isChecked
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "inline-block peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "w-5 h-5 rounded-full" }) }),
-    label ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2", children: "test" }) : ""
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "inline-block peer-checked:[&>*]:bg-primary-700 w-6 h-6 bg-black-100 peer-checked:bg-transparent rounded-full p-[1.1px] border-solid border-[1px] border-black-800", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "w-5 h-5 rounded-full" }) }),
+    label ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2", children: "test" }) : ""
   ] });
 }
 
 // src/components/Input/index.tsx
-var import_react3 = __toESM(require("react"));
-var import_jsx_runtime3 = require("react/jsx-runtime");
-var Input = import_react3.default.forwardRef(function Input2({
+var import_react4 = __toESM(require("react"));
+var import_jsx_runtime4 = require("react/jsx-runtime");
+var Input = import_react4.default.forwardRef(function Input2({
   onChange,
   onBlur,
   value = "",
@@ -230,7 +293,7 @@ var Input = import_react3.default.forwardRef(function Input2({
   name = "",
   register
 }, ref) {
-  const [inputValue, setInputValue] = (0, import_react3.useState)(value);
+  const [inputValue, setInputValue] = (0, import_react4.useState)(value);
   const inputId = label.toLowerCase().split(" ").join("-");
   const onInputChange = (event) => {
     if (!onChange || isDisabled)
@@ -243,9 +306,9 @@ var Input = import_react3.default.forwardRef(function Input2({
       return;
     onBlur(event);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex flex-col items-start", children: [
-    label ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
-    register ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "flex flex-col items-start", children: [
+    label ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
+    register ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       "input",
       __spreadProps(__spreadValues({
         name,
@@ -264,7 +327,7 @@ var Input = import_react3.default.forwardRef(function Input2({
         ].join(" "),
         type: "text"
       })
-    ) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       "input",
       {
         name,
@@ -286,15 +349,15 @@ var Input = import_react3.default.forwardRef(function Input2({
         type: "text"
       }
     ),
-    isError ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm text-red-800 relative w-full", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "absolute", children: errorMessage }) }) : ""
+    isError ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-sm text-red-800 relative w-full", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "absolute", children: errorMessage }) }) : ""
   ] });
 });
 
 // src/components/Modal/index.tsx
-var import_react4 = require("react");
-var import_jsx_runtime4 = require("react/jsx-runtime");
+var import_react5 = require("react");
+var import_jsx_runtime5 = require("react/jsx-runtime");
 function Modal({ children, title, style }) {
-  (0, import_react4.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
     var _a;
     (_a = document.querySelector("body")) == null ? void 0 : _a.classList.add("overflow-hidden");
     return () => {
@@ -302,16 +365,16 @@ function Modal({ children, title, style }) {
       (_a2 = document.querySelector("body")) == null ? void 0 : _a2.classList.remove("overflow-hidden");
     };
   }, []);
-  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(import_jsx_runtime4.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25" }),
-    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25" }),
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
       "div",
       {
         className: [
           "w-full h-[100vh] absolute z-30",
           "flex justify-center align-baseline top-0 left-0"
         ].join(" "),
-        children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "div",
           {
             style,
@@ -321,8 +384,8 @@ function Modal({ children, title, style }) {
               "p-[25px_30px] rounded-2xl text"
             ].join(" "),
             children: [
-              title ? /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "pb-5", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "text-base font-bold", children: title }) }) : "",
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { children })
+              title ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "pb-5", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "text-base font-bold", children: title }) }) : "",
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { children })
             ]
           }
         )
@@ -332,15 +395,15 @@ function Modal({ children, title, style }) {
 }
 
 // src/components/Tooltip/index.tsx
-var import_react5 = require("react");
+var import_react6 = require("react");
 
 // src/components/Tooltip/TooltipContent.tsx
-var import_jsx_runtime5 = require("react/jsx-runtime");
+var import_jsx_runtime6 = require("react/jsx-runtime");
 function TooltipContent({
   tipLocation = "top",
   children
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
     "div",
     {
       className: "bg-black-100 mt-2 py-1 pl-2 pr-4 shadow-[0_0_4px_rgba(29,171,221,0.2)] w-fit whitespace-nowrap rounded-sm dark:text-black-900 after:absolute after:left-[1px] " + (tipLocation == "top" ? "after:top-1 " : "") + (tipLocation == "bottom" ? "after:-bottom-1 after:rotate-180 " : "") + (tipLocation == "left" ? "after:top-2/4 after:left-[-6px] after:translate-y-[2px] after:-rotate-90 " : "") + (tipLocation == "right" ? "after:top-2/4 after:left-full after:translate-x-[-2px] after:translate-y-[2px] after:rotate-90 text-left " : "") + "after:border-b-4 after:border-b-black-500 after:w-0 after:h-0 after:border-l-4 after:border-r-4 after:border-l-black-100/0 after:border-r-black-100/0",
@@ -350,19 +413,19 @@ function TooltipContent({
 }
 
 // src/components/Tooltip/index.tsx
-var import_jsx_runtime6 = require("react/jsx-runtime");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function Tooltip({
   direction = "bottom",
   tooltipContent,
   children
 }) {
-  const [tooltipDirection, setTooltipDirection] = (0, import_react5.useState)("top");
-  const [halfWidth, setHalfWidth] = (0, import_react5.useState)(0);
-  const tooltipWrapper = (0, import_react5.useRef)(null);
-  (0, import_react5.useEffect)(() => {
+  const [tooltipDirection, setTooltipDirection] = (0, import_react6.useState)("top");
+  const [halfWidth, setHalfWidth] = (0, import_react6.useState)(0);
+  const tooltipWrapper = (0, import_react6.useRef)(null);
+  (0, import_react6.useEffect)(() => {
     tipDirection(direction || "bottom");
   }, [direction]);
-  (0, import_react5.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     var _a, _b;
     if (typeof ((_a = tooltipWrapper.current) == null ? void 0 : _a.clientWidth) === "number") {
       setHalfWidth(Math.trunc(((_b = tooltipWrapper.current) == null ? void 0 : _b.clientWidth) / 2));
@@ -378,34 +441,34 @@ function Tooltip({
     if (tip === "right")
       setTooltipDirection("left");
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "group relative w-fit", ref: tooltipWrapper, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { children }),
-    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "group relative w-fit", ref: tooltipWrapper, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { children }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       "div",
       {
         style: direction === "top" || direction === "bottom" ? { transform: `translateX(${halfWidth}px)` } : {},
         className: "absolute " + (direction === "top" ? `-top-10 ` : "") + (direction === "left" ? "-top-3 -translate-x-full -left-2 " : "") + (direction === "right" ? "-top-3 translate-x-2 left-full " : "") + "invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300",
-        children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipContent, { tipLocation: tooltipDirection, children: tooltipContent })
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(TooltipContent, { tipLocation: tooltipDirection, children: tooltipContent })
       }
     )
   ] });
 }
 
 // src/components/Snackbar/index.tsx
-var import_react6 = require("react");
+var import_react7 = require("react");
 var import_react_awesome_reveal = require("react-awesome-reveal");
-var import_shared_icon = require("shared-icon");
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_shared_icon2 = require("shared-icon");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 var SnackbarIcon = ({ type }) => {
   switch (type) {
     case "error":
-      return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_shared_icon.IcError, {});
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcError, {});
     case "info":
-      return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_shared_icon.IcInfo, {});
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcInfo, {});
     case "warning":
-      return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_shared_icon.IcWarning, {});
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcWarning, {});
     case "success":
-      return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_shared_icon.IcChecked, {});
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcChecked, {});
     default:
       return null;
   }
@@ -417,9 +480,9 @@ function Snackbar({
   onClose,
   children
 }) {
-  const [baseColor, setBaseColor] = (0, import_react6.useState)("bg-red-700");
-  const [image, setImage] = (0, import_react6.useState)("error");
-  (0, import_react6.useEffect)(() => {
+  const [baseColor, setBaseColor] = (0, import_react7.useState)("bg-red-700");
+  const [image, setImage] = (0, import_react7.useState)("error");
+  (0, import_react7.useEffect)(() => {
     if (variant === "error") {
       setBaseColor("bg-red-700");
       setImage("error");
@@ -438,7 +501,7 @@ function Snackbar({
     if (onClose)
       onClose(false);
   }
-  (0, import_react6.useEffect)(() => {
+  (0, import_react7.useEffect)(() => {
     if (timer && isShown) {
       setTimeout(() => {
         if (onClose)
@@ -446,20 +509,20 @@ function Snackbar({
       }, timer);
     }
   }, [timer, isShown]);
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "fixed top-4 left-1/2 -translate-x-1/2 z-50", children: isShown ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react_awesome_reveal.Fade, { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "fixed top-4 left-1/2 -translate-x-1/2 z-50", children: isShown ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react_awesome_reveal.Fade, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
     "div",
     {
       className: `${baseColor} w-fit max-w-xl min-h-[65px] p-[19px_35px_10px_35px] rounded-[10px] flex gap-4 leading-[27px] text-black-100`,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SnackbarIcon, { type: image }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-base translate-y-[2px] min-w-[10rem] block", children: children ? children : "Snackbar Children Goes Here!" }),
-        !timer ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(SnackbarIcon, { type: image }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "text-base translate-y-[2px] min-w-[10rem] block", children: children ? children : "Snackbar Children Goes Here!" }),
+        !timer ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           "button",
           {
             onClick: () => onCloseAction(),
             "data-testid": "close-snackbar",
             className: "-translate-y-1 translate-x-4",
-            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_shared_icon.IcSnackbarClose, {})
+            children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcSnackbarClose, {})
           }
         ) : ""
       ]
@@ -468,10 +531,10 @@ function Snackbar({
 }
 
 // src/components/Dropdown/index.tsx
-var import_react7 = require("react");
+var import_react8 = require("react");
 var import_react_awesome_reveal2 = require("react-awesome-reveal");
-var import_shared_icon2 = require("shared-icon");
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_shared_icon3 = require("shared-icon");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function Dropdown({
   type = "dropdown",
   options = [{ label: "sampel", value: "sampelVal" }],
@@ -481,13 +544,13 @@ function Dropdown({
   label = ""
 }) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [isOpen, setIsOpen] = (0, import_react7.useState)(false);
-  const inputRef = (0, import_react7.useRef)(null);
-  const [inputValue, setInputValue] = (0, import_react7.useState)({
+  const [isOpen, setIsOpen] = (0, import_react8.useState)(false);
+  const inputRef = (0, import_react8.useRef)(null);
+  const [inputValue, setInputValue] = (0, import_react8.useState)({
     label: "",
     value: ""
   });
-  const [inputOptions, setInputOptions] = (0, import_react7.useState)([...options]);
+  const [inputOptions, setInputOptions] = (0, import_react8.useState)([...options]);
   const handleFocus = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -514,7 +577,7 @@ function Dropdown({
     });
   };
   const optionHtml = inputOptions.map((value2, idx) => {
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
       "button",
       {
         onClick: () => setActiveVal(value2),
@@ -524,7 +587,7 @@ function Dropdown({
       idx
     );
   });
-  (0, import_react7.useEffect)(() => {
+  (0, import_react8.useEffect)(() => {
     if (!inputValue)
       return;
     const matchedData = options.find((data) => data.value === value);
@@ -536,7 +599,7 @@ function Dropdown({
       setInputOptions(filterOptions);
     }
   }, [value]);
-  (0, import_react7.useEffect)(() => {
+  (0, import_react8.useEffect)(() => {
     const outsideClickHandler = ({ target }) => {
       const { current } = inputRef;
       if (current && !current.contains(target)) {
@@ -548,16 +611,16 @@ function Dropdown({
       document.removeEventListener("mousedown", outsideClickHandler);
     };
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex flex-col items-start", children: [
-    label ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col items-start", children: [
+    label ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
       "div",
       {
         ref: inputRef,
         "data-testid": "focus-element",
         className: "w-full relative z-[5] dark:text-black-900",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
             "input",
             {
               id: inputId,
@@ -570,9 +633,9 @@ function Dropdown({
               onChange: (e) => onInputChange(e)
             }
           ),
-          type === "dropdown" && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_shared_icon2.IcArrow, { className: "z-1 absolute left-full top-[13px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" }),
-          isOpen && inputOptions.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react_awesome_reveal2.Fade, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]", children: [
-            inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+          type === "dropdown" && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_shared_icon3.IcArrow, { className: "z-1 absolute left-full top-[13px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180" }),
+          isOpen && inputOptions.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_react_awesome_reveal2.Fade, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full bg-black-100 absolute mt-2 p-[12px_5px_7px_5px] overflow-y-scroll max-h-32 scrollbar-thin scrollbar-thumb-black-500 scrollbar-track-dark-100 scrollbar-thumb-rounded-full scrollbar-track-rounded-full shadow-[0px_1px_4px_rgba(0,0,0,0.25)]", children: [
+            inputOptions.length > 0 && value !== "" && type === "dropdown" ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
               "button",
               {
                 onClick: () => setActiveVal({
@@ -592,17 +655,17 @@ function Dropdown({
 }
 
 // src/components/Checkbox/index.tsx
-var import_react8 = require("react");
-var import_shared_icon3 = require("shared-icon");
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_react9 = require("react");
+var import_shared_icon4 = require("shared-icon");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function Checkbox({
   value = "",
   valueList = [],
   onChange,
   label
 }) {
-  const [isChecked, setChecked] = (0, import_react8.useState)(false);
-  (0, import_react8.useEffect)(() => {
+  const [isChecked, setChecked] = (0, import_react9.useState)(false);
+  (0, import_react9.useEffect)(() => {
     if (value) {
       const isValueIncluded = valueList.includes(value);
       if (isValueIncluded)
@@ -621,8 +684,8 @@ function Checkbox({
     }
     onChange(results);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("label", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("label", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
       "input",
       {
         className: "peer w-[24px] h-[24px] sr-only",
@@ -632,15 +695,15 @@ function Checkbox({
         checked: isChecked
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "inline-block w-[24px] h-[24px] bg-black-100 border-solid border-[1px] border-black-800 rounded-[3px] peer-checked:bg-primary-800 peer-checked:border-primary-800 p-[6px_3px_4px_1px] peer-checked:drop-shadow-[0px_1px_4px_#6F9DF8]", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_shared_icon3.IcCheckboxCheck, {}) }),
-    label ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2", children: label }) : ""
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "inline-block w-[24px] h-[24px] bg-black-100 border-solid border-[1px] border-black-800 rounded-[3px] peer-checked:bg-primary-800 peer-checked:border-primary-800 p-[6px_3px_4px_1px] peer-checked:drop-shadow-[0px_1px_4px_#6F9DF8]", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_shared_icon4.IcCheckboxCheck, {}) }),
+    label ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "inline-block leading-[24px] h-[24px] translate-y-[-7px] ml-2 mr-2", children: label }) : ""
   ] });
 }
 
 // src/components/Textarea/index.tsx
-var import_react9 = __toESM(require("react"));
-var import_jsx_runtime10 = require("react/jsx-runtime");
-var Textarea = import_react9.default.forwardRef(function Textarea2({
+var import_react10 = __toESM(require("react"));
+var import_jsx_runtime11 = require("react/jsx-runtime");
+var Textarea = import_react10.default.forwardRef(function Textarea2({
   placeholder = "Input Text Here...",
   value,
   onChange,
@@ -653,15 +716,15 @@ var Textarea = import_react9.default.forwardRef(function Textarea2({
   name
 }, ref) {
   const inputId = label.toLowerCase().split(" ").join("-");
-  const [sumCharacters, setSumCharacters] = (0, import_react9.useState)(0);
-  const [textboxVal, setTextBoxVal] = (0, import_react9.useState)("");
+  const [sumCharacters, setSumCharacters] = (0, import_react10.useState)(0);
+  const [textboxVal, setTextBoxVal] = (0, import_react10.useState)("");
   const textareaId = `textarea-${Math.random()}`;
-  (0, import_react9.useEffect)(() => {
+  (0, import_react10.useEffect)(() => {
     setSumCharacters(
       document.getElementById(inputId).value.length
     );
   }, [register == null ? void 0 : register.ref]);
-  (0, import_react9.useEffect)(() => {
+  (0, import_react10.useEffect)(() => {
     let tmpVal = value;
     if (register)
       tmpVal = document.getElementById(inputId).value;
@@ -716,9 +779,9 @@ var Textarea = import_react9.default.forwardRef(function Textarea2({
       return;
     conditionalOnBlur(event);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "flex flex-col items-start", children: [
-    label ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
-    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-col items-start", children: [
+    label ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("label", { className: "pb-[5px]", htmlFor: inputId, children: label }) : "",
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
       "textarea",
       {
         ref: register ? register.ref : ref,
@@ -738,7 +801,7 @@ var Textarea = import_react9.default.forwardRef(function Textarea2({
         ].join(" ")
       }
     ),
-    limit ? /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "text-black-700 text-sm p-1", children: [
+    limit ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "text-black-700 text-sm p-1", children: [
       sumCharacters,
       "/",
       limit,
@@ -756,5 +819,6 @@ var Textarea = import_react9.default.forwardRef(function Textarea2({
   Radio,
   Snackbar,
   Textarea,
+  ToggleMode,
   Tooltip
 });

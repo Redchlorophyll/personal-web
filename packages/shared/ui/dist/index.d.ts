@@ -1,5 +1,7 @@
 import React, { ReactNode, LegacyRef, CSSProperties } from 'react';
 
+declare function ToggleMode(): JSX.Element;
+
 type variantStyle = 'warning' | 'success' | 'primary' | 'error' | 'muted';
 type typeStyle = 'solid' | 'outline' | 'translucent';
 type buttonProps = {
@@ -109,4 +111,4 @@ type textareaProps = {
 };
 declare const Textarea: React.ForwardRefExoticComponent<textareaProps & React.RefAttributes<HTMLTextAreaElement>>;
 
-export { Button, Checkbox, Dropdown, Input, Modal, Radio, Snackbar, Textarea, Tooltip, variantType };
+export { Button, Checkbox, Dropdown, Input, Modal, Radio, Snackbar, Textarea, ToggleMode, Tooltip, variantType };

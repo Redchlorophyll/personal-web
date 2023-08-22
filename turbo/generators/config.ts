@@ -113,7 +113,10 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
           'templates/package/{{type}}/src/components/**.hbs', // for ui type package
           'templates/package/{{type}}/src/svg/**.hbs', // for icon type package
           'templates/package/{{type}}/src/data/**.hbs', // for data type package
-          'templates/package/{{type}}/src/util/**.hbs', // for util type package
+          'templates/package/{{type}}/src/enums/**.hbs', // for core type package
+          'templates/package/{{type}}/src/interfaces/**.hbs', // for util type package
+          'templates/package/{{type}}/src/stores/**.hbs', // for util type package
+          'templates/package/{{type}}/src/utils/**.hbs', // for util type package
         ],
       },
       {

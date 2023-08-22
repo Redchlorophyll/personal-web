@@ -16,6 +16,11 @@ const workspace = {
     /* PLOP_INJECT_PACKAGE */
 
     {
+      name: 'web-ui',
+      value: 'web/ui',
+    },
+
+    {
       name: 'shared-ui',
       value: 'shared/ui',
     },

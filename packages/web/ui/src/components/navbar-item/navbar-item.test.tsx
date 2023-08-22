@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
+import { NavbarItem } from './navbar-item';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
-import NavbarItem from '@/components/Navbar/NavbarItem';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
@@ -11,7 +10,7 @@ const push = jest.fn();
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
-describe('component - Navbar - NavbarItem', () => {
+describe('<NavbarItem />', () => {
   useRouter.mockImplementation(() => ({
     route: '/',
     pathname: '',
@@ -20,12 +19,15 @@ describe('component - Navbar - NavbarItem', () => {
     push,
   }));
 
-  test('it should render properly', () => {
-    render(<NavbarItem>Home</NavbarItem>);
+  test('should render properly', () => {
+    const { baseElement } = render(
+      <NavbarItem wip href="/">
+        Home
+      </NavbarItem>
+    );
 
-    const target = screen.getByText('Home');
-
-    expect(target).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
   });
 
   test('it should be able to click"', async () => {
@@ -46,15 +48,5 @@ describe('component - Navbar - NavbarItem', () => {
 
     await user.click(target);
     expect(push).not.toHaveBeenCalledWith('/');
-  });
-
-  test('it should show WIP flag', () => {
-    render(
-      <NavbarItem href="/about" wip>
-        about
-      </NavbarItem>
-    );
-    const target = screen.getByText('WIP');
-    expect(target).toBeInTheDocument();
   });
 });

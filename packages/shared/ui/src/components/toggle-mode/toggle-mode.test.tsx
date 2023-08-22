@@ -1,24 +1,19 @@
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import ToggleMode from '@/components/ToggleMode';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { ToggleMode } from './toggle-mode';
 import { Provider } from 'react-redux';
-import { store } from '@/store';
+import userEvent from '@testing-library/user-event';
+import { store } from 'shared-core';
 
-describe('components - common - ToggleMode', () => {
-  test('It should render properly', () => {
-    render(
+describe('<ToggleMode />', () => {
+  test('should render properly', () => {
+    const { baseElement } = render(
       <Provider store={store}>
         <ToggleMode />
       </Provider>
     );
 
-    const toggleMode = screen.getByRole('checkbox', {
-      name: 'toggle-mode',
-    });
-
-    expect(toggleMode).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
   });
 
   test('it should show dark mode icons when clicked', async () => {

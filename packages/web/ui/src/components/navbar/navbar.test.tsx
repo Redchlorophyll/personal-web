@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
-import { {{pascalCase name}} } from './{{kebabCase name}}';
+import { Navbar } from './navbar';
 
-describe('<{{pascalCase name}} />', () => {
+describe('<Navbar />', () => {
   test('should render properly', () => {
-    const { baseElement } = render(<{{pascalCase name}} />);
+    const { baseElement } = render(<Navbar>Navbar header</Navbar>);
 
     expect(baseElement).toMatchSnapshot();
     expect(baseElement).toBeTruthy();

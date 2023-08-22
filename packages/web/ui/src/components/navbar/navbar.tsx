@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 
-type NavbarProps = {
+export interface NavbarProps {
   children?: ReactNode;
-};
+}
 
-export default function Navbar({ children }: NavbarProps) {
+export function Navbar({ children }: NavbarProps) {
   return (
     <div
       className={[

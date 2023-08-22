@@ -10,6 +10,7 @@ module.exports = withTM({
     transpilePackages: [
       /* PLOP_INJECT_CORE_PACKAGE */
       'shared-core',
+      'web-ui',
     ],
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },

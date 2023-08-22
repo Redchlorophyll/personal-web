@@ -1,9 +1,20 @@
 import React from 'react';
-import info from '@/config/info';
 import Image from 'next/image';
 import { Linkedin, Github, Instagram, Facebook } from 'shared-icon';
 
-export default function ReachMeOut() {
+export interface ReachMeOutProps {
+  socialMedia: {
+    name: string;
+    note: string;
+    github: string;
+    email: string;
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+  };
+}
+
+export function ReachMeOut({ socialMedia }: ReachMeOutProps) {
   return (
     <section aria-labelledby="title">
       <div id="title" className="w-full flex justify-center text-center">
@@ -19,16 +30,16 @@ export default function ReachMeOut() {
       </div>
 
       <div className="flex gap-2">
-        <a href={info.linkedin} className="w-16 flex justify-center">
+        <a href={socialMedia.linkedin} className="w-16 flex justify-center">
           <Linkedin className="scale-[0.5] absolute" />
         </a>
-        <a href={info.github} className="w-16 flex justify-center">
+        <a href={socialMedia.github} className="w-16 flex justify-center">
           <Github className="scale-[0.5] absolute" />
         </a>
-        <a href={info.instagram} className="w-16 flex justify-center">
+        <a href={socialMedia.instagram} className="w-16 flex justify-center">
           <Instagram className="scale-[0.5] absolute" />
         </a>
-        <a href={info.facebook} className="w-16 flex justify-center">
+        <a href={socialMedia.facebook} className="w-16 flex justify-center">
           <Facebook className="scale-[0.5] absolute" />
         </a>
       </div>

@@ -1,18 +1,18 @@
-import React, { ReactNode, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import React, { ReactNode, useEffect, useState } from 'react';
 
-type navbarProps = {
+export interface NavbarItemProps {
   children: ReactNode;
   isActive?: boolean;
   href?: string;
   wip?: boolean;
-};
+}
 
-export default function NavbarItem({
+export function NavbarItem({
   children,
   href = '#',
   wip = false,
-}: navbarProps) {
+}: NavbarItemProps) {
   const [isChecked, setChecked] = useState<boolean>(false);
   const { asPath, push } = useRouter();
 
@@ -55,17 +55,15 @@ export default function NavbarItem({
         ].join(' ')}
       >
         {wip ? (
-          <div
+          <p
             className={[
               'bg-red-700 absolute z-[1] py-[1px] px-[3px]',
               'text-xs -translate-y-1 right-0 text-black-100',
             ].join(' ')}
           >
             WIP
-          </div>
-        ) : (
-          ''
-        )}
+          </p>
+        ) : null}
         {children}
       </div>
     </div>

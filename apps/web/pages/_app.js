@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
-import '@/assets/styles/globals.css';
+/* PLOP_INJECT_STYLING */
+import 'web-ui/styles.css';
 import 'shared-ui/styles.css';
+
+import '@/assets/styles/globals.css';
 import { store, Provider } from 'shared-core';
 import { AuthContextProvider } from '@/context/Auth';
 
