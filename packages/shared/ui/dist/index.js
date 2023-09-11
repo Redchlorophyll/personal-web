@@ -62,14 +62,14 @@ module.exports = __toCommonJS(src_exports);
 
 // src/components/toggle-mode/toggle-mode.tsx
 var import_react = require("react");
+var import_redux_setup_custom = require("redux-setup-custom");
 var import_shared_core = require("shared-core");
-var import_shared_core2 = require("shared-core");
 var import_shared_icon = require("shared-icon");
 var import_jsx_runtime = require("react/jsx-runtime");
 var { toggleDark, toggleLight, localStorageTheme } = import_shared_core.themeSlice.actions;
 function ToggleMode() {
-  const theme = (0, import_shared_core2.useAppSelector)((state) => state.theme.theme);
-  const dispatch = (0, import_shared_core2.useAppDispatch)();
+  const theme = (0, import_redux_setup_custom.useAppSelector)((state) => state.theme.theme);
+  const dispatch = (0, import_redux_setup_custom.useAppDispatch)();
   const isSunny = theme === "light";
   function onChangeMode() {
     if (localStorage.getItem("theme") === "dark") {
@@ -114,7 +114,19 @@ function ToggleMode() {
               "w-10 h-10",
               "justify-center"
             ].join(" "),
-            children: isSunny ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_shared_icon.IcSunny, { className: "scale-90 -translate-x-[2px]" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_shared_icon.IcMoon, { className: "scale-90 translate-x-[3px] -translate-y-[1px]" })
+            children: isSunny ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              import_shared_icon.IcSunny,
+              {
+                className: "scale-90 -translate-x-[2px]",
+                "data-testid": "light-mode-icon"
+              }
+            ) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+              import_shared_icon.IcMoon,
+              {
+                className: "scale-90 translate-x-[3px] -translate-y-[1px]",
+                "data-testid": "dark-mode-icon"
+              }
+            )
           }
         )
       ]

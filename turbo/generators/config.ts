@@ -116,7 +116,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
             },
             {
               type: 'append',
-              path: `apps/${app}/pages/next.config.js`,
+              path: `apps/${app}/next.config.js`,
               pattern: `/* PLOP_INJECT_CORE_PACKAGE */`,
               template: `'${packageName}',`,
             },
@@ -129,15 +129,26 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
           destination: `packages/{{pathCase packageName}}`,
           base: 'templates/package/{{type}}',
           templateFiles: [
+            // for config files, applicable for all package type.
             `templates/package/${type}/**.hbs`,
             `templates/package/${type}/src/**.hbs`,
-            `templates/package/${type}/src/components/**.hbs`, // for ui type package
-            `templates/package/${type}/src/svg/**.hbs`, // for icon type package
-            `templates/package/${type}/src/data/**.hbs`, // for data type package
-            `templates/package/${type}/src/enums/**.hbs`, // for core type package
-            `templates/package/${type}/src/interfaces/**.hbs'=`, // for util type package
-            `templates/package/${type}/src/stores/**.hbs`, // for util type package
-            `templates/package/${type}/src/utils/**.hbs`, // for util type package
+
+            // for ui type package
+            `templates/package/${type}/src/components/**.hbs`,
+
+            // for icon type package
+            `templates/package/${type}/src/svg/**.hbs`,
+
+            // for data type package
+            `templates/package/${type}/src/data/**.hbs`,
+
+            // for core type package
+            `templates/package/${type}/src/enums/**.hbs`,
+
+            // for util type package
+            `templates/package/${type}/src/interfaces/**.hbs'=`,
+            `templates/package/${type}/src/stores/**.hbs`,
+            `templates/package/${type}/src/utils/**.hbs`,
           ],
         },
         {

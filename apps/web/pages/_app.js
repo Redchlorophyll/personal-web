@@ -4,7 +4,8 @@ import 'web-ui/styles.css';
 import 'shared-ui/styles.css';
 
 import '@/assets/styles/globals.css';
-import { store, Provider } from 'shared-core';
+import { Provider } from 'react-redux';
+import { store } from 'redux-setup-custom';
 import { AuthContextProvider } from '@/context/Auth';
 
 export default function App({ Component, pageProps }) {

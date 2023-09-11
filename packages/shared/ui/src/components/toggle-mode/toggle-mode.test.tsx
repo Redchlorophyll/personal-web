@@ -1,51 +1,62 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import { ToggleMode } from './toggle-mode';
-import { Provider } from 'react-redux';
-import userEvent from '@testing-library/user-event';
-import { store } from 'shared-core';
+import {
+  act,
+  screen,
+  renderWithProviders,
+  reduxProvider,
+  userEvent,
+} from 'testing-library-react-custom';
 
-describe('<ToggleMode />', () => {
+describe('shared - ui - toggle-mode', () => {
   test('should render properly', () => {
-    const { baseElement } = render(
-      <Provider store={store}>
-        <ToggleMode />
-      </Provider>
-    );
+    const { baseElement } = renderWithProviders(<ToggleMode />, {
+      provider: reduxProvider({
+        preloadedState: {
+          theme: {
+            theme: 'light',
+          },
+        },
+      }),
+    });
 
     expect(baseElement).toMatchSnapshot();
     expect(baseElement).toBeTruthy();
   });
 
-  test('it should show dark mode icons when clicked', async () => {
-    const user = userEvent.setup();
-    render(
-      <Provider store={store}>
-        <ToggleMode />
-      </Provider>
-    );
-
-    const toggleMode = screen.getByRole('checkbox', {
-      name: 'toggle-mode',
+  test('should show light mode', async () => {
+    renderWithProviders(<ToggleMode />, {
+      provider: reduxProvider({
+        preloadedState: {
+          theme: {
+            theme: 'light',
+          },
+        },
+      }),
     });
 
-    await user.click(toggleMode);
-
-    expect(screen.getByAltText('Dark mode icon')).toBeInTheDocument();
+    expect(screen.getByTestId('light-mode-icon')).toBeVisible();
   });
 
-  test('it should show light mode', () => {
-    render(
-      <Provider store={store}>
-        <ToggleMode />
-      </Provider>
-    );
+  test('should show dark mode icons when clicked', async () => {
+    const user = userEvent;
+    renderWithProviders(<ToggleMode />, {
+      provider: reduxProvider({
+        preloadedState: {
+          theme: {
+            theme: 'light',
+          },
+        },
+      }),
+    });
 
     const toggleMode = screen.getByRole('checkbox', {
       name: 'toggle-mode',
     });
 
-    fireEvent.click(toggleMode);
+    await act(async () => {
+      await user.click(toggleMode);
+    });
 
-    expect(screen.getByAltText('Light mode icon')).toBeInTheDocument();
+    expect(screen.getByTestId('dark-mode-icon')).toBeVisible();
   });
 });

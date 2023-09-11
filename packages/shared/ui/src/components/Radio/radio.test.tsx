@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Radio } from './index';
-import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 function RadioWrapper() {
   const [radio, setRadio] = useState<string>('');
@@ -25,15 +28,22 @@ function RadioWrapper() {
 }
 
 describe('shared - ui - radio', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(<RadioWrapper />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+
   test('it should render properly', () => {
-    render(<RadioWrapper />);
+    renderWithProviders(<RadioWrapper />);
     const target = screen.getByRole('radio');
     expect(target).toBeInTheDocument();
   });
 
   test('it should be checked when clicked', async () => {
     const user = userEvent.setup();
-    render(<RadioWrapper />);
+    renderWithProviders(<RadioWrapper />);
     const target = screen.getByRole('radio');
     expect(screen.queryByText('test')).not.toBeInTheDocument();
 

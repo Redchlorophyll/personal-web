@@ -17,7 +17,7 @@ const customJestConfig = {
     '@/(.*)$': '<rootDir>/$1',
   },
   transform: {
-    '\\.[jt]sx?$': 'babel-jest',
+    '\\.[jt]sx?$': 'ts-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg|gif)$':
       'jest-transform-stub',
   },

@@ -1,12 +1,25 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+
 import '@testing-library/jest-dom';
 import { Tooltip } from './index';
-import userEvent from '@testing-library/user-event';
+
+import {
+  screen,
+  renderWithProviders,
+  userEvent,
+} from 'testing-library-react-custom';
 
 describe('shared - ui - tooltip', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(
+      <Tooltip tooltipContent={'this is tooltip'}>Click me Please!</Tooltip>
+    );
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
   test('it should render properly', () => {
-    render(
+    renderWithProviders(
       <Tooltip tooltipContent={'this is tooltip'}>Click me Please!</Tooltip>
     );
     const target = screen.getByText('Click me Please!');
@@ -16,7 +29,7 @@ describe('shared - ui - tooltip', () => {
 
   test('it should show tooltip content when being hovered', async () => {
     const user = userEvent.setup();
-    render(
+    renderWithProviders(
       <Tooltip tooltipContent={'this is tooltip'}>Click me Please!</Tooltip>
     );
     const target = screen.getByText('Click me Please!');

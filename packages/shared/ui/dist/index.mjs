@@ -20,8 +20,8 @@ var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 
 // src/components/toggle-mode/toggle-mode.tsx
 import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "redux-setup-custom";
 import { themeSlice } from "shared-core";
-import { useAppSelector, useAppDispatch } from "shared-core";
 import { IcMoon, IcSunny } from "shared-icon";
 import { jsx, jsxs } from "react/jsx-runtime";
 var { toggleDark, toggleLight, localStorageTheme } = themeSlice.actions;
@@ -72,7 +72,19 @@ function ToggleMode() {
               "w-10 h-10",
               "justify-center"
             ].join(" "),
-            children: isSunny ? /* @__PURE__ */ jsx(IcSunny, { className: "scale-90 -translate-x-[2px]" }) : /* @__PURE__ */ jsx(IcMoon, { className: "scale-90 translate-x-[3px] -translate-y-[1px]" })
+            children: isSunny ? /* @__PURE__ */ jsx(
+              IcSunny,
+              {
+                className: "scale-90 -translate-x-[2px]",
+                "data-testid": "light-mode-icon"
+              }
+            ) : /* @__PURE__ */ jsx(
+              IcMoon,
+              {
+                className: "scale-90 translate-x-[3px] -translate-y-[1px]",
+                "data-testid": "dark-mode-icon"
+              }
+            )
           }
         )
       ]

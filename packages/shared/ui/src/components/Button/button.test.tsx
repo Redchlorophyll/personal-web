@@ -1,9 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { Button } from './index';
 import { useState } from 'react';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 function ButtonWrapper() {
   const [status, setStatus] = useState<string>('empty');
@@ -23,8 +25,15 @@ function ButtonWrapper() {
 }
 
 describe('shared - ui - Button', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(<ButtonWrapper />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+
   test('It should render properly', () => {
-    render(<ButtonWrapper />);
+    renderWithProviders(<ButtonWrapper />);
     const target = screen.getByText('Test');
 
     expect(target).toBeInTheDocument();
@@ -32,7 +41,7 @@ describe('shared - ui - Button', () => {
 
   test('It should show status when clicked', async () => {
     const user = userEvent.setup();
-    render(<ButtonWrapper />);
+    renderWithProviders(<ButtonWrapper />);
     const target = screen.getByRole('button');
 
     expect(screen.queryByText('empty')).toBeInTheDocument();

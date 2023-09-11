@@ -5,6 +5,14 @@ module.exports = withTM({
   images: {
     domains: ['i.pinimg.com', 'lh3.googleusercontent.com', 'media.licdn.com'],
   },
+  experimental: {
+    transpilePackages: [
+      /* PLOP_INJECT_CORE_PACKAGE */
+      'shared-core',
+      'web-ui',
+    ],
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

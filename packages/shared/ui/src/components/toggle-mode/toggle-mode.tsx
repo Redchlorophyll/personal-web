@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from 'redux-setup-custom';
 import { themeSlice } from 'shared-core';
-import { useAppSelector, useAppDispatch } from 'shared-core';
 import { IcMoon, IcSunny } from 'shared-icon';
 
 const { toggleDark, toggleLight, localStorageTheme } = themeSlice.actions;
@@ -56,9 +56,15 @@ export function ToggleMode() {
         ].join(' ')}
       >
         {isSunny ? (
-          <IcSunny className="scale-90 -translate-x-[2px]" />
+          <IcSunny
+            className="scale-90 -translate-x-[2px]"
+            data-testid="light-mode-icon"
+          />
         ) : (
-          <IcMoon className="scale-90 translate-x-[3px] -translate-y-[1px]" />
+          <IcMoon
+            className="scale-90 translate-x-[3px] -translate-y-[1px]"
+            data-testid="dark-mode-icon"
+          />
         )}
       </label>
     </div>

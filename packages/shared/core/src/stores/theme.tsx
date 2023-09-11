@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface ThemeState {
-  theme: String;
+  theme: 'light' | 'dark';
 }
 
 const initialState: ThemeState = {
@@ -19,7 +19,7 @@ export const themeSlice = createSlice({
     toggleDark: (state) => {
       state.theme = 'dark';
     },
-    setTheme: (state, action: PayloadAction<String>) => {
+    setTheme: (state, action: PayloadAction<'light' | 'dark'>) => {
       state.theme = action.payload;
     },
     localStorageTheme: (state) => {
@@ -34,7 +34,3 @@ export const themeSlice = createSlice({
     },
   },
 });
-
-// Action creators are generated for each case reducer function
-
-export default themeSlice.reducer;

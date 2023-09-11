@@ -1,9 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { Input } from './index';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 function InputWrapper(props: { isDisabled?: boolean }) {
   const [value, setValue] = useState<string>('');
@@ -20,8 +22,15 @@ function InputWrapper(props: { isDisabled?: boolean }) {
 }
 
 describe('shared - ui - Input', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(<InputWrapper />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+
   test('It should render properly', () => {
-    render(<InputWrapper />);
+    renderWithProviders(<InputWrapper />);
     const target = screen.getByLabelText('input');
 
     expect(target).toBeInTheDocument();
@@ -29,7 +38,7 @@ describe('shared - ui - Input', () => {
 
   test('It should show right input when inputing value', async () => {
     const user = userEvent.setup();
-    render(<InputWrapper />);
+    renderWithProviders(<InputWrapper />);
     const target = screen.getByLabelText('input');
 
     expect(screen.getByDisplayValue('')).toBeInTheDocument();
@@ -39,7 +48,7 @@ describe('shared - ui - Input', () => {
 
   test('It should not allow text input when disabled', async () => {
     const user = userEvent.setup();
-    render(<InputWrapper isDisabled={true} />);
+    renderWithProviders(<InputWrapper isDisabled={true} />);
     const target = screen.getByLabelText('input');
 
     expect(screen.getByDisplayValue('')).toBeInTheDocument();

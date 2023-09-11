@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Checkbox } from './index';
-import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 function CheckboxWrapper() {
   const [valueCheckbox, setValueCheckbox] = useState<Array<string>>([]);
@@ -25,15 +28,22 @@ function CheckboxWrapper() {
 }
 
 describe('shared - ui - checkbox', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(<CheckboxWrapper />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+
   test('it should render properly', () => {
-    render(<CheckboxWrapper />);
+    renderWithProviders(<CheckboxWrapper />);
     const target = screen.getByRole('checkbox');
     expect(target).toBeInTheDocument();
   });
 
   test('it should show value when clicked', async () => {
     const user = userEvent.setup();
-    render(<CheckboxWrapper />);
+    renderWithProviders(<CheckboxWrapper />);
     const target = screen.getByRole('checkbox');
     expect(screen.queryByText('test')).not.toBeInTheDocument();
 

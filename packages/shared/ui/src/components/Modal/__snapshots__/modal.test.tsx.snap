@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - Modal should render properly 1`] = `
+<body
+  class="overflow-hidden"
+>
+  <div>
+    <div
+      class="w-full h-[100vh] fixed top-0 left-0 z-30 bg-black-900 opacity-25"
+    />
+    <div
+      class="w-full h-[100vh] absolute z-30 flex justify-center align-baseline top-0 left-0"
+    >
+      <div
+        class="w-[616px] min-h-[503px] bg-black-100 dark:bg-dark-layout top-1/2 fixed -translate-y-1/2 p-[25px_30px] rounded-2xl text"
+      >
+        <div
+          class="pb-5"
+        >
+          <span
+            class="text-base font-bold"
+          >
+            this is modal title
+          </span>
+        </div>
+        <div>
+          this is modal content
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
