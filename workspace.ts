@@ -29,6 +29,11 @@ const workspace = {
       name: 'shared-icon',
       value: 'shared/icon',
     },
+
+    {
+      name: 'shared-core',
+      value: 'shared/core',
+    },
   ],
   packageTypes: [
     {
@@ -53,4 +58,4 @@ const workspace = {
   ],
 };
 
-export default workspace;
+module.exports = workspace;

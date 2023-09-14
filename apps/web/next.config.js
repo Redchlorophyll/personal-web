@@ -1,5 +1,8 @@
 const withTM = require('next-transpile-modules')(['ui']);
 const path = require('path');
+const workspace = require('../../workspace.ts');
+
+const packages = workspace.packages.map((pckge) => pckge.name);
 
 module.exports = withTM({
   reactStrictMode: true,
@@ -7,11 +10,7 @@ module.exports = withTM({
     domains: ['i.pinimg.com', 'lh3.googleusercontent.com', 'media.licdn.com'],
   },
   experimental: {
-    transpilePackages: [
-      /* PLOP_INJECT_CORE_PACKAGE */
-      'shared-core',
-      'web-ui',
-    ],
+    transpilePackages: [...packages],
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   webpack(config) {
