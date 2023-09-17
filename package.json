@@ -14,7 +14,10 @@
     "create:component": "turbo gen component",
     "create:package": "turbo gen package",
     "create:app": "turbo gen app",
-    "create:redux": "turbo gen redux"
+    "create:redux": "turbo gen redux",
+    "create:method": "turbo gen method",
+    "create:interface": "turbo gen interface",
+    "create:enum": "turbo gen enum"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.2",
