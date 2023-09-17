@@ -1,6 +1,6 @@
 import { User } from 'firebase/auth';
 
-function isUserAuthorized(user: User) {
+const isUserAuthorized = (user: User) => {
   if (user === null) return false;
   if (
     user.displayName === 'Dhonni Ari' &&
@@ -9,6 +9,6 @@ function isUserAuthorized(user: User) {
     return true;
   }
   return false;
-}
+};
 
 export { isUserAuthorized };

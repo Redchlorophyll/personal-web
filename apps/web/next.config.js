@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')(['ui']);
+const withTM = require('next-transpile-modules')(['shared-ui']);
 const path = require('path');
 const workspace = require('../../workspace.ts');
 

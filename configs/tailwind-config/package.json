@@ -1,0 +1,13 @@
+{
+  "name": "tailwind-config",
+  "version": "0.0.0",
+  "main": "./base.js",
+  "exports": {
+    ".": "./base.js"
+  },
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
