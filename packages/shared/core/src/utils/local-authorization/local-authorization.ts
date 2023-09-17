@@ -1,6 +1,9 @@
-import { User } from 'firebase/auth';
+interface isUserAuthorizedInterface {
+  displayName: string;
+  email: string;
+}
 
-const isUserAuthorized = (user: User) => {
+const isUserAuthorized = (user: isUserAuthorizedInterface) => {
   if (user === null) return false;
   if (
     user.displayName === 'Dhonni Ari' &&

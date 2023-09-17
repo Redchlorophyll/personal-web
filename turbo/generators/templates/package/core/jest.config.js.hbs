@@ -4,15 +4,12 @@ const customJestConfig = {
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
   moduleDirectories: ['node_modules', '<rootDir>/src/'],
-  testEnvironment: 'jsdom',
   moduleNameMapper: {
     '@/(.*)connector(.ts)?$': '<rootDir>/$1connector.mock',
     '@/(.*)$': '<rootDir>/$1',
   },
   transform: {
     '\\.[jt]sx?$': 'ts-jest',
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg|gif)$':
-      'jest-transform-stub',
   },
 };
 

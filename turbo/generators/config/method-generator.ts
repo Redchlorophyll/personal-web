@@ -39,11 +39,11 @@ export const methodGenerator = (plop: PlopTypes.NodePlopAPI) => {
       },
       // will comment out this line until test file already added in template generator
 
-      // {
-      //   type: 'add',
-      //   path: 'packages/{{package}}/src/components/{{kebabCase name}}/{{kebabCase name}}.test.ts',
-      //   templateFile: 'templates/component/test.hbs',
-      // },
+      {
+        type: 'add',
+        path: 'packages/{{package}}/src/utils/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
+        templateFile: 'templates/method/test.hbs',
+      },
       {
         type: 'append',
         path: 'packages/{{package}}/src/index.ts',
