@@ -33,19 +33,19 @@ export const reduxGenerator = (plop: PlopTypes.NodePlopAPI) => {
     actions: [
       {
         type: 'add',
-        path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.tsx',
+        path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.ts',
         templateFile: 'templates/store/store.hbs',
       },
       // currently no test file, will comment out this file until template provided.
 
-      // {
-      //   type: 'add',
-      //   path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.test.tsx',
-      //   templateFile: 'templates/store/test.hbs',
-      // },
+      {
+        type: 'add',
+        path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.spec.ts',
+        templateFile: 'templates/store/test.hbs',
+      },
       {
         type: 'append',
-        path: 'packages/{{package}}/src/index.tsx',
+        path: 'packages/{{package}}/src/index.ts',
         pattern: `/* PLOP_INJECT_EXPORT */`,
         template: `export * from './stores/{{kebabCase name}}/{{kebabCase name}}';`,
       },
