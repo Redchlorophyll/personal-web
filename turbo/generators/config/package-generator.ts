@@ -28,6 +28,13 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
         choices: workspace.packageTypes,
       },
       {
+        type: 'list',
+        name: 'isAllPackages',
+        message: 'do you want apply the package into all apps?',
+        choices: ['Yes', 'No'],
+      },
+      {
+        when: (answer) => answer.isAllPackages === 'No',
         type: 'checkbox',
         name: 'affectedApp',
         message: 'what app that will consume this package',
@@ -42,77 +49,93 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
       },
     ],
     actions: (data) => {
-      const { affectedApp, type, packageName } = data || {};
+      const { affectedApp, isAllPackages } = data || {};
 
-      const plopActionForAffectedApp: Array<Array<PlopTypes.ActionType>> =
-        affectedApp.map((app) => {
-          return [
-            {
+      let plopActionForAffectedApp: Array<PlopTypes.ActionType> = [];
+      let apps: Array<string> = [];
+
+      switch (isAllPackages) {
+        case 'Yes':
+          plopActionForAffectedApp = workspace.apps.map((app) => {
+            return {
+              type: 'append',
+              path: `apps/${app.value}/pages/_app.js`,
+              pattern: `/* PLOP_INJECT_STYLING */`,
+              template: `import '{{packageName}}/styles.css';`,
+            };
+          });
+
+          apps = workspace.apps.map((app) => app.name);
+          break;
+        case 'No':
+          plopActionForAffectedApp = affectedApp.map((app) => {
+            return {
               type: 'append',
               path: `apps/${app}/pages/_app.js`,
               pattern: `/* PLOP_INJECT_STYLING */`,
-              template: `import '${packageName}/styles.css';`,
-            },
-          ];
-        });
+              template: `import '{{packageName}}/styles.css';`,
+            };
+          });
+
+          apps = affectedApp.map((app) => app) || [];
+          break;
+      }
 
       return [
         {
           type: 'addMany',
-          destination: `packages/{{pathCase packageName}}`,
+          destination: 'packages/{{pathCase packageName}}',
           base: 'templates/package/{{type}}',
           templateFiles: [
             // for config files, applicable for all package type.
-            `templates/package/${type}/**.hbs`,
-            `templates/package/${type}/src/**.hbs`,
+            'templates/package/{{type}}/**.hbs',
+            'templates/package/{{type}}/src/**.hbs',
 
             // for ui type package
-            `templates/package/${type}/src/components/**.hbs`,
+            'templates/package/{{type}}/src/components/**.hbs',
 
             // for icon type package
-            `templates/package/${type}/src/svg/**.hbs`,
+            'templates/package/{{type}}/src/svg/**.hbs',
 
             // for data type package
-            `templates/package/${type}/src/data/**.hbs`,
+            'templates/package/{{type}}/src/data/**.hbs',
 
             // for core type package
-            `templates/package/${type}/src/enums/**.hbs`,
+            'templates/package/{{type}}/src/enums/**.hbs',
 
             // for util type package
-            `templates/package/${type}/src/interfaces/**.hbs'=`,
-            `templates/package/${type}/src/stores/**.hbs`,
-            `templates/package/${type}/src/utils/**.hbs`,
+            'templates/package/{{type}}/src/interfaces/**.hbs',
+            'templates/package/{{type}}/src/stores/**.hbs',
+            'templates/package/{{type}}/src/utils/**.hbs',
           ],
         },
         {
           type: 'append',
           path: 'workspace.ts',
-          pattern: `/* PLOP_INJECT_PACKAGE */`,
+          pattern: '/* PLOP_INJECT_PACKAGE */',
           template: `
       {
-        name: '${packageName}',
+        name: '{{packageName}}',
         value: '{{pathCase packageName}}',
       },`,
         },
-        ...plopActionForAffectedApp.flat(),
+        ...plopActionForAffectedApp,
         function addPackageInsideApp(answers: {
           affectedApp?: Array<string>;
-          package?: string;
+          packageName?: string;
         }) {
-          if (!answers.package) {
-            return 'no package provided, skipping append file';
-          }
-
-          if (!answers.affectedApp) {
+          if (!answers.affectedApp && isAllPackages === 'No') {
             return 'no apps provided, skipping append file';
           }
 
-          answers.affectedApp.forEach((app) => {
+          console.log(apps);
+
+          apps.forEach((app) => {
             const packageJson = JSON.parse(
               fs.readFileSync(`apps/${app}/package.json`, 'utf-8')
             );
 
-            packageJson.devDependencies[answers.package || ''] = '*';
+            packageJson.dependencies[answers.packageName || ''] = '*';
 
             const newPackageJson = JSON.stringify(packageJson, null, 2);
 
@@ -123,9 +146,9 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
             );
           });
 
-          return answers.affectedApp
-            .map((app) => `/apps/${app}/package.json`)
-            .join(' & ');
+          return apps
+            .map((app) => '\x1b[34m•\x1b[0m ' + `/apps/${app}/package.json`)
+            .join('\n');
         },
         function runNodeInstallAfterCreation() {
           // after package creation we need to run this.

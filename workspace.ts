@@ -6,11 +6,6 @@ const workspace = {
       name: 'web',
       value: 'web',
     },
-
-    {
-      name: 'docs',
-      value: 'docs',
-    },
   ],
   packages: [
     /* PLOP_INJECT_PACKAGE */
@@ -54,6 +49,22 @@ const workspace = {
     {
       name: 'data',
       value: 'data',
+    },
+  ],
+  dependencies: [
+    {
+      name: 'react',
+      version: '12.0.0',
+      enforceAll: true, // not recomended
+      enforceOn: [],
+    },
+  ],
+  devDependencies: [
+    {
+      name: 'react',
+      version: '12.0.0',
+      enforceAll: true, // not recomended
+      enforceOn: [],
     },
   ],
 };

@@ -27,7 +27,7 @@ export const componentGenerator = (plop: PlopTypes.NodePlopAPI) => {
         choices: workspace.packages.filter((pckage) => {
           const splittedName = pckage.name.split('-');
 
-          return splittedName[1] === 'ui';
+          return splittedName[splittedName.length - 1] === 'ui';
         }),
       },
     ],

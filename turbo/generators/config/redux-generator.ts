@@ -26,7 +26,7 @@ export const reduxGenerator = (plop: PlopTypes.NodePlopAPI) => {
         choices: workspace.packages.filter((pckage) => {
           const splittedName = pckage.name.split('-');
 
-          return splittedName[1] === 'core';
+          return splittedName[splittedName.length - 1] === 'core';
         }),
       },
     ],
@@ -36,6 +36,8 @@ export const reduxGenerator = (plop: PlopTypes.NodePlopAPI) => {
         path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.tsx',
         templateFile: 'templates/store/store.hbs',
       },
+      // currently no test file, will comment out this file until template provided.
+
       // {
       //   type: 'add',
       //   path: 'packages/{{package}}/src/stores/{{kebabCase name}}/{{kebabCase name}}.test.tsx',
