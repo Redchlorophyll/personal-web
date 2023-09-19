@@ -1,4 +1,4 @@
-const workspace = require('../../../workspace.ts');
+const workspace = require('../../../workspace.config.js');
 
 import fs from 'fs-extra';
 import * as child from 'child_process';
@@ -98,7 +98,7 @@ export const appGenerator = (plop: PlopTypes.NodePlopAPI) => {
         },
         {
           type: 'append',
-          path: 'workspace.ts',
+          path: 'workspace.config.js',
           pattern: `/* PLOP_INJECT_APP */`,
           template: `
       {

@@ -1,4 +1,4 @@
-const workspace = require('../../../workspace.ts');
+const workspace = require('../../../workspace.config.js');
 
 import type { PlopTypes } from '@turbo/gen';
 

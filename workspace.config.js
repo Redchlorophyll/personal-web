@@ -51,22 +51,6 @@ const workspace = {
       value: 'data',
     },
   ],
-  dependencies: [
-    {
-      name: 'react',
-      version: '12.0.0',
-      enforceAll: true, // not recomended
-      enforceOn: [],
-    },
-  ],
-  devDependencies: [
-    {
-      name: 'react',
-      version: '12.0.0',
-      enforceAll: true, // not recomended
-      enforceOn: [],
-    },
-  ],
 };
 
 module.exports = workspace;
