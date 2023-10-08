@@ -8,6 +8,7 @@ import { methodGenerator } from './config/method-generator';
 import { interfaceGenerator } from './config/interface-generator';
 import { enumGenerator } from './config/enum-generator';
 import { addDependenciesGenerator } from './config/add-dependencies-generator';
+import { deleteDependenciesGenerator } from './config/delete-dependencies-generator';
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
   componentGenerator(plop);
@@ -25,4 +26,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   enumGenerator(plop);
 
   addDependenciesGenerator(plop);
+
+  deleteDependenciesGenerator(plop);
 }
