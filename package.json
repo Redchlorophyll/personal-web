@@ -17,7 +17,8 @@
     "create:redux": "turbo gen redux",
     "create:method": "turbo gen method",
     "create:interface": "turbo gen interface",
-    "create:enum": "turbo gen enum"
+    "create:enum": "turbo gen enum",
+    "dependencies:add": "turbo gen add-dependencies"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.2",

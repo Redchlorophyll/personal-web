@@ -1,5 +1,6 @@
 const packageConfig = {
   dependencies: [
+    /* PLOP_INJECT_DEPENDENCIES */
     {
       name: '@hookform/resolvers',
       version: '^2.9.10',
@@ -64,6 +65,7 @@ const packageConfig = {
     },
   ],
   devDependencies: [
+    /* PLOP_INJECT_DEV_DEPENDENCIES */
     {
       name: '@turbo/gen',
       version: '^1.10.2',

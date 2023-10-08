@@ -7,6 +7,7 @@ import { reduxGenerator } from './config/redux-generator';
 import { methodGenerator } from './config/method-generator';
 import { interfaceGenerator } from './config/interface-generator';
 import { enumGenerator } from './config/enum-generator';
+import { addDependenciesGenerator } from './config/add-dependencies-generator';
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
   componentGenerator(plop);
@@ -22,4 +23,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
   interfaceGenerator(plop);
 
   enumGenerator(plop);
+
+  addDependenciesGenerator(plop);
 }

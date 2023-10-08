@@ -1,6 +1,6 @@
 const withTM = require('next-transpile-modules')(['shared-ui']);
 const path = require('path');
-const workspace = require('../../workspace.ts');
+const workspace = require('../../workspace.config.js');
 
 const packages = workspace.packages.map((pckge) => pckge.name);
 
