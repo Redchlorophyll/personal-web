@@ -49,36 +49,25 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
       },
     ],
     actions: (data) => {
-      const { affectedApp, isAllPackages } = data || {};
+      const { affectedApp, isAllPackages, type } = data || {};
 
       let plopActionForAffectedApp: Array<PlopTypes.ActionType> = [];
       let apps: Array<string> = [];
 
-      switch (isAllPackages) {
-        case 'Yes':
-          plopActionForAffectedApp = workspace.apps.map((app) => {
-            return {
-              type: 'append',
-              path: `apps/${app.value}/pages/_app.js`,
-              pattern: `/* PLOP_INJECT_STYLING */`,
-              template: `import '{{packageName}}/styles.css';`,
-            };
-          });
+      const appsToProcess =
+        isAllPackages === 'Yes' ? workspace.apps : affectedApp || [];
 
-          apps = workspace.apps.map((app) => app.name);
-          break;
-        case 'No':
-          plopActionForAffectedApp = affectedApp.map((app) => {
-            return {
-              type: 'append',
-              path: `apps/${app}/pages/_app.js`,
-              pattern: `/* PLOP_INJECT_STYLING */`,
-              template: `import '{{packageName}}/styles.css';`,
-            };
-          });
+      apps = appsToProcess.map((app) => app.name);
 
-          apps = affectedApp.map((app) => app) || [];
-          break;
+      if (type === 'ui') {
+        plopActionForAffectedApp = appsToProcess.map((app) => ({
+          type: 'append',
+          path: `apps/${app.value}/pages/_app.tsx`,
+          pattern: `/* PLOP_INJECT_STYLING */`,
+          template: `import '{{packageName}}/styles.css';`,
+        }));
+
+        apps = appsToProcess.map((app) => app.name);
       }
 
       return [
@@ -108,16 +97,6 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
             'templates/package/{{type}}/src/stores/**.hbs',
             'templates/package/{{type}}/src/utils/**.hbs',
           ],
-        },
-        {
-          type: 'append',
-          path: 'workspace.config.js',
-          pattern: '/* PLOP_INJECT_PACKAGE */',
-          template: `
-      {
-        name: '{{packageName}}',
-        value: '{{pathCase packageName}}',
-      },`,
         },
         ...plopActionForAffectedApp,
         function addPackageInsideApp(answers: {
@@ -156,6 +135,16 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
           child.execSync('yarn install', { stdio: [0, 1, 2] });
 
           return 'node_modules installed';
+        },
+        {
+          type: 'append',
+          path: 'workspace.config.js',
+          pattern: '/* PLOP_INJECT_PACKAGE */',
+          template: `
+      {
+        name: '{{packageName}}',
+        value: '{{pathCase packageName}}',
+      },`,
         },
       ];
     },

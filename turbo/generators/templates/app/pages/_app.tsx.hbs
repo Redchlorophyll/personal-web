@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '@/assets/styles/globals.css';
 
-* PLOP_INJECT_STYLING */
+/* PLOP_INJECT_STYLING */
 import 'web-ui/styles.css';
 import 'shared-ui/styles.css';
 
@@ -13,7 +13,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }

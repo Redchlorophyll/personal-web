@@ -39,7 +39,7 @@ export const componentGenerator = (plop: PlopTypes.NodePlopAPI) => {
       },
       {
         type: 'add',
-        path: 'packages/{{package}}/src/components/{{kebabCase name}}/{{kebabCase name}}.test.tsx',
+        path: 'packages/{{package}}/src/components/{{kebabCase name}}/{{kebabCase name}}.spec.tsx',
         templateFile: 'templates/component/test.hbs',
       },
       {

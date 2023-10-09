@@ -188,11 +188,7 @@ const packageConfig = {
     {
       name: 'babel-jest',
       version: '^29.3.1',
-      enforceOn: [
-        'apps/web/package.json',
-        'packages/shared-ui/package.json',
-        'packages/shared-core/package.json',
-      ],
+      enforceOn: ['apps/web/package.json', 'packages/shared-core/package.json'],
     },
     {
       name: 'concurrently',

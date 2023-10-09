@@ -35,13 +35,6 @@ export const enumGenerator = (plop: PlopTypes.NodePlopAPI) => {
         path: 'packages/{{package}}/src/enums/{{kebabCase name}}-enum/{{kebabCase name}}.enum.ts',
         templateFile: 'templates/enum/enum.hbs',
       },
-      // will comment out this line until test file already added in template generator
-
-      // {
-      //   type: 'add',
-      //   path: 'packages/{{package}}/src/components/{{kebabCase name}}/{{kebabCase name}}.test.ts',
-      //   templateFile: 'templates/component/test.hbs',
-      // },
       {
         type: 'append',
         path: 'packages/{{package}}/src/index.ts',
