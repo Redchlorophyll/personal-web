@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { render, act, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Snackbar } from './index';
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  waitFor,
+  act,
+} from 'testing-library-react-custom';
 
 type propType = {
   isTimer: boolean;
@@ -36,7 +41,7 @@ function SnackbarWrapper(props: propType) {
 
 describe('shared - ui - Snakbar', () => {
   test('it should not rendered', () => {
-    render(
+    renderWithProviders(
       <div>
         <Snackbar variant="error">This is Snackbar Error Message!</Snackbar>
       </div>
@@ -47,7 +52,7 @@ describe('shared - ui - Snakbar', () => {
   });
 
   test('it should render properly', () => {
-    render(
+    renderWithProviders(
       <Snackbar variant="error" isShown={true}>
         This is Snackbar Error Message!
       </Snackbar>
@@ -59,7 +64,7 @@ describe('shared - ui - Snakbar', () => {
   });
 
   it('should not show close icon when timer props defined', () => {
-    render(
+    renderWithProviders(
       <Snackbar variant="error" isShown={true} timer={5000}>
         This is Snackbar Error Message!
       </Snackbar>
@@ -72,7 +77,7 @@ describe('shared - ui - Snakbar', () => {
 
   it('should disappear when timer is ended', async () => {
     await act(async () => {
-      render(<SnackbarWrapper isTimer />);
+      renderWithProviders(<SnackbarWrapper isTimer />);
       mockAllIsIntersecting(true);
 
       waitFor(() => {
@@ -87,7 +92,7 @@ describe('shared - ui - Snakbar', () => {
   it('should disappear when close is clicked', async () => {
     await act(async () => {
       const user = userEvent.setup();
-      render(<SnackbarWrapper isTimer={false} />);
+      renderWithProviders(<SnackbarWrapper isTimer={false} />);
       mockAllIsIntersecting(true);
       let target;
 

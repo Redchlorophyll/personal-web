@@ -9,12 +9,11 @@ import {
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { useRouter } from 'next/router';
-import ToggleMode from '@/components/ToggleMode';
 import Image from 'next/image';
 import Blank from '~/layouts/Blank';
 import linkyList from '@/config/LinkyList';
-import ReachMeOut from '@/components/ReachMeOut';
-import { Button, Checkbox } from 'shared-ui';
+import { ReachMeOut } from 'web-ui';
+import { Button, ToggleMode } from 'shared-ui';
 import { UserAuth } from '@/context/Auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -263,7 +262,7 @@ export default function Linky() {
   const inputProfileImageRef = useRef(null);
   const [profileData, setProfileData] = useState<profileDataType>({
     image:
-      'https://media.licdn.com/dms/image/D5603AQGnGKppkU2ZRw/profile-displayphoto-shrink_800_800/0/1673371446943?e=1681948800&v=beta&t=7NELWDvP-I3OgXRgwY6a4CqdDQI3qDXCMyAii9xNc7g',
+      'https://media.licdn.com/dms/image/D5603AQHsvsKdiqGqDQ/profile-displayphoto-shrink_800_800/0/1680023383414?e=1693440000&v=beta&t=vTxpSMJ4FMim9C_xUsxLOFikVOaOzTU_pcj51RaMNME',
     info,
   });
   const [isFetching, setIsFetching] = useState(true); //dummy until API Exists
@@ -642,7 +641,7 @@ export default function Linky() {
         </div>
 
         <section className="flex justify-center w-full h-[20vh] pt-4 mb-48">
-          <ReachMeOut />
+          <ReachMeOut socialMedia={info} />
         </section>
 
         <footer className="text-xs md:text-base relative bottom-5 w-full text-center text-[#acacac]">

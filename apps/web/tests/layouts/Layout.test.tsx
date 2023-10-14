@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Layout from '~/Layouts';
+import Layout from '@/layouts';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { store } from '@/store';
+import { store } from 'shared-core';
 
 jest.mock('next/dynamic', () => ({
   __esModule: true,

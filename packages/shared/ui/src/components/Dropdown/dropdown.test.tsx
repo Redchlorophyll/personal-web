@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { Dropdown } from './index';
-import userEvent from '@testing-library/user-event';
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 type optVal = {
   label: string;
@@ -45,8 +47,17 @@ function DropdownWrapper(props: props) {
 }
 
 describe('shared - ui - dropdown', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(
+      <DropdownWrapper isCombobox={false} />
+    );
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+
   test('it should render properly', () => {
-    render(<DropdownWrapper isCombobox={false} />);
+    renderWithProviders(<DropdownWrapper isCombobox={false} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText('pilih bank');
@@ -55,7 +66,7 @@ describe('shared - ui - dropdown', () => {
 
   test('it should show right value', async () => {
     const user = userEvent.setup();
-    render(<DropdownWrapper isCombobox={false} />);
+    renderWithProviders(<DropdownWrapper isCombobox={false} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText('pilih bank');
@@ -67,7 +78,7 @@ describe('shared - ui - dropdown', () => {
 
   it('should change combobox value if changed by input', async () => {
     const user = userEvent.setup();
-    render(<DropdownWrapper isCombobox={true} />);
+    renderWithProviders(<DropdownWrapper isCombobox={true} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText('pilih bank');
@@ -78,7 +89,7 @@ describe('shared - ui - dropdown', () => {
 
   it('should show suggestion when input exists in options', async () => {
     const user = userEvent.setup();
-    render(<DropdownWrapper isCombobox={true} />);
+    renderWithProviders(<DropdownWrapper isCombobox={true} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText('pilih bank');
@@ -89,7 +100,7 @@ describe('shared - ui - dropdown', () => {
 
   it('should clear value selection', async () => {
     const user = userEvent.setup();
-    render(<DropdownWrapper isCombobox={false} />);
+    renderWithProviders(<DropdownWrapper isCombobox={false} />);
     mockAllIsIntersecting(true);
 
     const target = screen.getByPlaceholderText('pilih bank');

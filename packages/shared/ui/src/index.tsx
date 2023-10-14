@@ -1,4 +1,6 @@
 import * as React from 'react';
+/* PLOP_INJECT_EXPORT */
+export * from './components/toggle-mode/toggle-mode';
 export * from './components/Button/index';
 export * from './components/Radio/index';
 export * from './components/Input/index';

@@ -1,9 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { Textarea } from './index';
-import { act } from 'react-dom/test-utils';
+import {
+  renderWithProviders,
+  screen,
+  userEvent,
+  act,
+} from 'testing-library-react-custom';
 
 function InputWrapper({
   disabled = false,
@@ -32,17 +34,17 @@ function InputWrapper({
   );
 }
 
-describe('shared - ui - Input', () => {
-  test('It should render properly', () => {
-    render(<InputWrapper />);
-    const target = screen.getByRole('textbox');
+describe('shared - ui - Textarea', () => {
+  test('should render properly', () => {
+    const { baseElement } = renderWithProviders(<InputWrapper />);
 
-    expect(target).toBeInTheDocument();
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
   });
 
   test('It should not allow text input when disabled', async () => {
     const user = userEvent.setup();
-    render(<InputWrapper disabled={true} />);
+    renderWithProviders(<InputWrapper disabled={true} />);
     const target = screen.getByRole('textbox');
 
     await act(async () => await user.type(target, 'test'));
@@ -51,7 +53,7 @@ describe('shared - ui - Input', () => {
 
   test('It should show right input when inputing value', async () => {
     const user = userEvent.setup();
-    render(<InputWrapper />);
+    renderWithProviders(<InputWrapper />);
     const target = screen.getByRole('textbox');
 
     expect(screen.queryByDisplayValue('')).toBeInTheDocument();
@@ -61,7 +63,7 @@ describe('shared - ui - Input', () => {
 
   test('It should show right input when inputing value', async () => {
     const user = userEvent.setup();
-    render(<InputWrapper limit={5} />);
+    renderWithProviders(<InputWrapper limit={5} />);
     const target = screen.getByRole('textbox');
 
     expect(screen.queryByDisplayValue('')).toBeInTheDocument();

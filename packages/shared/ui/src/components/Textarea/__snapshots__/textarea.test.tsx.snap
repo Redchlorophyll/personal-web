@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - Input should render properly 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="flex flex-col items-start"
+      >
+        <label
+          class="pb-[5px]"
+          for="textarea"
+        >
+          textarea
+        </label>
+        <textarea
+          class="w-full h-[170px] outline-none border-[0.5px] border-solid border-[#464646] rounded-[7px] px-[13px] py-[8px] resize-none focus:dark:drop-shadow-[0px_1px_17px_#406FCB] dark:text-black-900 disabled:bg-black-200 disabled:text-black-700 disabled:border-black-600 dark:disabled:bg-black-500"
+          id="textarea"
+          placeholder="This is Textarea"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;

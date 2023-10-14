@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - Button should render properly 1`] = `
+<body>
+  <div>
+    <div>
+      <p>
+        empty
+      </p>
+      <button
+        class="w-fit min-w-[140px] px-[27px] pt-[3px] pb-[6px] h-[34px] rounded-[27.2748px] leading-[22px] bg-yellow-700 text-black-100 active:bg-yellow-900"
+        type="button"
+      >
+        Test
+      </button>
+    </div>
+  </div>
+</body>
+`;

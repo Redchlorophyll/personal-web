@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - checkbox should render properly 1`] = `
+<body>
+  <div>
+    <div>
+      <label>
+        <input
+          class="peer w-[24px] h-[24px] sr-only"
+          type="checkbox"
+          value="test"
+        />
+        <div
+          class="inline-block w-[24px] h-[24px] bg-black-100 border-solid border-[1px] border-black-800 rounded-[3px] peer-checked:bg-primary-800 peer-checked:border-primary-800 p-[6px_3px_4px_1px] peer-checked:drop-shadow-[0px_1px_4px_#6F9DF8]"
+        >
+          <svg
+            fill="none"
+            height="11"
+            width="18"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m0 4.228 1.29-1.11L7.116 9.89 5.826 11z"
+              fill="#fff"
+            />
+            <path
+              d="m5.826 11-1.11-1.29L16.003 0l1.11 1.29z"
+              fill="#fff"
+            />
+          </svg>
+        </div>
+      </label>
+    </div>
+  </div>
+</body>
+`;

@@ -1,13 +1,16 @@
 import React, { ReactNode, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import ToggleMode from '@/components/ToggleMode';
+import { Navbar } from 'web-ui';
+import { ToggleMode } from 'shared-ui';
 import { IcBack } from 'shared-icon';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-const NavbarItem = dynamic(() => import('@/components/Navbar/NavbarItem'), {
-  suspense: true,
-});
+const NavbarItem = dynamic(
+  () => import('web-ui').then((mod) => mod.NavbarItem),
+  {
+    ssr: false,
+  }
+);
 
 type DefaultLayoutProps = {
   children: ReactNode;
