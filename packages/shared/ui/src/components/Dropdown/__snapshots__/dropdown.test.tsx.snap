@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - dropdown should render properly 1`] = `
+<body>
+  <div>
+    <div>
+      <button>
+        trigger blur
+      </button>
+      <div
+        class="flex flex-col items-start"
+      >
+        <div
+          class="w-full relative z-[5] dark:text-black-900"
+          data-testid="focus-element"
+        >
+          <input
+            class="peer cursor-pointer bg-black-100 w-full p-[5px_17px_5px_13px] border-black-800 border-solid border-[0.5px] focus:outline-none focus:border-solid focus:border-[0.5px] focus:border-primary-800 rounded-lg dark:focus:drop-shadow-[0px_1px_17px_#406fcb]"
+            id=""
+            placeholder="pilih bank"
+            readonly=""
+            type="text"
+            value=""
+          />
+          <svg
+            class="z-1 absolute left-full top-[13px] -translate-x-[28px] transition-transform peer-focus:transition-transform peer-focus:rotate-180"
+            fill="none"
+            height="10"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.202 0a2.576 2.576 0 0 1-.047 3.643l-6.36 6.194L5.999 7.99 14.202 0Z"
+              fill="url(#ic_arrow_svg__a)"
+            />
+            <path
+              d="M1.839.093 9.635 8.04 7.796 9.844 1.804 3.736A2.576 2.576 0 0 1 1.84.093Z"
+              fill="#D9D9D9"
+            />
+            <defs>
+              <lineargradient
+                gradientUnits="userSpaceOnUse"
+                id="ic_arrow_svg__a"
+                x1="12.056"
+                x2="6.673"
+                y1="4.033"
+                y2="9.293"
+              >
+                <stop
+                  stop-color="#CBCBCB"
+                />
+                <stop
+                  offset="1"
+                  stop-color="#BCC0CA"
+                />
+              </lineargradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

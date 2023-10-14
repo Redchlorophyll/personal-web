@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { UserAuth } from "@/context/Auth";
-import { Button } from "ui";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { UserAuth } from '@/context/Auth';
+import { Button } from 'shared-ui';
+import Image from 'next/image';
+import { IcLoading } from 'shared-icon';
 
 export default function GoogleLogin() {
   const { googleSignInWithRedirect, user, logout } = UserAuth();
@@ -18,12 +19,12 @@ export default function GoogleLogin() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("isLogin") === "true") setIsLoggedIn(true);
+    if (localStorage.getItem('isLogin') === 'true') setIsLoggedIn(true);
     else setIsLoggedIn(false);
 
     // watch changes in localStorage
-    window.addEventListener("storage", () => {
-      if (localStorage.getItem("isLogin") === "true") setIsLoggedIn(true);
+    window.addEventListener('storage', () => {
+      if (localStorage.getItem('isLogin') === 'true') setIsLoggedIn(true);
       else setIsLoggedIn(false);
     });
   }, []);
@@ -34,14 +35,16 @@ export default function GoogleLogin() {
         <div className="pb-5">
           <h1 className="mb-2">Google Sign Up</h1>
           {isLoggedIn && Object.keys(user || {}).length === 0 ? (
-            <div className="flex justify-center">
-              <div className="bg-[url('../img/icons/ic_loading.svg')] w-[40px] h-[40px] bg-contain animate-spin" />
+            <div className="flex justify-center h-12 translate-y-5">
+              <div className="absolute animate-spin">
+                <IcLoading className="scale-[4]" />
+              </div>
             </div>
           ) : (
-            ""
+            ''
           )}
           {Object.keys(user || {}).length === 0 ? (
-            ""
+            ''
           ) : (
             <>
               <div className="font-semibold mb-2">Logged in as,</div>
@@ -69,7 +72,7 @@ export default function GoogleLogin() {
         <div className="pb-2">
           {Object.keys(user || {}).length === 0 ? (
             isLoggedIn ? (
-              ""
+              ''
             ) : (
               <Button onClick={onClickGoogleSignIn}>Google Sign In</Button>
             )
@@ -82,13 +85,13 @@ export default function GoogleLogin() {
         <Button
           variant={
             isLoggedIn && Object.keys(user || {}).length === 0
-              ? "muted"
-              : "primary"
+              ? 'muted'
+              : 'primary'
           }
           onClick={() =>
             isLoggedIn && Object.keys(user || {}).length === 0
-              ? ""
-              : router.push("/linky")
+              ? ''
+              : router.push('/linky')
           }
         >
           Go back to Linky Page

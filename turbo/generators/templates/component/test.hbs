@@ -1,0 +1,11 @@
+import { {{pascalCase name}} } from './{{kebabCase name}}';
+import { renderWithProviders } from 'testing-library-react-custom';
+
+describe('<{{pascalCase name}} />', () => {
+  it('should render properly', () => {
+    const { baseElement } = renderWithProviders(<{{pascalCase name}} />);
+
+    expect(baseElement).toMatchSnapshot();
+    expect(baseElement).toBeTruthy();
+  });
+});

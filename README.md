@@ -1,18 +1,50 @@
+# How To Run on Your Local
+
+1. make sure already install yarn. If you hasn't run this following command
+
+```
+npm install yarn -g
+```
+
+2. run this following command to install all required modules
+
+```
+yarn install
+```
+
+3. To develop all apps and packages, run the following command:
+
+```
+yarn run dev
+```
+
+4. Happy Coding!
+
+# Staging Url
+
+[dahs-git-staging-redchlorophyll.vercel.app](https://dahs-git-staging-redchlorophyll.vercel.app/)
+
+# commit guideline
+
+//tbd
+
+# =====OLD README BELLOW======
+
 # Turborepo starter
 
 This is an official starter Turborepo.
 
 ## What's inside?
 
-This Turborepo includes the following packages/apps:
+This repository build with Turborepo as monorepo used. with following main code structures:
 
-### Apps and Packages
+### Apps, Packages, Config
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `apps/docs`: a [Next.js](https://nextjs.org) app //tbd
+- `apps/web`: main web of dahs web
+- `packages/shared/ui`: a stub React component library shared by both `web` and `docs` applications
+- `config/eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `config/tsconfig`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 

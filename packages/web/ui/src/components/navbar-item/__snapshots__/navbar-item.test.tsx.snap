@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavbarItem /> should render properly 1`] = `
+<body>
+  <div>
+    <div
+      class="relative h-[calc(100%+20px)]"
+    >
+      <input
+        class="cursor-pointer w-full h-full peer absolute -translate-y-3 z-[2] opacity-0"
+        type="checkbox"
+      />
+      <div
+        class="absolute transition-all peer-hover:h-[65%] bg-red-200 h-0 w-full rounded-b-[3px] peer-checked:text-black-100 peer-checked:peer-hover:h-full peer-checked:h-full peer-checked:bg-primary-700"
+      />
+       
+      <div
+        class="relative p-[18px] transition-colors peer-hover:text-black-100 peer-checked:text-black-100 text-lg"
+      >
+        <p
+          class="bg-red-700 absolute z-[1] py-[1px] px-[3px] text-xs -translate-y-1 right-0 text-black-100"
+        >
+          WIP
+        </p>
+        Home
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { UserAuth } from "@/context/Auth";
-import Image from "next/image";
+import React from 'react';
+import { UserAuth } from '@/context/Auth';
+import Image from 'next/image';
 
 export default function AdminNavbar() {
   const { logout, user } = UserAuth();
@@ -20,7 +20,7 @@ export default function AdminNavbar() {
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
     </>
   );

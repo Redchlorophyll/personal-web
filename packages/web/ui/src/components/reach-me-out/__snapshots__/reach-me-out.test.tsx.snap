@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReachMeOut /> should render properly 1`] = `
+<body>
+  <div>
+    <section
+      aria-labelledby="title"
+    >
+      <div
+        class="w-full flex justify-center text-center"
+        id="title"
+      >
+        <div
+          class="-translate-x-2"
+        >
+          Reach Me Out Here!
+        </div>
+        <div>
+          <img
+            alt="fire icons"
+            data-nimg="1"
+            decoding="async"
+            height="20"
+            loading="lazy"
+            src="/_next/image?url=%2Filustrations%2Ffire.png&w=48&q=75"
+            srcset="/_next/image?url=%2Filustrations%2Ffire.png&w=32&q=75 1x, /_next/image?url=%2Filustrations%2Ffire.png&w=48&q=75 2x"
+            style="color: transparent;"
+            width="20"
+          />
+        </div>
+      </div>
+      <div
+        class="flex gap-2"
+      >
+        <a
+          class="w-16 flex justify-center"
+          href="https://www.linkedin.com/in/dhonni-ari-hendra-saputra/"
+        >
+          <svg
+            class="scale-[0.5] absolute"
+            fill="none"
+            height="101"
+            width="101"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              filter="url(#linkedin_svg__a)"
+            >
+              <path
+                d="M4 46.5C4 20.819 24.819 0 50.5 0S97 20.819 97 46.5 76.181 93 50.5 93 4 72.181 4 46.5Z"
+                fill="#0077B5"
+              />
+              <path
+                clip-rule="evenodd"
+                d="M37.555 28.72c0 3.04-2.288 5.472-5.963 5.472h-.067c-3.538 0-5.825-2.433-5.825-5.473 0-3.104 2.357-5.469 5.962-5.469 3.605 0 5.825 2.365 5.893 5.47Zm-.694 9.794v31.662H26.323V38.514h10.538Zm38.003 31.662V52.022c0-9.725-5.198-14.251-12.132-14.251-5.595 0-8.1 3.073-9.499 5.229v-4.485h-10.54c.14 2.97 0 31.662 0 31.662h10.54V52.494c0-.946.069-1.89.347-2.568.762-1.89 2.496-3.847 5.407-3.847 3.815 0 5.34 2.903 5.34 7.158v16.94h10.537Z"
+                fill="#fff"
+                fill-rule="evenodd"
+              />
+            </g>
+            <defs>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="101"
+                id="linkedin_svg__a"
+                width="101"
+                x="0"
+                y="0"
+              >
+                <feflood
+                  flood-opacity="0"
+                  result="BackgroundImageFix"
+                />
+                <fecolormatrix
+                  in="SourceAlpha"
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feoffset
+                  dy="4"
+                />
+                <fegaussianblur
+                  stdDeviation="2"
+                />
+                <fecomposite
+                  in2="hardAlpha"
+                  operator="out"
+                />
+                <fecolormatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feblend
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_762_7"
+                />
+                <feblend
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_762_7"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </a>
+        <a
+          class="w-16 flex justify-center"
+          href="https://github.com/Redchlorophyll"
+        >
+          <svg
+            class="scale-[0.5] absolute"
+            fill="none"
+            height="102"
+            width="102"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              filter="url(#github_svg__a)"
+            >
+              <path
+                d="M51 0C25.047 0 4 21.575 4 48.19 4 69.48 17.467 87.545 36.142 93.917c2.349.446 3.211-1.045 3.211-2.318 0-1.15-.044-4.945-.064-8.972-13.075 2.915-15.834-5.686-15.834-5.686-2.138-5.57-5.219-7.05-5.219-7.05-4.264-2.992.322-2.93.322-2.93 4.72.34 7.204 4.966 7.204 4.966 4.192 7.367 10.995 5.237 13.678 4.005.421-3.114 1.64-5.24 2.983-6.443C31.984 68.27 21.01 64.138 21.01 45.673c0-5.261 1.836-9.56 4.843-12.935-.488-1.214-2.097-6.115.455-12.753 0 0 3.947-1.295 12.928 4.94 3.75-1.068 7.77-1.603 11.765-1.622 3.994.019 8.018.554 11.774 1.622 8.97-6.235 12.912-4.94 12.912-4.94 2.558 6.638.948 11.54.46 12.753 3.014 3.375 4.838 7.674 4.838 12.935 0 18.509-10.995 22.584-21.461 23.777 1.685 1.496 3.188 4.428 3.188 8.924 0 6.448-.055 11.638-.055 13.225 0 1.282.846 2.785 3.229 2.312C84.55 87.53 98 69.474 98 48.19 98 21.575 76.957 0 51 0Z"
+                fill="#000"
+              />
+            </g>
+            <defs>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="102"
+                id="github_svg__a"
+                width="102"
+                x="0"
+                y="0"
+              >
+                <feflood
+                  flood-opacity="0"
+                  result="BackgroundImageFix"
+                />
+                <fecolormatrix
+                  in="SourceAlpha"
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feoffset
+                  dy="4"
+                />
+                <fegaussianblur
+                  stdDeviation="2"
+                />
+                <fecomposite
+                  in2="hardAlpha"
+                  operator="out"
+                />
+                <fecolormatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feblend
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_762_13"
+                />
+                <feblend
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_762_13"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </a>
+        <a
+          class="w-16 flex justify-center"
+          href="https://www.instagram.com/lorddahs/"
+        >
+          <svg
+            class="scale-[0.5] absolute"
+            fill="none"
+            height="102"
+            width="102"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              filter="url(#instagram_svg__a)"
+            >
+              <path
+                d="M4 47C4 21.043 25.043 0 51 0s47 21.043 47 47-21.043 47-47 47S4 72.957 4 47Z"
+                fill="#fff"
+              />
+              <mask
+                height="94"
+                id="instagram_svg__b"
+                maskUnits="userSpaceOnUse"
+                style="mask-type: alpha;"
+                width="94"
+                x="4"
+                y="0"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M4 47C4 21.043 25.043 0 51 0s47 21.043 47 47-21.043 47-47 47S4 72.957 4 47Z"
+                  fill="#fff"
+                  fill-rule="evenodd"
+                />
+              </mask>
+              <g
+                mask="url(#instagram_svg__b)"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M50.998 21.933c-6.804 0-7.658.03-10.332.152-2.668.122-4.49.544-6.084 1.164-1.648.64-3.047 1.497-4.44 2.89-1.395 1.394-2.25 2.793-2.893 4.44-.622 1.595-1.045 3.417-1.165 6.085-.12 2.673-.15 3.528-.15 10.336s.03 7.66.15 10.333c.123 2.669.546 4.49 1.165 6.084.641 1.649 1.498 3.048 2.891 4.44 1.393 1.395 2.792 2.254 4.44 2.894 1.594.62 3.416 1.042 6.084 1.165 2.674.121 3.528.151 10.335.151 6.808 0 7.66-.03 10.334-.151 2.668-.123 4.492-.545 6.087-1.165 1.648-.64 3.045-1.499 4.437-2.893 1.395-1.393 2.251-2.792 2.894-4.44.616-1.594 1.039-3.416 1.164-6.084.12-2.674.152-3.526.152-10.334s-.032-7.662-.152-10.336c-.125-2.668-.548-4.49-1.165-6.084-.642-1.648-1.498-3.047-2.893-4.44-1.394-1.395-2.788-2.251-4.439-2.89-1.598-.62-3.42-1.043-6.089-1.165-2.673-.122-3.524-.152-10.33-.152Zm-2.244 4.518h2.248c6.693 0 7.487.024 10.13.144 2.444.112 3.77.52 4.654.863 1.17.455 2.003.998 2.88 1.875.878.877 1.42 1.713 1.876 2.883.343.882.752 2.209.863 4.653.12 2.642.147 3.436.147 10.126 0 6.69-.027 7.483-.147 10.126-.111 2.444-.52 3.77-.863 4.653-.454 1.17-.998 2.002-1.876 2.88-.877.877-1.71 1.42-2.88 1.874-.883.345-2.21.752-4.654.864-2.643.12-3.437.146-10.13.146-6.693 0-7.486-.026-10.129-.146-2.444-.113-3.77-.521-4.654-.864-1.17-.455-2.006-.998-2.883-1.875-.877-.878-1.42-1.711-1.876-2.881-.343-.883-.752-2.21-.863-4.653-.12-2.643-.144-3.437-.144-10.13 0-6.694.024-7.484.144-10.127.112-2.444.52-3.77.863-4.654.454-1.17.999-2.005 1.876-2.882.877-.878 1.713-1.42 2.883-1.876.883-.345 2.21-.752 4.654-.864 2.313-.105 3.209-.136 7.88-.141v.006Zm12.62 7.169a3.008 3.008 0 0 1 3.009-3.007v-.002a3.009 3.009 0 1 1-3.008 3.009Zm-10.372.507c-7.11 0-12.873 5.764-12.873 12.873 0 7.11 5.764 12.87 12.873 12.87 7.11 0 12.871-5.76 12.871-12.87 0-7.109-5.762-12.873-12.871-12.873ZM59.358 47a8.356 8.356 0 1 0-16.712 0 8.356 8.356 0 0 0 16.712 0Z"
+                  fill="#000"
+                  fill-rule="evenodd"
+                />
+              </g>
+            </g>
+            <defs>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="102"
+                id="instagram_svg__a"
+                width="102"
+                x="0"
+                y="0"
+              >
+                <feflood
+                  flood-opacity="0"
+                  result="BackgroundImageFix"
+                />
+                <fecolormatrix
+                  in="SourceAlpha"
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feoffset
+                  dy="4"
+                />
+                <fegaussianblur
+                  stdDeviation="2"
+                />
+                <fecomposite
+                  in2="hardAlpha"
+                  operator="out"
+                />
+                <fecolormatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feblend
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_762_14"
+                />
+                <feblend
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_762_14"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </a>
+        <a
+          class="w-16 flex justify-center"
+          href="https://www.facebook.com/DAHS381D/"
+        >
+          <svg
+            class="scale-[0.5] absolute"
+            fill="none"
+            height="101"
+            width="101"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              filter="url(#facebook_svg__a)"
+            >
+              <path
+                d="M97 46.5C97 20.816 76.184 0 50.5 0S4 20.816 4 46.5c0 23.214 17.002 42.45 39.234 45.937V59.941H31.428V46.5h11.806V36.255c0-11.652 6.94-18.09 17.565-18.09 5.086 0 10.408.907 10.408.907v11.444H65.34c-5.776 0-7.574 3.587-7.574 7.265V46.5h12.896L68.6 59.941H57.766v32.496C79.998 88.95 97 69.714 97 46.5Z"
+                fill="#1877F2"
+              />
+              <path
+                d="M68.6 59.941 70.663 46.5H57.766v-8.719c0-3.678 1.798-7.265 7.574-7.265h5.867V19.072s-5.322-.908-10.408-.908c-10.626 0-17.565 6.44-17.565 18.091V46.5H31.428v13.441h11.806v32.496c2.37.372 4.796.563 7.266.563 2.47 0 4.895-.19 7.266-.563V59.941H68.6Z"
+                fill="#fff"
+              />
+            </g>
+            <defs>
+              <filter
+                color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse"
+                height="101"
+                id="facebook_svg__a"
+                width="101"
+                x="0"
+                y="0"
+              >
+                <feflood
+                  flood-opacity="0"
+                  result="BackgroundImageFix"
+                />
+                <fecolormatrix
+                  in="SourceAlpha"
+                  result="hardAlpha"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                />
+                <feoffset
+                  dy="4"
+                />
+                <fegaussianblur
+                  stdDeviation="2"
+                />
+                <fecomposite
+                  in2="hardAlpha"
+                  operator="out"
+                />
+                <fecolormatrix
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                />
+                <feblend
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_762_4"
+                />
+                <feblend
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_762_4"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
+</body>
+`;

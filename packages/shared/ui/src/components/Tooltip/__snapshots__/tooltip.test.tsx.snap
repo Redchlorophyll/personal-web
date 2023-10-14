@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared - ui - tooltip should render properly 1`] = `
+<body>
+  <div>
+    <div
+      class="group relative w-fit"
+    >
+      <div>
+        Click me Please!
+      </div>
+      <div
+        class="absolute invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all ease-in-out duration-300"
+        style="transform: translateX(0px);"
+      >
+        <div
+          class="bg-black-100 mt-2 py-1 pl-2 pr-4 shadow-[0_0_4px_rgba(29,171,221,0.2)] w-fit whitespace-nowrap rounded-sm dark:text-black-900 after:absolute after:left-[1px] after:top-1 after:border-b-4 after:border-b-black-500 after:w-0 after:h-0 after:border-l-4 after:border-r-4 after:border-l-black-100/0 after:border-r-black-100/0"
+        >
+          this is tooltip
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

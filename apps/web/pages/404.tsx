@@ -1,8 +1,7 @@
-import Image from "next/image";
-import ilu404 from "@/assets/img/ilustrations/ilu_404.png";
-import { Button } from "ui";
-import Link from "next/link";
-import Layout from "~/layouts";
+import Image from 'next/image';
+import { Button } from 'shared-ui';
+import Link from 'next/link';
+import Layout from '~/layouts';
 
 export default function FourOhFour() {
   return (
@@ -12,7 +11,9 @@ export default function FourOhFour() {
           <div className="w-full flex justify-center md:!w-[250px]">
             <div className="w-[200px] md:w-full">
               <Image
-                src={ilu404}
+                src={'/ilustrations/ilu_404.png'}
+                width={350}
+                height={350}
                 alt="empty page illustration - lost astronout"
                 quality="30"
               />

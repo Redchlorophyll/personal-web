@@ -1,0 +1,13 @@
+import { {{camelCase name}}Slice, {{pascalCase name}}Interface } from './{{kebabCase name}}';
+
+describe('{{camelCase name}}', () => {
+  test('initialize slice with initialValue', () => {
+    const initialValue: {{pascalCase name}}Interface = {}
+    const listSliceInit = {{camelCase name}}Slice.reducer(
+      initialValue,
+      { type: 'unknown' }
+    );
+
+    expect(listSliceInit).toMatchInlineSnapshot();
+  });
+});

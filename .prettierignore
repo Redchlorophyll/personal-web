@@ -1,0 +1,6 @@
+*.hbs
+.next
+node_modules
+.turbo
+yarn-error.log
+dist

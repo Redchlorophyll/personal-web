@@ -2,18 +2,33 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/**/*",
+    "configs/**/*"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:web": "turbo run dev --scope=web --include-dependencies",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
+    "postinstall": "husky install",
+    "create:component": "turbo gen component",
+    "create:package": "turbo gen package",
+    "create:app": "turbo gen app",
+    "create:redux": "turbo gen redux",
+    "create:method": "turbo gen method",
+    "create:interface": "turbo gen interface",
+    "create:enum": "turbo gen enum",
+    "dependencies:add": "turbo gen add-dependencies",
+    "dependencies:delete": "turbo gen delete-dependencies"
   },
   "devDependencies": {
+    "@turbo/gen": "^1.10.2",
     "eslint": "^7.32.0",
     "eslint-config-custom": "*",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "v1.10.2"
   }
 }
