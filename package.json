@@ -20,7 +20,8 @@
     "create:interface": "turbo gen interface",
     "create:enum": "turbo gen enum",
     "dependencies:add": "turbo gen add-dependencies",
-    "dependencies:delete": "turbo gen delete-dependencies"
+    "dependencies:delete": "turbo gen delete-dependencies",
+    "storybook": "cd apps/storybook && yarn run storybook"
   },
   "devDependencies": {
     "@turbo/gen": "^1.10.2",
