@@ -1,0 +1,4 @@
+put public files here.
+
+example:
+image, static downloadable files
