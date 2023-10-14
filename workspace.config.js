@@ -2,6 +2,11 @@ const workspace = {
   apps: [
     /* PLOP_INJECT_APP */
 
+      {
+        name: 'storybook',
+        value: 'storybook',
+      },
+
     {
       name: 'web',
       value: 'web',
