@@ -43,6 +43,11 @@ export const componentGenerator = (plop: PlopTypes.NodePlopAPI) => {
         templateFile: 'templates/component/test.hbs',
       },
       {
+        type: 'add',
+        path: 'packages/{{package}}/src/components/{{kebabCase name}}/{{kebabCase name}}.stories.tsx',
+        templateFile: 'templates/component/stories.hbs',
+      },
+      {
         type: 'append',
         path: 'packages/{{package}}/src/index.tsx',
         pattern: `/* PLOP_INJECT_EXPORT */`,

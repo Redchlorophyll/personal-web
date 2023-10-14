@@ -16,5 +16,5 @@ const Template: StoryFn<typeof Button> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  children: 'Button',
+  children: 'Ema Cantik',
 };
