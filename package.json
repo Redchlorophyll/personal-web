@@ -21,6 +21,7 @@
     "create:enum": "turbo gen enum",
     "dependencies:add": "turbo gen add-dependencies",
     "dependencies:delete": "turbo gen delete-dependencies",
+    "dependencies:sync": "turbo gen sync-dependencies",
     "storybook": "cd apps/storybook && yarn run storybook",
     "storybook:build": "cd apps/storybook && storybook build"
   },

@@ -62,7 +62,10 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
       if (type === 'ui') {
         plopActionForAffectedApp = appsToProcess.map((app) => ({
           type: 'append',
-          path: `apps/${app.value}/pages/_app.tsx`,
+          path:
+            app.value !== 'storybook'
+              ? `apps/${app.value}/pages/_app.tsx`
+              : 'apps/storybook/.storybook/preview.ts',
           pattern: `/* PLOP_INJECT_STYLING */`,
           template: `import '{{packageName}}/styles.css';`,
         }));
@@ -107,8 +110,6 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
             return 'no apps provided, skipping append file';
           }
 
-          console.log(apps);
-
           apps.forEach((app) => {
             const packageJson = JSON.parse(
               fs.readFileSync(`apps/${app}/package.json`, 'utf-8')
@@ -145,6 +146,13 @@ export const packageGenerator = (plop: PlopTypes.NodePlopAPI) => {
         name: '{{packageName}}',
         value: '{{pathCase packageName}}',
       },`,
+        },
+        function syncAfterInstall() {
+          child.execSync('yarn run dependencies:sync', {
+            stdio: [0, 1, 2],
+          });
+
+          return 'sync dependencies successs';
         },
       ];
     },
