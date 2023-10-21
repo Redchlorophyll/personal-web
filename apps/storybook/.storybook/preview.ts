@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react';
+
+/* PLOP_INJECT_STYLING */
 import 'web-ui/styles.css';
 import 'shared-ui/styles.css';
 

@@ -142,6 +142,13 @@ export const appGenerator = (plop: PlopTypes.NodePlopAPI) => {
 
           return 'node_modules installed';
         },
+        function syncAfterInstall() {
+          child.execSync('yarn run dependencies:sync', {
+            stdio: [0, 1, 2],
+          });
+
+          return 'sync dependencies successs';
+        },
       ];
     },
   });
